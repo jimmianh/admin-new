@@ -14,6 +14,7 @@ import { IconsProviderModule } from './icons-provider.module';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import {NzBreadCrumbModule} from "ng-zorro-antd/breadcrumb";
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 registerLocaleData(en);
 
@@ -30,7 +31,8 @@ registerLocaleData(en);
         IconsProviderModule,
         NzLayoutModule,
         NzMenuModule,
-        NzBreadCrumbModule
+        NzBreadCrumbModule,
+        NgbModule
     ],
   providers: [
     { provide: NZ_I18N, useValue: en_US }
