@@ -1,1 +1,80 @@
-<p>danh sách kênh thanh toán</p>
+<button class="mb-2" nz-button [nzType]="'primary'" (click)="showModal()"><span>Tạo mới</span></button>
+
+<nz-modal [(nzVisible)]="isVisible" nzTitle="Tạo mới thông tin kênh thanh toán" (nzOnCancel)="handleCancel()"
+          (nzOnOk)="handleOk()">
+  <ng-container *nzModalContent>
+    <form nz-form [formGroup]="validateForm">
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" hidden nzFor="id">Id</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24" hidden>
+          <input nz-input formControlName="id" hidden id="id" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">Name</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid Name!">
+          <input nz-input formControlName="name" id="name" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="clientId" nzRequired>Client Id</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your clientId!">
+          <input
+            nz-input
+            type="clientId"
+            id="clientId"
+            formControlName="clientId"
+          />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="secretId" nzRequired>Secret Id</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your secretId!">
+          <input
+            nz-input
+            type="secretId"
+            id="secretId"
+            formControlName="secretId"
+          />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="payerId" nzRequired>Payer Id</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your payerId!">
+          <input
+            nz-input
+            type="payerId"
+            id="payerId"
+            formControlName="payerId"
+          />
+        </nz-form-control>
+      </nz-form-item>
+    </form>
+  </ng-container>
+</nz-modal>
+<nz-table>
+  <thead>
+  <tr>
+    <th>STT</th>
+    <th>Name</th>
+    <th>Client Id</th>
+    <th>Secret Id</th>
+    <th>Payer Id</th>
+    <th>Status</th>
+    <th>Action</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let data of listPaymentChannel; let i = index">
+    <td>{{ i + 1 }}</td>
+    <td>{{ data.name }}</td>
+    <td>{{ data.clientId }}</td>
+    <td>{{ data.secretId }}</td>
+    <td>{{ data.payerId }}</td>
+    <td><nz-switch [(ngModel)]="data.status" (ngModelChange)="onChange($event, data.id)" ></nz-switch></td>
+    <td>
+      <span nz-icon nzType="edit" (click)="getDetail(data.id)" nzTheme="outline" style="color: #2c2ce0; cursor: pointer"></span>
+    </td>
+  </tr>
+  </tbody>
+</nz-table>
