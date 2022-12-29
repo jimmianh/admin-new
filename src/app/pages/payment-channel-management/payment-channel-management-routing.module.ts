@@ -18,13 +18,6 @@ const routes: Routes = [
         }
       },
       {
-        path: 'form',
-        component: PaymentChannelManagementFormComponent,
-        data: {
-          title: 'form kênh thanh toán'
-        }
-      },
-      {
         path: 'create',
         component: PaymentChannelManagementFormComponent,
         data: {

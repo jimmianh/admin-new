@@ -1,125 +1,37 @@
-<nz-layout class="app-layout">
-  <nz-sider class="menu-sidebar"
-            nzCollapsible
-            nzWidth="256px"
-            nzBreakpoint="md"
-            [(nzCollapsed)]="isCollapsed"
-            [nzTrigger]="null">
-    <div class="sidebar-logo">
-      <a href="https://ng.ant.design/" target="_blank">
-        <img src="https://ng.ant.design/assets/img/logo.svg" alt="logo">
-        <h1>Ant Design Of Angular</h1>
-      </a>
+<nz-layout>
+  <nz-sider nzCollapsible nzWidth="250px">
+    <div class="logo">
+      <img src="./assets/logo1.png" alt=""/>
+      <p>Herofund</p>
     </div>
-    <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
-      <li nz-submenu nzOpen nzTitle="Dashboard" nzIcon="dashboard">
-        <ul>
-          <li nz-menu-item nzMatchRouter>
-            <a routerLink="/dashboard">Thống kê</a>
-          </li>
-        </ul>
-      </li>
-      <li nz-submenu nzOpen nzTitle="Quản lý người dùng" nzIcon="dashboard">
-        <ul>
-          <li nz-menu-item nzMatchRouter>
-            <a routerLink="/user/list">Danh sách</a>
-          </li>
-          <li nz-menu-item nzMatchRouter>
-            <a routerLink="/user/form">Tạo mới</a>
-          </li>
-        </ul>
-      </li>
-      <li nz-submenu nzOpen nzTitle="Quản lý danh mục" nzIcon="dashboard">
-        <ul>
-          <li nz-menu-item nzMatchRouter>
-            <a routerLink="/categories/list">Danh sách</a>
-          </li>
-          <li nz-menu-item nzMatchRouter>
-            <a routerLink="/categories/form">Tạo mới</a>
-          </li>
-        </ul>
-      </li>
-      <li nz-submenu nzOpen nzTitle="Quản lý chiến dịch" nzIcon="dashboard">
-        <ul>
-          <li nz-menu-item nzMatchRouter>
-            <a routerLink="/campaign/list">Danh sách</a>
-          </li>
-          <li nz-menu-item nzMatchRouter>
-            <a routerLink="/campaign/form">Tạo mới</a>
-          </li>
-        </ul>
-      </li>
-      <li nz-submenu nzOpen nzTitle="Quản lý bài viết" nzIcon="dashboard">
-        <ul>
-          <li nz-menu-item nzMatchRouter>
-            <a routerLink="/article/list">Danh sách</a>
-          </li>
-          <li nz-menu-item nzMatchRouter>
-            <a routerLink="/article/form">Tạo mới</a>
-          </li>
-        </ul>
-      </li>
-      <li nz-submenu nzOpen nzTitle="Quản lý bình luận" nzIcon="dashboard">
-        <ul>
-          <li nz-menu-item nzMatchRouter>
-            <a routerLink="/comment/list">Danh sách</a>
-          </li>
-        </ul>
-      </li>
-      <li nz-submenu nzOpen nzTitle="FAQ" nzIcon="dashboard">
-        <ul>
-          <li nz-menu-item nzMatchRouter>
-            <a routerLink="/faq/list">Danh sách</a>
-          </li>
-          <li nz-menu-item nzMatchRouter>
-            <a routerLink="/faq/form">Tạo mới</a>
-          </li>
-        </ul>
-      </li>
-      <li nz-submenu nzOpen nzTitle="Quản lý nhà tài trợ" nzIcon="dashboard">
-        <ul>
-          <li nz-menu-item nzMatchRouter>
-            <a routerLink="/sponsor/list">Danh sách</a>
-          </li>
-          <li nz-menu-item nzMatchRouter>
-            <a routerLink="/sponsor/form">Tạo mới</a>
-          </li>
-        </ul>
-      </li>
-      <li nz-submenu nzOpen nzTitle="Quản lý kênh thanh toán" nzIcon="dashboard">
-        <ul>
-          <li nz-menu-item nzMatchRouter>
-            <a routerLink="/payment-channel/list">Danh sách</a>
-          </li>
-          <li nz-menu-item nzMatchRouter>
-            <a routerLink="/payment-channel/form">Tạo mới</a>
-          </li>
-        </ul>
-      </li>
-      <li nz-submenu nzOpen nzTitle="Lịch sử giao dịch" nzIcon="dashboard">
-        <ul>
-          <li nz-menu-item nzMatchRouter>
-            <a routerLink="/transaction/list">Danh sách</a>
-          </li>
-        </ul>
-      </li>
+    <ul nz-menu nzTheme="dark" *ngFor="let nav of navItems; let i = index" nzMode="inline">
+      <div *ngIf="!nav.children; then thenBlock; else elseBlock"></div>
+      <ng-template #thenBlock>
+        <li (click)="onClick(nav.url)" nz-menu-item routerLink="{{nav.url}}" class="nav-url">
+          <span nz-icon nzType="{{nav.icon.name}}"></span>
+          <span>{{nav.name}}</span>
+        </li>
+      </ng-template>
+      <ng-template #elseBlock>
+        <li nz-submenu nzTitle="{{ nav.name }}" id="{{i}}" nzIcon="{{ nav.icon.name }}" class="parent-nav">
+          <ul>
+            <li class="nav-url" (click)="onSelected(c.url, i)" *ngFor="let c of nav.children" routerLink="{{ c.url }}" nz-menu-item>{{ c.name }}</li>
+          </ul>
+        </li>
+      </ng-template>
     </ul>
   </nz-sider>
   <nz-layout>
-    <nz-header>
-      <div class="app-header">
-        <span class="header-trigger" (click)="isCollapsed = !isCollapsed">
-            <span class="trigger"
-               nz-icon
-               [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
-            ></span>
-        </span>
-      </div>
-    </nz-header>
+    <nz-header></nz-header>
     <nz-content>
+      <nz-breadcrumb>
+        <nz-breadcrumb-item>ADMIN</nz-breadcrumb-item>
+        <nz-breadcrumb-item>MANAGEMENT</nz-breadcrumb-item>
+      </nz-breadcrumb>
       <div class="inner-content">
         <router-outlet></router-outlet>
       </div>
     </nz-content>
+    <nz-footer>Ant Design ©2020 Implement By Angular</nz-footer>
   </nz-layout>
 </nz-layout>

@@ -1,1 +1,26 @@
-<p>danh sách kênh thanh toán</p>
+<nz-table>
+  <thead>
+  <tr>
+    <th>STT</th>
+    <th>Name</th>
+    <th>Client Id</th>
+    <th>Secret Id</th>
+    <th>Payer Id</th>
+    <th>Action</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let data of listPaymentChannel; let i = index">
+    <td>{{ i + 1 }}</td>
+    <td>{{ data.name }}</td>
+    <td>{{ data.clientId }}</td>
+    <td>{{ data?.secretId }}</td>
+    <td>{{ data?.payerId }}</td>
+    <td>
+      <a>Action 一 {{ data.name }}</a>
+      <nz-divider nzType="vertical"></nz-divider>
+      <a>Delete</a>
+    </td>
+  </tr>
+  </tbody>
+</nz-table>
