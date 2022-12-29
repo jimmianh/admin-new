@@ -4,6 +4,7 @@ export interface PaymentChannel {
   clientId: string;
   secretId: string;
   payerId: string;
+  status: number;
 }
 
 export interface PaymentChannelRequest {
