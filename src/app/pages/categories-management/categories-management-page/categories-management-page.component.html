@@ -1,1 +1,35 @@
-<p>Danh sách danh mục</p>
+<nz-table #nzTable [nzData]="listCategories" nzTableLayout="fixed">
+  <thead>
+  <tr>
+    <th>STT</th>
+    <th nzCustomFilter>
+      Tên danh mục
+      <nz-filter-trigger [(nzVisible)]="visible" [nzActive]="searchValue.length > 0" [nzDropdownMenu]="menu">
+        <span nz-icon nzType="search"></span>
+      </nz-filter-trigger>
+    </th>
+    <th>Thao tác</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let data of nzTable.data">
+    <td>{{ data.id + 1 }}</td>
+    <td>{{ data.name }}</td>
+    <td>
+      <button style="margin-right: 10px" class="btn"><span nz-icon nzType="delete" nzTheme="outline"></span></button>
+      <button style="margin-right: 10px" class="btn"><span nz-icon nzType="delete" nzTheme="outline"></span></button>
+      <button class="btn"><span nz-icon nzType="delete" nzTheme="outline"></span></button>
+    </td>
+  </tr>
+  </tbody>
+</nz-table>
+<nz-dropdown-menu #menu="nzDropdownMenu">
+  <div class="ant-table-filter-dropdown">
+    <div class="search-box">
+      <input type="text" nz-input placeholder="Tìm kiếm danh mục" [(ngModel)]="searchValue" />
+      <button nz-button nzSize="small" nzType="primary" (click)="search()" class="search-button">Tìm kiếm</button>
+      <button nz-button nzSize="small" (click)="reset()">Làm mới</button>
+    </div>
+  </div>
+</nz-dropdown-menu>
+
