@@ -6,6 +6,16 @@ import { PaymentChannelManagementPageComponent } from './payment-channel-managem
 import { PaymentChannelManagementFormComponent } from './payment-channel-management-form/payment-channel-management-form.component';
 import {NzDividerModule} from "ng-zorro-antd/divider";
 import {NzTableModule} from "ng-zorro-antd/table";
+import {NzModalModule} from "ng-zorro-antd/modal";
+import {NzButtonModule} from "ng-zorro-antd/button";
+import {NzCheckboxModule} from "ng-zorro-antd/checkbox";
+import {NzGridModule} from "ng-zorro-antd/grid";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {NzFormModule} from "ng-zorro-antd/form";
+import {NzInputModule} from "ng-zorro-antd/input";
+import {NzSelectModule} from "ng-zorro-antd/select";
+import {NzIconModule} from "ng-zorro-antd/icon";
+import {NzSwitchModule} from "ng-zorro-antd/switch";
 
 
 @NgModule({
@@ -18,6 +28,17 @@ import {NzTableModule} from "ng-zorro-antd/table";
     PaymentChannelManagementRoutingModule,
     NzDividerModule,
     NzTableModule,
+    NzModalModule,
+    NzButtonModule,
+    NzCheckboxModule,
+    NzGridModule,
+    ReactiveFormsModule,
+    NzFormModule,
+    NzInputModule,
+    NzSelectModule,
+    NzIconModule,
+    NzSwitchModule,
+    FormsModule,
   ]
 })
 export class PaymentChannelManagementModule { }
