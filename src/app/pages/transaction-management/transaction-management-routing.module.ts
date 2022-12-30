@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {TransactionManagementPageComponent} from "./transaction-management-page/transaction-management-page.component";
-import {TransactionManagementDetailComponent} from "./transaction-management-detail/transaction-management-detail.component";
 
 const routes: Routes = [
   {
@@ -16,14 +15,7 @@ const routes: Routes = [
         data: {
           title: 'Danh sách lịch sử giao dịch'
         }
-      },
-      {
-        path: 'view/:id',
-        component: TransactionManagementDetailComponent,
-        data: {
-          title: 'Xem chi tiết'
-        }
-      },
+      }
     ]
   }
 ];

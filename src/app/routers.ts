@@ -7,6 +7,32 @@ export const navItems: NavData[] = [
     icon: { name: 'pie-chart' },
   },
   {
+    name: 'Quản lý chiến dịch',
+    url: '/campaign',
+    icon: { name: 'fire' },
+    children: [
+      {
+        name: 'Danh sách',
+        url: '/campaign/list',
+      },
+      {
+        name: 'Tạo chiến dịch',
+        url: '/campaign/create',
+      },
+    ],
+  },
+  {
+    name: 'Lịch sử giao dịch',
+    url: '/transaction',
+    icon: { name: 'transaction' },
+    children: [
+      {
+        name: 'Danh sách',
+        url: '/transaction/list',
+      },
+    ],
+  },
+  {
     name: 'Quản lý người dùng',
     url: '/user',
     icon: { name: 'team' },
@@ -48,21 +74,6 @@ export const navItems: NavData[] = [
       {
         name: 'Tạo nhà đồng hành',
         url: '/sponsor/create',
-      },
-    ],
-  },
-  {
-    name: 'Quản lý chiến dịch',
-    url: '/campaign',
-    icon: { name: 'fire' },
-    children: [
-      {
-        name: 'Danh sách',
-        url: '/campaign/list',
-      },
-      {
-        name: 'Tạo chiến dịch',
-        url: '/campaign/create',
       },
     ],
   },
@@ -115,17 +126,6 @@ export const navItems: NavData[] = [
       {
         name: 'Danh sách',
         url: '/payment-channel/list',
-      },
-    ],
-  },
-  {
-    name: 'Lịch sử giao dịch',
-    url: '/transaction',
-    icon: { name: 'transaction' },
-    children: [
-      {
-        name: 'Danh sách',
-        url: '/transaction/list',
       },
     ],
   },

@@ -1,1 +1,46 @@
-<p>Danh sách các lịch sử giao dịch</p>
+<nz-table
+  nzShowSizeChanger
+  [nzData]="listOfData"
+  [nzShowPagination]="false"
+  (nzCurrentPageDataChange)="onCurrentPageDataChange($event)"
+>
+  <thead>
+  <tr>
+    <th
+      [nzSelections]="listOfSelection"
+      [(nzChecked)]="checked"
+      [nzIndeterminate]="indeterminate"
+      (nzCheckedChange)="onAllChecked($event)"
+    ></th>
+    <th>Name</th>
+    <th>Amount</th>
+    <th>Message</th>
+    <th>Sending Time</th>
+    <th>Campaign</th>
+    <th>Account</th>
+    <th>Payment Channel</th>
+    <th>Payment Status</th>
+    <th>Transaction Id</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let data of listOfData">
+    <td [nzChecked]="setOfCheckedId.has(data.id)" (nzCheckedChange)="onItemChecked(data.id, $event)"></td>
+    <td>{{ data.senderName }}</td>
+    <td>{{ data.amount }}</td>
+    <td>{{ data.message }}</td>
+    <td>{{ data.sendingTime }}</td>
+    <td>{{ data.campaignId }}</td>
+    <td>{{ data.amount }}</td>
+    <td>{{ data.paymentChannel }}</td>
+    <td>{{ data.paymentStatus }}</td>
+    <td>{{ data.paypalTransactionId }}</td>
+  </tr>
+  </tbody>
+</nz-table>
+<nz-pagination class="pagination"
+               (nzPageIndexChange)="onChangePage($event)"
+               [nzPageIndex]="offset" [nzTotal]="totalElements"
+               [nzPageSize]="limit">
+</nz-pagination>
+

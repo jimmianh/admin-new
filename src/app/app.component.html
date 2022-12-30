@@ -1,5 +1,5 @@
-<nz-layout>
-  <nz-sider nzCollapsible nzWidth="250px">
+<nz-layout class="layout">
+  <nz-sider nzCollapsible nzWidth="250px" [nzCollapsible]="false">
     <div class="logo">
       <img src="./assets/logo1.png" alt=""/>
       <p>Herofund</p>
@@ -21,16 +21,16 @@
       </ng-template>
     </ul>
   </nz-sider>
-  <nz-layout>
+  <nz-layout class="right-layout">
     <nz-header></nz-header>
     <nz-content>
       <nz-breadcrumb>
         <nz-breadcrumb-item>ADMIN</nz-breadcrumb-item>
         <nz-breadcrumb-item>MANAGEMENT</nz-breadcrumb-item>
       </nz-breadcrumb>
-      <div class="inner-content">
+      <nz-card>
         <router-outlet></router-outlet>
-      </div>
+      </nz-card>
     </nz-content>
     <nz-footer>Ant Design ©2020 Implement By Angular</nz-footer>
   </nz-layout>
