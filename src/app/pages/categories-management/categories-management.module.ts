@@ -11,6 +11,8 @@ import {NzIconModule} from "ng-zorro-antd/icon";
 import {NzTableModule} from "ng-zorro-antd/table";
 import {NzFormModule} from "ng-zorro-antd/form";
 import {FormGroup, FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {NzModalModule} from "ng-zorro-antd/modal";
+import {NzSwitchModule} from "ng-zorro-antd/switch";
 
 
 @NgModule({
@@ -28,7 +30,9 @@ import {FormGroup, FormsModule, ReactiveFormsModule} from "@angular/forms";
     NzTableModule,
     FormsModule,
     NzFormModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NzModalModule,
+    NzSwitchModule
   ]
 })
 export class CategoriesManagementModule { }
