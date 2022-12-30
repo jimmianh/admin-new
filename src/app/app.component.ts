@@ -1,22 +1,29 @@
 import { Component } from '@angular/core';
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {navItems} from './routers';
+import {Location} from "@angular/common";
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
+
 export class AppComponent {
   public navItems = navItems;
   public router: Router;
-
-  constructor(private routers: Router) {
+  routerLink: any
+  href: any
+  constructor(
+    private routers: Router,
+    private location : Location
+              ) {
     this.router = routers;
+
   }
 
   ngOnInit(): void {
-
+    this.href = this.location.path()
   }
 
   onClick(url: any) {
