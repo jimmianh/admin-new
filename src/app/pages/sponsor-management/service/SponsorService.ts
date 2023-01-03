@@ -25,26 +25,18 @@ export class SponsorService {
     return this.refreshData;
   }
 
-  getPage(offset: number, limit: number) {
+  getPage(offset: number, limit: number, keyword: string, status: any) {
+    let query = `/api/v1/admin/sponsors?offset=${offset}&limit=${limit}`;
+    if (status !== undefined){
+      query += `&status=${status}`
+    }
+    if (keyword !== null){
+      query += `&keyword=${keyword}`
+    }
     return this.http
-      .get<any>(SystemConfig.getBaseUrl() + `/api/v1/admin/sponsors?offset=${offset}&limit=${limit}`, {
+      .get<any>(SystemConfig.getBaseUrl() + query, {
         headers,
       })
-      .pipe(
-        catchError((error: any) => {
-          return throwError(error);
-        }),
-        tap(()=>{
-          this.RefreshData.next()
-        })
-      );
-  }
-
-  search(filter: any) {
-    return this.http
-      .post<any>(SystemConfig.getBaseUrl() + `/api/v1/admin/sponsors/search`,
-        JSON.stringify(filter),
-        {headers})
       .pipe(
         catchError((error: any) => {
           return throwError(error);
