@@ -1,0 +1,112 @@
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {catchError, Subject, tap, throwError} from "rxjs";
+import {SystemConfig} from "../../../util/SystemConfig";
+
+
+const headers: HttpHeaders = new HttpHeaders({
+  Authorization: 'Bearer ' + SystemConfig.getTokenTest(),
+  'content-type': 'application/json'
+});
+
+@Injectable({
+  providedIn: 'root'
+})
+
+
+export class SponsorService {
+
+  private refreshData = new Subject<void>();
+
+  constructor(private http: HttpClient) {
+  }
+
+  get RefreshData() {
+    return this.refreshData;
+  }
+
+  getPage(offset: number, limit: number) {
+    return this.http
+      .get<any>(SystemConfig.getBaseUrl() + `/api/v1/admin/sponsors?offset=${offset}&limit=${limit}`, {
+        headers,
+      })
+      .pipe(
+        catchError((error: any) => {
+          return throwError(error);
+        }),
+        tap(()=>{
+          this.RefreshData.next()
+        })
+      );
+  }
+
+  search(filter: any) {
+    return this.http
+      .post<any>(SystemConfig.getBaseUrl() + `/api/v1/admin/sponsors/search`,
+        JSON.stringify(filter),
+        {headers})
+      .pipe(
+        catchError((error: any) => {
+          return throwError(error);
+        }),
+        tap(()=>{
+          this.RefreshData.next()
+        })
+      );
+  }
+
+  updateStatus(id: number, status : number) {
+    return this.http
+      .put<any>(SystemConfig.getBaseUrl() + `/api/v1/admin/sponsors/update/status?id=${id}&status=${status}`,{},
+        {headers})
+      .pipe(
+        catchError((error: any) => {
+          return throwError(error);
+        }),
+        tap(()=>{
+          this.RefreshData.next()
+        })
+      );
+  }
+
+  create(sponsor: any) {
+    return this.http
+      .post<any>(SystemConfig.getBaseUrl() + `/api/v1/admin/sponsors`,
+        JSON.stringify(sponsor),
+        {headers})
+      .pipe(
+        catchError((error: any) => {
+          return throwError(error);
+        }),
+        tap(()=>{
+          this.RefreshData.next()
+        })
+      );
+  }
+
+  getDetail(id: number){
+    return this.http
+      .get<any>(SystemConfig.getBaseUrl() + `/api/v1/admin/sponsors/detail?id=${id}`,
+        {headers})
+      .pipe(
+        catchError((error: any) => {
+          return throwError(error);
+        }),
+      );
+  }
+
+  update(sponsor: any) {
+    return this.http
+      .put<any>(SystemConfig.getBaseUrl() + `/api/v1/admin/sponsors`,
+        JSON.stringify(sponsor),
+        {headers})
+      .pipe(
+        catchError((error: any) => {
+          return throwError(error);
+        }),
+        tap(()=>{
+          this.RefreshData.next()
+        })
+      );
+  }
+}

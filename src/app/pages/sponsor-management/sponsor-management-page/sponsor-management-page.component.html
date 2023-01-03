@@ -1,1 +1,77 @@
-<p>Danh sách các nhà tài trợ</p>
+<form nz-form [formGroup]="formSearch" class="ant-advanced-search-form">
+  <div nz-row [nzGutter]="24">
+    <div nz-col [nzSpan]="8">
+      <nz-form-item>
+        <nz-form-label class="label__keyword">Keyword:</nz-form-label>
+        <nz-form-control>
+          <input
+            nz-input
+            placeholder="Vui lòng từ khóa"
+            [formControlName]="'keyword'"
+          />
+        </nz-form-control>
+      </nz-form-item>
+
+    </div>
+    <div nz-col [nzSpan]="4">
+      <nz-form-item>
+        <nz-form-label class="label__keyword">Status:</nz-form-label>
+        <nz-form-control>
+          <nz-select nzShowSearch nzAllowClear nzPlaceHolder="status" [formControlName]="'status'">
+            <nz-option nzLabel="ENABLE" nzValue="0"></nz-option>
+            <nz-option nzLabel="DISABLE" nzValue="1"></nz-option>
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+  </div>
+  <div nz-row>
+    <div nz-col [nzSpan]="24" class="search-area">
+      <button nz-button [nzType]="'primary'" (click)="search()">Search</button>
+      <button nz-button (click)="resetForm()">Clear</button>
+    </div>
+  </div>
+</form>
+<div class="search-result-list">
+  <nz-table
+    nzShowSizeChanger
+    [nzData]="listSponsor"
+    [nzShowPagination]="false"
+  >
+    <thead>
+    <tr>
+      <th>Stt</th>
+      <th>Image</th>
+      <th>Name</th>
+      <th>Status</th>
+      <th>Created At</th>
+      <th>Updated At</th>
+      <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let data of listSponsor; let i = index">
+      <td>{{ i + 1 }}</td>
+      <td><img
+        nz-image
+        width="200px"
+        nzSrc="{{ data.image }}"
+        alt="sponsor" src="{{data.image}}"/></td>
+      <td>{{ data.name }}</td>
+      <td><nz-switch [(ngModel)]="data.status" (ngModelChange)="onChange($event, data.id)" ></nz-switch></td>
+      <td>{{ data.createdAt }}</td>
+      <td>{{ data.updatedAt }}</td>
+      <td>
+        <a>Action 一 {{data.name}}</a>
+        <nz-divider nzType="vertical"></nz-divider>
+        <a nz-icon nzType="edit" href="sponsor/edit/{{data.id}}" nzTheme="outline" style="color: #2c2ce0; cursor: pointer"></a>
+      </td>
+    </tr>
+    </tbody>
+  </nz-table>
+  <nz-pagination class="pagination"
+                 (nzPageIndexChange)="onChangePage($event)"
+                 [nzPageIndex]="offset" [nzTotal]="totalElements"
+                 [nzPageSize]="limit">
+  </nz-pagination>
+</div>
