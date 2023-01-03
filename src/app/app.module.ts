@@ -15,6 +15,7 @@ import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import {NzBreadCrumbModule} from "ng-zorro-antd/breadcrumb";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {NzCardModule} from "ng-zorro-antd/card";
 
 registerLocaleData(en);
 
@@ -32,7 +33,8 @@ registerLocaleData(en);
         NzLayoutModule,
         NzMenuModule,
         NzBreadCrumbModule,
-        NgbModule
+        NgbModule,
+        NzCardModule
     ],
   providers: [
     { provide: NZ_I18N, useValue: en_US }
