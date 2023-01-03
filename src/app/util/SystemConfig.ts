@@ -1,7 +1,7 @@
 export class SystemConfig {
 
   static getBaseUrl() {
-    return 'https://herofund.up.railway.app';
+    return 'http://localhost:8080';
   }
 
   static getTokenTest() {
