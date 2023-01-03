@@ -1,5 +1,7 @@
 <nz-layout class="layout">
   <nz-sider nzCollapsible nzWidth="250px" [nzCollapsible]="false">
+<nz-layout *ngIf="href !== '/login'">
+  <nz-sider nzCollapsible nzWidth="250px">
     <div class="logo">
       <img src="./assets/logo1.png" alt=""/>
       <p>Herofund</p>
@@ -35,3 +37,6 @@
     <nz-footer>Ant Design ©2020 Implement By Angular</nz-footer>
   </nz-layout>
 </nz-layout>
+<ng-container *ngIf="href === '/login'">
+  <router-outlet></router-outlet>
+</ng-container>

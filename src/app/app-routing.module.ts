@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import {LoginModule} from "./pages/login/login.module";
+import {LoginComponent} from "./pages/login/login.component";
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: '/dashboard' },
@@ -52,6 +54,10 @@ const routes: Routes = [
     path: 'user',
     loadChildren: () =>
       import('./pages/user-management/user-management.module').then((m) => m.UserManagementModule)
+  },
+  {
+    path: 'login',
+    component: LoginComponent,
   },
 ];
 
