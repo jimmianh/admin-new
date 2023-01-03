@@ -16,6 +16,8 @@ export class SponsorManagementPageComponent implements OnInit {
   totalElements: number = 0;
   offset: number = 1;
   limit: number = 6;
+  keyword = "";
+  status!: undefined;
   formSearch!: UntypedFormGroup;
 
   constructor(private sponsorService: SponsorService, private fb: UntypedFormBuilder) {
@@ -41,11 +43,15 @@ export class SponsorManagementPageComponent implements OnInit {
 
   resetForm() {
     this.formSearch.reset();
+    this.keyword ="";
+    this.status = undefined;
     this.getPageSponsor();
   }
 
   search() {
-
+    this.keyword = this.formSearch.value.keyword ?? "";
+    this.status = this.formSearch.value.status;
+    this.getPageSponsor();
   }
 
   createFormSearch() {
@@ -64,7 +70,7 @@ export class SponsorManagementPageComponent implements OnInit {
 
 
   getPageSponsor() {
-    this.sponsorService.getPage(this.offset, this.limit).subscribe(res => this.handlerDataResponse(res))
+    this.sponsorService.getPage(this.offset, this.limit, this.keyword, this.status).subscribe(res => this.handlerDataResponse(res))
   }
 
   updateStatus(id: number, status: number) {

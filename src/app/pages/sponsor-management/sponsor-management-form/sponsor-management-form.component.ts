@@ -14,12 +14,11 @@ import {Message} from "../../../util/StringUtil";
 })
 export class SponsorManagementFormComponent implements OnInit {
 
-  id: number = 0;
+  id!: number;
   validateForm!: UntypedFormGroup;
   loading = false;
   avatarUrl?: string;
   file?: File;
-  detail: any;
 
   constructor(private router: ActivatedRoute,
               private sponsorService: SponsorService,
@@ -33,7 +32,8 @@ export class SponsorManagementFormComponent implements OnInit {
     this.createForm();
     let a = this.router.snapshot.paramMap.get('id');
     if (a) {
-      this.getDetail(parseInt(a))
+      this.id = parseInt(a)
+      this.getDetail(this.id)
     }
   }
 
@@ -43,7 +43,6 @@ export class SponsorManagementFormComponent implements OnInit {
       this.validateForm.get('name')!.setValue(res.name)
       this.validateForm.get('image')!.setValue(res.image)
       this.avatarUrl = res.image;
-      this.detail = res.detail;
       this.validateForm.get('description')!.setValue(res.description)
       this.validateForm.get('detail')!.setValue(res.detail)
     })
@@ -51,7 +50,7 @@ export class SponsorManagementFormComponent implements OnInit {
 
   createForm(): void {
     this.validateForm = this.fb.group({
-      id: [null, [Validators.required]],
+      id: [null, [Validators.nullValidator]],
       name: [null, [Validators.required]],
       description: [null, [Validators.required]],
       detail: [null, [Validators.required]],
@@ -93,17 +92,18 @@ export class SponsorManagementFormComponent implements OnInit {
   }
 
   btnSave() {
-    this.validateForm.value.image = this.avatarUrl;
+    this.validateForm.controls['image'].setValue(this.avatarUrl);
     if (this.validateForm.valid) {
       if (this.r.url.includes('/sponsor/edit')) {
+        this.validateForm.value.id = this.id;
         this.update(this.validateForm.value)
       }
       if (this.r.url.includes('/sponsor/form')) {
         this.create(this.validateForm.value);
-        console.log("create");
       }
 
     } else {
+      console.log('errr')
       Object.values(this.validateForm.controls).forEach(control => {
         if (control.invalid) {
           control.markAsDirty();
