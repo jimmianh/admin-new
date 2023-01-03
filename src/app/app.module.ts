@@ -16,13 +16,12 @@ import { NzMenuModule } from 'ng-zorro-antd/menu';
 import {NzBreadCrumbModule} from "ng-zorro-antd/breadcrumb";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {NzCardModule} from "ng-zorro-antd/card";
-import {LoginViewComponent} from "./views/login/login-view.component";
 
 registerLocaleData(en);
 
 @NgModule({
   declarations: [
-    AppComponent, LoginViewComponent
+    AppComponent
   ],
     imports: [
         BrowserModule,
@@ -40,6 +39,6 @@ registerLocaleData(en);
   providers: [
     { provide: NZ_I18N, useValue: en_US }
   ],
-  bootstrap: [AppComponent, LoginViewComponent]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

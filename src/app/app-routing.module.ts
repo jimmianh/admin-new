@@ -1,10 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {LoginViewComponent} from "./views/login/login-view.component";
 
 const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: '/auth' },
-  { path: 'auth', component: LoginViewComponent },
+  { path: '', pathMatch: 'full', redirectTo: '/dashboard' },
   {
     path: 'dashboard',
     loadChildren: () =>

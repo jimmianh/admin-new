@@ -5,8 +5,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {PaymentChannel, PaymentChannelRequest} from '../model/PaymentChannel';
 import {SystemConfig} from '../../../util/SystemConfig';
 
-const token =
-  'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsInBob25lIjoiMDk2OTQ1MTY5MSIsInByb2ZpbGVJZCI6MSwiZXhwIjoxNjcyMzg1MTM3LCJpYXQiOjE2NzIyOTg3MzcsImF1dGhvcml0aWVzIjpbeyJhdXRob3JpdHkiOiJST0xFX0FETUlOIn1dfQ.MC_XMBOmYF_aBGhltXjoukfk5d90E1AnNuXyW_zAo40';
+const token = SystemConfig.getTokenTest();
 const headers: HttpHeaders = new HttpHeaders({
   Authorization: 'Bearer ' + token,
   'content-type': 'application/json'

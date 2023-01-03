@@ -1,15 +1,17 @@
 import {Component, OnInit} from '@angular/core';
 import {Transaction} from "../modal/TransactionModel";
 import {TransactionService} from "../service/transaction-service.service";
+import {UntypedFormBuilder, UntypedFormGroup, Validators} from "@angular/forms";
+import * as moment from 'moment'
 
 @Component({
   selector: 'app-transaction-management-page',
   templateUrl: 'transaction-management-page.component.html',
   styleUrls: ['transaction-management-page.component.scss']
 })
-export class TransactionManagementPageComponent implements OnInit{
+export class TransactionManagementPageComponent implements OnInit {
 
-  constructor(private transactionService: TransactionService) {
+  constructor(private transactionService: TransactionService, private fb: UntypedFormBuilder) {
   }
 
   listOfSelection = [
@@ -43,6 +45,12 @@ export class TransactionManagementPageComponent implements OnInit{
   totalElements: number = 0;
   offset: number = 1;
   limit: number = 6;
+  formSearch!: UntypedFormGroup;
+
+  ngOnInit(): void {
+    this.getListTransaction();
+    this.createFormSearch();
+  }
 
   updateCheckedSet(id: number, checked: boolean): void {
     if (checked) {
@@ -72,22 +80,61 @@ export class TransactionManagementPageComponent implements OnInit{
     this.indeterminate = this.listOfCurrentPageData.some(item => this.setOfCheckedId.has(item.id)) && !this.checked;
   }
 
-  ngOnInit(): void {
-    this.getListTransaction();
-  }
 
-  getListTransaction(){
-    this.transactionService.getPageTransaction(this.offset, this.limit).subscribe(res =>{
-      this.listOfData = res?.items
-      this.pageSize = res?.totalPages
-      this.offset = res?.offset
-      this.limit = res?.limit
-      this.totalElements = res?.totalElements
-    })
+  getListTransaction() {
+    this.transactionService.getPageTransaction(this.offset, this.limit)
+      .subscribe(res => this.handlerDataResponse(res))
   }
 
   onChangePage(page: number) {
     this.offset = page;
     this.getListTransaction();
+  }
+
+  resetForm(): void {
+    this.formSearch.reset();
+    this.getListTransaction();
+  }
+
+  search() {
+    console.log(this.formSearch.value)
+    this.searchTransaction(this.formSearch.value)
+
+  }
+
+  searchTransaction(filter: any) {
+    this.transactionService.search(filter)
+      .subscribe(res => this.handlerDataResponse(res))
+  }
+
+  handlerDataResponse(res: any) {
+    this.listOfData = res?.items
+    this.pageSize = res?.totalPages
+    this.offset = res?.offset
+    this.limit = res?.limit
+    this.totalElements = res?.totalElements
+  }
+
+  createFormSearch() {
+    this.formSearch = this.fb.group({
+      keyword: [null, [Validators.nullValidator]],
+      campaignId: [null, [Validators.nullValidator]],
+      paymentStatus: [null, [Validators.nullValidator]],
+      startAmount: [null, [Validators.nullValidator]],
+      endAmount: [null, [Validators.nullValidator]],
+      accountId: [null, [Validators.nullValidator]],
+      startDateSendingTime: [null, [Validators.nullValidator]],
+      endDateSendingTime: [null, [Validators.nullValidator]],
+      date: [null, [Validators.nullValidator]],
+      offset: [1, [Validators.nullValidator]],
+      limit: [10, [Validators.nullValidator]],
+    });
+  }
+
+  onChange($event: any) {
+    let startDate = moment($event[0]).format('DD/MM/YYYY');
+    let endDate = moment($event[1]).format('DD/MM/YYYY');
+    this.formSearch.value.startDateSendingTime = startDate;
+    this.formSearch.value.endDateSendingTime = endDate;
   }
 }

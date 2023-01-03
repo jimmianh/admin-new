@@ -4,9 +4,9 @@ export interface Transaction {
   message: string
   amount: number
   sendingTime: string
-  campaignId: number
+  campaign: number
   paymentChannel: number
-  accountId: number
+  account: number
   paymentStatus: string
   paypalTransactionId: string
 }

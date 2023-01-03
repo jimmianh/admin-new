@@ -1,46 +1,110 @@
-<nz-table
-  nzShowSizeChanger
-  [nzData]="listOfData"
-  [nzShowPagination]="false"
-  (nzCurrentPageDataChange)="onCurrentPageDataChange($event)"
->
-  <thead>
-  <tr>
-    <th
-      [nzSelections]="listOfSelection"
-      [(nzChecked)]="checked"
-      [nzIndeterminate]="indeterminate"
-      (nzCheckedChange)="onAllChecked($event)"
-    ></th>
-    <th>Name</th>
-    <th>Amount</th>
-    <th>Message</th>
-    <th>Sending Time</th>
-    <th>Campaign</th>
-    <th>Account</th>
-    <th>Payment Channel</th>
-    <th>Payment Status</th>
-    <th>Transaction Id</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="let data of listOfData">
-    <td [nzChecked]="setOfCheckedId.has(data.id)" (nzCheckedChange)="onItemChecked(data.id, $event)"></td>
-    <td>{{ data.senderName }}</td>
-    <td>{{ data.amount }}</td>
-    <td>{{ data.message }}</td>
-    <td>{{ data.sendingTime }}</td>
-    <td>{{ data.campaignId }}</td>
-    <td>{{ data.amount }}</td>
-    <td>{{ data.paymentChannel }}</td>
-    <td>{{ data.paymentStatus }}</td>
-    <td>{{ data.paypalTransactionId }}</td>
-  </tr>
-  </tbody>
-</nz-table>
-<nz-pagination class="pagination"
-               (nzPageIndexChange)="onChangePage($event)"
-               [nzPageIndex]="offset" [nzTotal]="totalElements"
-               [nzPageSize]="limit">
-</nz-pagination>
+<form nz-form [formGroup]="formSearch" class="ant-advanced-search-form">
+  <div nz-row [nzGutter]="24">
+    <div nz-col [nzSpan]="8">
+      <nz-form-item>
+        <nz-form-label>Keyword</nz-form-label>
+        <nz-form-control>
+          <input
+            nz-input
+            placeholder="Vui lòng từ khóa"
+            [formControlName]="'keyword'"
+          />
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+    <div nz-col [nzSpan]="8">
+      <nz-form-item>
+        <nz-form-label>Sending Time</nz-form-label>
+        <nz-form-control>
+          <nz-range-picker [formControlName]="'date'" (ngModelChange)="onChange($event)"></nz-range-picker>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+    <div nz-col [nzSpan]="4">
+      <nz-form-item>
+        <nz-form-label>Status</nz-form-label>
+        <nz-form-control>
+          <nz-select nzShowSearch nzAllowClear nzPlaceHolder="status" [formControlName]="'paymentStatus'">
+            <nz-option nzLabel="DONE" nzValue="DONE"></nz-option>
+            <nz-option nzLabel="UNPAID" nzValue="UNPAID"></nz-option>
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+    <div nz-col [nzSpan]="6">
+      <nz-form-item>
+        <nz-form-label>Amount ($)</nz-form-label>
+        <nz-form-control class="__amount">
+          <input
+            class="__amount_start"
+            nz-input
+            placeholder="start"
+            [formControlName]="'startAmount'"/>
+          <input
+            class="__amount_end"
+            nz-input
+            placeholder="end"
+            [formControlName]="'endAmount'"/>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+
+  </div>
+  <div nz-row>
+    <div nz-col [nzSpan]="24" class="search-area">
+      <button nz-button [nzType]="'primary'" (click)="search()">Search</button>
+      <button nz-button (click)="resetForm()">Clear</button>
+    </div>
+  </div>
+</form>
+<div class="search-result-list">
+  <nz-table
+    nzShowSizeChanger
+    [nzData]="listOfData"
+    [nzShowPagination]="false"
+    (nzCurrentPageDataChange)="onCurrentPageDataChange($event)"
+  >
+    <thead>
+    <tr>
+<!--      <th-->
+<!--        [nzSelections]="listOfSelection"-->
+<!--        [(nzChecked)]="checked"-->
+<!--        [nzIndeterminate]="indeterminate"-->
+<!--        (nzCheckedChange)="onAllChecked($event)"-->
+<!--      ></th>-->
+      <th>Stt</th>
+      <th>Name</th>
+      <th>Amount ($)</th>
+      <th>Message</th>
+      <th>Sending Time</th>
+      <th>Campaign</th>
+      <th>Account</th>
+      <th>Payment Channel</th>
+      <th>Payment Status</th>
+      <th>Transaction Id</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let data of listOfData; let i = index">
+<!--      <td [nzChecked]="setOfCheckedId.has(data.id)" (nzCheckedChange)="onItemChecked(data.id, $event)"></td>-->
+      <td>{{ i + 1 }}</td>
+      <td>{{ data.senderName }}</td>
+      <td>{{ data.amount }}</td>
+      <td>{{ data.message }}</td>
+      <td>{{ data.sendingTime }}</td>
+      <td>{{ data.campaign }}</td>
+      <td>{{ data.account }}</td>
+      <td>{{ data.paymentChannel }}</td>
+      <td>{{ data.paymentStatus }}</td>
+      <td>{{ data.paypalTransactionId }}</td>
+    </tr>
+    </tbody>
+  </nz-table>
+  <nz-pagination class="pagination"
+                 (nzPageIndexChange)="onChangePage($event)"
+                 [nzPageIndex]="offset" [nzTotal]="totalElements"
+                 [nzPageSize]="limit">
+  </nz-pagination>
+</div>
+
 
