@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {navItems} from './routers';
 import {Location} from "@angular/common";
+import {LocalService} from "./service/local.service";
 
 @Component({
   selector: 'app-root',
@@ -15,6 +16,7 @@ export class AppComponent {
   routerLink: any
   href: any
   constructor(
+    private localStore: LocalService,
     private routers: Router,
     private location : Location
               ) {
