@@ -48,11 +48,10 @@
         </nz-form-control>
       </nz-form-item>
     </div>
-
   </div>
   <div nz-row>
     <div nz-col [nzSpan]="24" class="search-area">
-      <button nz-button [nzType]="'primary'" (click)="search()">Search</button>
+      <button nz-button [nzType]="'primary'" (click)="btnSearch()">Search</button>
       <button nz-button (click)="resetForm()">Clear</button>
     </div>
   </div>
@@ -65,19 +64,12 @@
   >
     <thead>
     <tr>
-<!--      <th-->
-<!--        [nzSelections]="listOfSelection"-->
-<!--        [(nzChecked)]="checked"-->
-<!--        [nzIndeterminate]="indeterminate"-->
-<!--        (nzCheckedChange)="onAllChecked($event)"-->
-<!--      ></th>-->
       <th>Stt</th>
       <th>Name</th>
       <th>Amount ($)</th>
       <th>Message</th>
       <th>Sending Time</th>
       <th>Campaign</th>
-      <th>Account</th>
       <th>Payment Channel</th>
       <th>Payment Status</th>
       <th>Transaction Id</th>
@@ -85,14 +77,12 @@
     </thead>
     <tbody>
     <tr *ngFor="let data of listOfData; let i = index">
-<!--      <td [nzChecked]="setOfCheckedId.has(data.id)" (nzCheckedChange)="onItemChecked(data.id, $event)"></td>-->
       <td>{{ i + 1 }}</td>
       <td>{{ data.senderName }}</td>
       <td>{{ data.amount }}</td>
       <td>{{ data.message }}</td>
       <td>{{ data.sendingTime }}</td>
       <td>{{ data.campaign }}</td>
-      <td>{{ data.account }}</td>
       <td>{{ data.paymentChannel }}</td>
       <td>{{ data.paymentStatus }}</td>
       <td>{{ data.paypalTransactionId }}</td>
