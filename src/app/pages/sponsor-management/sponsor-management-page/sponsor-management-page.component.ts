@@ -25,6 +25,9 @@ export class SponsorManagementPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.getPageSponsor();
+    this.sponsorService.RefreshData.subscribe(() => {
+      this.getPageSponsor();
+    })
     this.createFormSearch();
   }
 

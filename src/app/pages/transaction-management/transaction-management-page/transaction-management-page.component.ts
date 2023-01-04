@@ -49,6 +49,9 @@ export class TransactionManagementPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.getListTransaction();
+    this.transactionService.RefreshData.subscribe(() => {
+      this.getListTransaction();
+    })
     this.createFormSearch();
   }
 
@@ -88,23 +91,46 @@ export class TransactionManagementPageComponent implements OnInit {
 
   onChangePage(page: number) {
     this.offset = page;
+    if (this.checkValueFormSearch()) {
+      this.searchTransaction();
+      return;
+    }
     this.getListTransaction();
+  }
+
+  checkValueFormSearch(): boolean {
+    if (this.formSearch.value.keyword) return true;
+    if (this.formSearch.value.campaignId) return true;
+    if (this.formSearch.value.paymentStatus) return true;
+    if (this.formSearch.value.startAmount) return true;
+    if (this.formSearch.value.endAmount) return true;
+    if (this.formSearch.value.startDateSendingTime) return true;
+    if (this.formSearch.value.endDateSendingTime) return true;
+    return false;
   }
 
   resetForm(): void {
     this.formSearch.reset();
+    this.offset = 1;
     this.getListTransaction();
   }
 
-  search() {
-    console.log(this.formSearch.value)
-    this.searchTransaction(this.formSearch.value)
-
+  btnSearch() {
+    this.offset = 1;
+    this.searchTransaction()
   }
 
-  searchTransaction(filter: any) {
+  searchTransaction() {
+    let filter = this.createFilter();
     this.transactionService.search(filter)
       .subscribe(res => this.handlerDataResponse(res))
+  }
+
+  createFilter(): any {
+    let filter = {...this.formSearch.value}
+    filter.offset = this.offset;
+    filter.limit = this.limit;
+    return filter;
   }
 
   handlerDataResponse(res: any) {
@@ -117,17 +143,16 @@ export class TransactionManagementPageComponent implements OnInit {
 
   createFormSearch() {
     this.formSearch = this.fb.group({
-      keyword: [null, [Validators.nullValidator]],
-      campaignId: [null, [Validators.nullValidator]],
-      paymentStatus: [null, [Validators.nullValidator]],
-      startAmount: [null, [Validators.nullValidator]],
-      endAmount: [null, [Validators.nullValidator]],
-      accountId: [null, [Validators.nullValidator]],
-      startDateSendingTime: [null, [Validators.nullValidator]],
-      endDateSendingTime: [null, [Validators.nullValidator]],
-      date: [null, [Validators.nullValidator]],
-      offset: [1, [Validators.nullValidator]],
-      limit: [10, [Validators.nullValidator]],
+      keyword: ["", [Validators.nullValidator]],
+      campaignId: ["", [Validators.nullValidator]],
+      paymentStatus: ["", [Validators.nullValidator]],
+      startAmount: ["", [Validators.nullValidator]],
+      endAmount: ["", [Validators.nullValidator]],
+      status: ["", [Validators.nullValidator]],
+      accountId: ["", [Validators.nullValidator]],
+      startDateSendingTime: ["", [Validators.nullValidator]],
+      endDateSendingTime: ["", [Validators.nullValidator]],
+      date: ["", [Validators.nullValidator]],
     });
   }
 
