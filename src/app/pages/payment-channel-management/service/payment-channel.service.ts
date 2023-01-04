@@ -3,9 +3,9 @@ import {catchError, Subject, tap, throwError} from 'rxjs';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 import {PaymentChannel, PaymentChannelRequest} from '../model/PaymentChannel';
-import {SystemConfig} from '../../../util/SystemConfig';
+import {SystemUtil} from '../../../util/SystemUtil';
 
-const token = SystemConfig.getTokenTest();
+const token = SystemUtil.getTokenTest();
 const headers: HttpHeaders = new HttpHeaders({
   Authorization: 'Bearer ' + token,
   'content-type': 'application/json'
@@ -27,7 +27,7 @@ export class PaymentChannelService {
 
   getListPaymentChannel() {
     return this.http
-      .get<any>(SystemConfig.getBaseUrl() + `/api/v1/admin/channels`, {
+      .get<any>(SystemUtil.getBaseUrl() + `/api/v1/admin/channels`, {
         headers,
       })
       .pipe(
@@ -40,7 +40,7 @@ export class PaymentChannelService {
   createPaymentChannel(request: PaymentChannelRequest) {
     return this.http
       .post<any>(
-        SystemConfig.getBaseUrl() + '/api/v1/admin/channels',
+        SystemUtil.getBaseUrl() + '/api/v1/admin/channels',
         JSON.stringify(request),
         {headers}
       )
@@ -57,7 +57,7 @@ export class PaymentChannelService {
   updatePaymentChannel(request: PaymentChannel) {
     return this.http
       .put<any>(
-        SystemConfig.getBaseUrl() + '/api/v1/admin/channels',
+        SystemUtil.getBaseUrl() + '/api/v1/admin/channels',
         JSON.stringify(request),
         {headers}
       )
@@ -74,7 +74,7 @@ export class PaymentChannelService {
   disablePaymentChannel(id: number, status: number) {
     return this.http
       .put<any>(
-        SystemConfig.getBaseUrl() + `/api/v1/admin/channels/update/status?id=${id}&status=${status}`,{},
+        SystemUtil.getBaseUrl() + `/api/v1/admin/channels/update/status?id=${id}&status=${status}`,{},
         {headers}
       )
       .pipe(
@@ -90,7 +90,7 @@ export class PaymentChannelService {
   getDetail(id : number) {
     return this.http
       .get<any>(
-        SystemConfig.getBaseUrl() + '/api/v1/admin/channels/detail?id=' + id,
+        SystemUtil.getBaseUrl() + '/api/v1/admin/channels/detail?id=' + id,
         {headers}
       )
       .pipe(
