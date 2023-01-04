@@ -3,9 +3,9 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {catchError, Subject, tap, throwError} from "rxjs";
 import {SystemUtil} from "../../../util/SystemUtil";
 
-
+const token = localStorage.getItem('access_token');
 const headers: HttpHeaders = new HttpHeaders({
-  Authorization: 'Bearer ' + SystemUtil.getTokenTest(),
+  Authorization: 'Bearer ' + token,
   'content-type': 'application/json'
 });
 
