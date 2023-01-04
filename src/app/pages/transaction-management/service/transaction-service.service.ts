@@ -1,11 +1,11 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {catchError, Subject, tap, throwError} from "rxjs";
-import {SystemConfig} from "../../../util/SystemConfig";
+import {SystemUtil} from "../../../util/SystemUtil";
 
 
 const headers: HttpHeaders = new HttpHeaders({
-  Authorization: 'Bearer ' + SystemConfig.getTokenTest(),
+  Authorization: 'Bearer ' + SystemUtil.getTokenTest(),
   'content-type': 'application/json'
 });
 
@@ -27,7 +27,7 @@ export class TransactionService {
 
   getPageTransaction(offset: number, limit: number) {
     return this.http
-      .get<any>(SystemConfig.getBaseUrl() + `/api/v1/admin/transactions?offset=${offset}&limit=${limit}`, {
+      .get<any>(SystemUtil.getBaseUrl() + `/api/v1/admin/transactions?offset=${offset}&limit=${limit}`, {
         headers,
       })
       .pipe(
@@ -42,7 +42,7 @@ export class TransactionService {
 
   search(filter: any) {
     return this.http
-      .post<any>(SystemConfig.getBaseUrl() + `/api/v1/admin/transactions/search`,
+      .post<any>(SystemUtil.getBaseUrl() + `/api/v1/admin/transactions/search`,
         JSON.stringify(filter),
         {headers})
       .pipe(

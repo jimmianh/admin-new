@@ -7,44 +7,104 @@
       <nz-form-item>
         <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">Tên danh mục</nz-form-label>
         <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid Name!">
-          <input nz-input formControlName="name" id="name" />
+          <input nz-input formControlName="name" id="name"/>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="image">Image</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid Name!">
+          <nz-upload
+            class="avatar-uploader"
+            nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+            nzName="avatar"
+            nzListType="picture-card"
+            [nzShowUploadList]="false"
+            (nzChange)="handleChange($event)"
+          >
+            <ng-container *ngIf="!avatarUrl">
+              <span class="upload-icon" nz-icon [nzType]="loading ? 'loading' : 'plus'"></span>
+              <div class="ant-upload-text">Upload</div>
+            </ng-container>
+            <img *ngIf="avatarUrl" [src]="avatarUrl" style="width: 100%" alt=""/>
+          </nz-upload>
         </nz-form-control>
       </nz-form-item>
     </form>
   </ng-container>
 </nz-modal>
-<nz-table #nzTable [nzData]="listCategories" nzTableLayout="fixed">
-  <thead>
-  <tr>
-    <th>STT</th>
-    <th nzCustomFilter>
-      Tên danh mục
-      <nz-filter-trigger [(nzVisible)]="visible" [nzActive]="searchValue.length > 0" [nzDropdownMenu]="menu">
-        <span nz-icon nzType="search"></span>
-      </nz-filter-trigger>
-    </th>
-    <th>Trạng thái</th>
-    <th>Thao tác</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="let data of nzTable.data; let i = index">
-    <td>{{ i + 1}}</td>
-    <td>{{ data.name }}</td>
-    <td><nz-switch [(ngModel)]="data.status" (ngModelChange)="onChange($event, data.id)" ></nz-switch></td>
-    <td>
-      <span nz-icon nzType="edit" (click)="getDetail(data.id)" nzTheme="outline" style="color: #2c2ce0; cursor: pointer"></span>
-    </td>
-  </tr>
-  </tbody>
-</nz-table>
-<nz-dropdown-menu #menu="nzDropdownMenu">
-  <div class="ant-table-filter-dropdown">
-    <div class="search-box">
-      <input type="text" nz-input placeholder="Tìm kiếm danh mục" [(ngModel)]="searchValue" />
-      <button nz-button nzSize="small" nzType="primary" (click)="search()" class="search-button">Tìm kiếm</button>
-      <button nz-button nzSize="small" (click)="reset()">Làm mới</button>
+<form nz-form [formGroup]="formSearch" class="ant-advanced-search-form">
+  <div nz-row [nzGutter]="24">
+    <div nz-col [nzSpan]="8">
+      <nz-form-item>
+        <nz-form-label class="label__keyword">Keyword</nz-form-label>
+        <nz-form-control>
+          <input
+            nz-input
+            placeholder="Vui lòng từ khóa"
+            [formControlName]="'keyword'"
+          />
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+    <div nz-col [nzSpan]="4">
+      <nz-form-item>
+        <nz-form-label class="label__keyword">Status</nz-form-label>
+        <nz-form-control>
+          <nz-select nzShowSearch nzAllowClear nzPlaceHolder="status" [formControlName]="'status'">
+            <nz-option nzLabel="ENABLE" nzValue="1"></nz-option>
+            <nz-option nzLabel="DISABLE" nzValue="0"></nz-option>
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>
     </div>
   </div>
-</nz-dropdown-menu>
+  <div nz-row>
+    <div nz-col [nzSpan]="24" class="search-area">
+      <button nz-button [nzType]="'primary'" (click)="search()">Search</button>
+      <button nz-button (click)="resetForm()">Clear</button>
+    </div>
+  </div>
+</form>
+<div class="search-result-list">
+  <nz-table
+    nzShowSizeChanger
+    [nzShowPagination]="false"
+    [nzData]="listCategories"
+  >
+    <thead>
+    <tr>
+      <th>Stt</th>
+      <th>Image</th>
+      <th>Name</th>
+      <th>Status</th>
+      <th>Created At</th>
+      <th>Updated At</th>
+      <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let data of listCategories; let i = index">
+      <td>{{ i + 1 }}</td>
+      <td><img
+        nz-image
+        width="200px"
+        nzSrc="{{ data.image }}"
+        alt="sponsor" src="{{data.image}}"/></td>
+      <td>{{ data.name }}</td>
+      <td><nz-switch [(ngModel)]="data.status" (ngModelChange)="onChange($event, data.id)"></nz-switch></td>
+      <td>{{ data.createdAt }}</td>
+      <td>{{ data.updatedAt }}</td>
+      <td style="text-align: center">
+        <span nz-icon nzType="edit" (click)="getDetail(data.id)" nzTheme="outline" style="color: #2c2ce0; cursor: pointer"></span>
+      </td>
+    </tr>
+    </tbody>
+  </nz-table>
+</div>
+
+<nz-pagination class="pagination"
+               (nzPageIndexChange)="onChangePage($event)"
+               [nzPageIndex]="offset" [nzTotal]="totalElements"
+               [nzPageSize]="limit">
+</nz-pagination>
 

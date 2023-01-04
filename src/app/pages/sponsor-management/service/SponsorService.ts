@@ -1,11 +1,11 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {catchError, Subject, tap, throwError} from "rxjs";
-import {SystemConfig} from "../../../util/SystemConfig";
+import {SystemUtil} from "../../../util/SystemUtil";
 
 
 const headers: HttpHeaders = new HttpHeaders({
-  Authorization: 'Bearer ' + SystemConfig.getTokenTest(),
+  Authorization: 'Bearer ' + SystemUtil.getTokenTest(),
   'content-type': 'application/json'
 });
 
@@ -27,14 +27,14 @@ export class SponsorService {
 
   getPage(offset: number, limit: number, keyword: string, status: any) {
     let query = `/api/v1/admin/sponsors?offset=${offset}&limit=${limit}`;
-    if (status !== undefined){
+    if (status){
       query += `&status=${status}`
     }
-    if (keyword !== null){
+    if (keyword){
       query += `&keyword=${keyword}`
     }
     return this.http
-      .get<any>(SystemConfig.getBaseUrl() + query, {
+      .get<any>(SystemUtil.getBaseUrl() + query, {
         headers,
       })
       .pipe(
@@ -49,7 +49,7 @@ export class SponsorService {
 
   updateStatus(id: number, status : number) {
     return this.http
-      .put<any>(SystemConfig.getBaseUrl() + `/api/v1/admin/sponsors/update/status?id=${id}&status=${status}`,{},
+      .put<any>(SystemUtil.getBaseUrl() + `/api/v1/admin/sponsors/update/status?id=${id}&status=${status}`,{},
         {headers})
       .pipe(
         catchError((error: any) => {
@@ -63,7 +63,7 @@ export class SponsorService {
 
   create(sponsor: any) {
     return this.http
-      .post<any>(SystemConfig.getBaseUrl() + `/api/v1/admin/sponsors`,
+      .post<any>(SystemUtil.getBaseUrl() + `/api/v1/admin/sponsors`,
         JSON.stringify(sponsor),
         {headers})
       .pipe(
@@ -78,7 +78,7 @@ export class SponsorService {
 
   getDetail(id: number){
     return this.http
-      .get<any>(SystemConfig.getBaseUrl() + `/api/v1/admin/sponsors/detail?id=${id}`,
+      .get<any>(SystemUtil.getBaseUrl() + `/api/v1/admin/sponsors/detail?id=${id}`,
         {headers})
       .pipe(
         catchError((error: any) => {
@@ -89,7 +89,7 @@ export class SponsorService {
 
   update(sponsor: any) {
     return this.http
-      .put<any>(SystemConfig.getBaseUrl() + `/api/v1/admin/sponsors`,
+      .put<any>(SystemUtil.getBaseUrl() + `/api/v1/admin/sponsors`,
         JSON.stringify(sponsor),
         {headers})
       .pipe(
