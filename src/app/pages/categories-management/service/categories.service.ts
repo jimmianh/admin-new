@@ -1,12 +1,11 @@
-import { Injectable } from '@angular/core';
-import {catchError, Observable, Subject, tap, throwError} from "rxjs";
+import {Injectable} from '@angular/core';
+import {catchError, Subject, tap, throwError} from "rxjs";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {SystemConfig} from "../../../util/SystemConfig";
-import {Categories, CategoriesRequest} from "../model/Categories";
+import {SystemUtil} from "../../../util/SystemUtil";
+import {CategoriesRequest} from "../model/Categories";
 
-const token = localStorage.getItem('access_token');
 const headers: HttpHeaders = new HttpHeaders({
-  Authorization: 'Bearer ' + token,
+  Authorization: 'Bearer ' + SystemUtil.getTokenTest(),
   'content-type': 'application/json'
 });
 
@@ -24,9 +23,16 @@ export class CategoriesService {
     return this.refreshData;
   }
 
-  getListCategories() {
+  getListCategories(offset: number, limit: number, keyword: string, status: any) {
+    let query = `/api/v1/admin/categories?offset=${offset}&limit=${limit}`;
+    if (status){
+      query += `&status=${status}`
+    }
+    if (keyword){
+      query += `&keyword=${keyword}`
+    }
     return this.http
-      .get<any>(SystemConfig.getBaseUrl() + `/api/v1/admin/categories`, {
+      .get<any>(SystemUtil.getBaseUrl() + query, {
         headers,
       })
       .pipe(
@@ -39,7 +45,7 @@ export class CategoriesService {
   createCategories(request: CategoriesRequest) {
     return this.http
       .post<any>(
-        SystemConfig.getBaseUrl() + '/api/v1/admin/categories',
+        SystemUtil.getBaseUrl() + '/api/v1/admin/categories',
         JSON.stringify(request),
         {headers}
       )
@@ -47,16 +53,16 @@ export class CategoriesService {
         catchError((error: any) => {
           return throwError(error);
         }),
-        tap(()=>{
+        tap(() => {
           this.RefreshData.next()
         })
       );
   }
 
-  updateCategories(request: Categories) {
+  updateCategories(request: CategoriesRequest) {
     return this.http
       .put<any>(
-        SystemConfig.getBaseUrl() + '/api/v1/admin/categories',
+        SystemUtil.getBaseUrl() + '/api/v1/admin/categories',
         JSON.stringify(request),
         {headers}
       )
@@ -64,7 +70,7 @@ export class CategoriesService {
         catchError((error: any) => {
           return throwError(error);
         }),
-        tap(()=>{
+        tap(() => {
           this.RefreshData.next()
         })
       );
@@ -73,30 +79,30 @@ export class CategoriesService {
   disableCategories(id: number, status: number) {
     return this.http
       .put<any>(
-        SystemConfig.getBaseUrl() + `/api/v1/admin/categories/update/status?id=${id}&status=${status}`,{},
+        SystemUtil.getBaseUrl() + `/api/v1/admin/categories/update/status?id=${id}&status=${status}`, {},
         {headers}
       )
       .pipe(
         catchError((error: any) => {
           return throwError(error);
         }),
-        tap(()=>{
+        tap(() => {
           this.RefreshData.next()
         })
       );
   }
 
-  getDetail(id : number) {
+  getDetail(id: number) {
     return this.http
       .get<any>(
-        SystemConfig.getBaseUrl() + '/api/v1/admin/categories/detail?id=' + id,
+        SystemUtil.getBaseUrl() + '/api/v1/admin/categories/detail?id=' + id,
         {headers}
       )
       .pipe(
         catchError((error: any) => {
           return throwError(error);
         }),
-        tap(()=>{
+        tap(() => {
           this.RefreshData.next()
         })
       );

@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {catchError, Subject, tap, throwError} from "rxjs";
-import {SystemConfig} from "../util/SystemConfig";
+import {SystemUtil} from "../util/SystemUtil";
 
 
 @Injectable({
@@ -26,7 +26,7 @@ export class FileService {
     formData.append("file", file);
 
     return this.http
-      .post<any>(SystemConfig.getBaseUrl() + `/api/v1/files/upload`, formData)
+      .post<any>(SystemUtil.getBaseUrl() + `/api/v1/files/upload`, formData)
       .pipe(
         catchError((error: any) => {
           return throwError(error);
