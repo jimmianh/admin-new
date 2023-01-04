@@ -16,8 +16,15 @@ import { NzMenuModule } from 'ng-zorro-antd/menu';
 import {NzBreadCrumbModule} from "ng-zorro-antd/breadcrumb";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {NzCardModule} from "ng-zorro-antd/card";
+import {AuthService} from "./auth/auth.service";
+import {AuthGuardService} from "./auth/auth-guard.service";
+import {JwtModule} from "@auth0/angular-jwt";
 
 registerLocaleData(en);
+
+export function tokenGetter() {
+  return localStorage.getItem("access_token");
+}
 
 @NgModule({
   declarations: [
@@ -35,9 +42,17 @@ registerLocaleData(en);
         NzBreadCrumbModule,
         NgbModule,
         NzCardModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+      JwtModule.forRoot({
+        config: {
+          tokenGetter: tokenGetter,
+          allowedDomains: ["https://herofund.up.railway.app", "foo.com", "bar.com"]
+        },
+      }),
     ],
   providers: [
+    AuthGuardService,
+    AuthService,
     { provide: NZ_I18N, useValue: en_US }
   ],
   bootstrap: [AppComponent]

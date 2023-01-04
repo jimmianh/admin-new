@@ -2,11 +2,9 @@ import { Injectable } from '@angular/core';
 import {catchError, Observable, Subject, tap, throwError} from "rxjs";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {SystemConfig} from "../../../util/SystemConfig";
-import {PaymentChannel, PaymentChannelRequest} from "../../payment-channel-management/model/PaymentChannel";
 import {Categories, CategoriesRequest} from "../model/Categories";
 
-const token =
-  'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsInBob25lIjoiMDk2OTQ1MTY5MSIsInByb2ZpbGVJZCI6MSwiZXhwIjoxNjcyNDYxMTk5LCJpYXQiOjE2NzIzNzQ3OTksImF1dGhvcml0aWVzIjpbeyJhdXRob3JpdHkiOiJST0xFX0FETUlOIn1dfQ.hB0mmkGiLaMKbvM63H6KtC0nXpbzxu400wBJExKJQ4c';
+const token = localStorage.getItem('access_token');
 const headers: HttpHeaders = new HttpHeaders({
   Authorization: 'Bearer ' + token,
   'content-type': 'application/json'

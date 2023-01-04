@@ -21,9 +21,11 @@ export class LoginComponent implements OnInit {
     console.log('ádd', payLoad)
     const res = await this.loginService.postLogin(payLoad).pipe(take(1))
       .subscribe((res) => {
+        localStorage.setItem('access_token', res.accessToken)
         console.log('res', res)
         if(res.accessToken) {
           this.router.navigate(['/dashboard']);
+          // window.location.reload()
         }
       });
   }

@@ -5,7 +5,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {PaymentChannel, PaymentChannelRequest} from '../model/PaymentChannel';
 import {SystemConfig} from '../../../util/SystemConfig';
 
-const token = SystemConfig.getTokenTest();
+const token = localStorage.getItem('access_token');
 const headers: HttpHeaders = new HttpHeaders({
   Authorization: 'Bearer ' + token,
   'content-type': 'application/json'
