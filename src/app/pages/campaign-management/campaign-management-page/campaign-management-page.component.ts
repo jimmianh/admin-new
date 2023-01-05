@@ -24,9 +24,6 @@ export class CampaignManagementPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.getListCampaign();
-    this.campaignService.RefreshData.subscribe(() => {
-      this.getListCampaign();
-    })
     this.createFormSearch();
   }
 

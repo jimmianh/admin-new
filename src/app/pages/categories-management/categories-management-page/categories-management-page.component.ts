@@ -28,6 +28,7 @@ export class CategoriesManagementPageComponent implements OnInit {
   formSearch!: UntypedFormGroup;
   keyword = "";
   status!: undefined;
+  title: string = "";
 
   constructor(private categoriesService: CategoriesService,
               private fileService: FileService,
@@ -37,9 +38,6 @@ export class CategoriesManagementPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.getListCategories();
-    this.categoriesService.RefreshData.subscribe(() => {
-      this.getListCategories();
-    })
     this.validateFormHandler();
     this.createFormSearch();
 
@@ -64,6 +62,7 @@ export class CategoriesManagementPageComponent implements OnInit {
 
   showModal(): void {
     this.resetForm();
+    this.title = "Tạo mới";
     this.isVisible = true;
   }
 
@@ -71,11 +70,13 @@ export class CategoriesManagementPageComponent implements OnInit {
     if (this.validateForm.valid) {
       if (this.validateForm.value.id === null) {
         this.createCategories(this.validateForm.value)
+        this.resetView();
         this.isVisible = false;
         this.resetForm();
         return;
       }
       this.updateCategories(this.validateForm.value);
+      this.resetView();
       this.isVisible = false;
       this.resetForm();
 
@@ -87,6 +88,12 @@ export class CategoriesManagementPageComponent implements OnInit {
         }
       });
     }
+  }
+
+  resetView(){
+    this.categoriesService.RefreshData.subscribe(() => {
+      this.getListCategories();
+    })
   }
 
   handleCancel(): void {
@@ -129,6 +136,7 @@ export class CategoriesManagementPageComponent implements OnInit {
   }
 
   getDetail(id: number) {
+    this.title = "Cập nhật"
     this.categoriesService.getDetail(id).subscribe(res => {
       this.validateForm.get('id')!.setValue(res.id);
       this.validateForm.get('name')!.setValue(res.name);

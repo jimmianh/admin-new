@@ -34,7 +34,7 @@ export class CampaignService {
         catchError((error: any) => {
           return throwError(error);
         }),
-        tap(()=>{
+        tap(() => {
           this.RefreshData.next()
         })
       );
@@ -49,9 +49,20 @@ export class CampaignService {
         catchError((error: any) => {
           return throwError(error);
         }),
-        tap(()=>{
+        tap(() => {
           this.RefreshData.next()
         })
       );
+  }
+
+  create(request: any) {
+    return this.http.post<any>(SystemUtil.getBaseUrl() + '/api/v1/admin/campaigns',
+      JSON.stringify(request), {headers})
+      .pipe(catchError((error: any) => {
+          return throwError(error);
+        }),
+        tap(() => {
+          this.RefreshData.next()
+        }))
   }
 }

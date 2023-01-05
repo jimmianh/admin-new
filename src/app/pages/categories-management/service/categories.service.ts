@@ -42,6 +42,17 @@ export class CategoriesService {
       );
   }
 
+  getListActiveCategory() {
+    let query = `/api/v1/categories/active`;
+    return this.http
+      .get<any>(SystemUtil.getBaseUrl() + query)
+      .pipe(
+        catchError((httpError: any) => {
+          return throwError(httpError);
+        })
+      );
+  }
+
   createCategories(request: CategoriesRequest) {
     return this.http
       .post<any>(

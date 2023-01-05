@@ -1,6 +1,6 @@
 <button class="mb-2" nz-button [nzType]="'primary'" (click)="showModal()"><span>Tạo mới</span></button>
 
-<nz-modal [(nzVisible)]="isVisible" nzTitle="Tạo mới thông tin kênh thanh toán" (nzOnCancel)="handleCancel()"
+<nz-modal [(nzVisible)]="isVisible" nzTitle="{{title}}" (nzOnCancel)="handleCancel()"
           (nzOnOk)="handleOk()">
   <ng-container *nzModalContent>
     <form nz-form [formGroup]="validateForm">
