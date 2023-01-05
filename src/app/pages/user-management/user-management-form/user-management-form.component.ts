@@ -40,31 +40,18 @@ export class UserManagementFormComponent implements OnInit {
 
   getDetail(id: number) {
     this.userService.getDetail(id).subscribe(res => {
-      this.validateForm.get('id')!.setValue(res.id)
-      this.validateForm.get('name')!.setValue(res.name)
-      this.validateForm.get('image')!.setValue(res.image)
-      this.avatarUrl = res.image;
-      this.validateForm.get('description')!.setValue(res.description)
-      this.validateForm.get('detail')!.setValue(res.detail)
+      this.validateForm.get('username')!.setValue(res.username)
+      this.validateForm.get('role')!.setValue(res.role)
     })
   }
 
   createForm(): void {
     this.validateForm = this.fb.group({
-      id: [null, [Validators.nullValidator]],
-      name: [null, [Validators.required]],
-      description: [null, [Validators.required]],
-      detail: [null, [Validators.required]],
-      image: [null, [Validators.required]],
+      username: [null, [Validators.nullValidator]],
+      role: [null, [Validators.required]],
     });
   }
 
-  handleChange(info: { file: NzUploadFile }): void {
-    this.fileService.upload(info.file!.originFileObj!).subscribe(res => {
-      this.avatarUrl = res.data;
-      this.validateForm.value.image = res.data;
-    })
-  }
 
 
   update(user: any) {
