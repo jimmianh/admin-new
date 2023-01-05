@@ -27,6 +27,9 @@ export class LoginComponent implements OnInit {
           this.router.navigate(['/dashboard']);
           // window.location.reload()
         }
+        if (res.status === false){
+          alert(res.error.message)
+        }
       });
   }
 

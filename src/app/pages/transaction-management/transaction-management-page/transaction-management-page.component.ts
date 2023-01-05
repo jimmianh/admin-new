@@ -49,9 +49,9 @@ export class TransactionManagementPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.getListTransaction();
-    this.transactionService.RefreshData.subscribe(() => {
-      this.getListTransaction();
-    })
+    // this.transactionService.RefreshData.subscribe(() => {
+    //   this.getListTransaction();
+    // })
     this.createFormSearch();
   }
 
