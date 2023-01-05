@@ -65,25 +65,21 @@
     <thead>
     <tr>
       <th>Stt</th>
-      <th>Name</th>
-      <th>Amount ($)</th>
-      <th>Message</th>
-      <th>Sending Time</th>
       <th>Campaign</th>
-      <th>Payment Channel</th>
-      <th>Payment Status</th>
+      <th width="10%">Sender Name</th>
+      <th width="9%">Amount ($)</th>
+      <th>Sending Time</th>
+      <th width="11%">Payment Status</th>
       <th>Transaction Id</th>
     </tr>
     </thead>
     <tbody>
     <tr *ngFor="let data of listOfData; let i = index">
       <td>{{ i + 1 }}</td>
+      <td>{{ data.campaign }}</td>
       <td>{{ data.senderName }}</td>
       <td>{{ data.amount }}</td>
-      <td>{{ data.message }}</td>
       <td>{{ data.sendingTime }}</td>
-      <td>{{ data.campaign }}</td>
-      <td>{{ data.paymentChannel }}</td>
       <td>{{ data.paymentStatus }}</td>
       <td>{{ data.paypalTransactionId }}</td>
     </tr>
