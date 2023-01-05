@@ -5,7 +5,7 @@ import {SystemUtil} from "../../../util/SystemUtil";
 import {CategoriesRequest} from "../model/Categories";
 
 const headers: HttpHeaders = new HttpHeaders({
-  Authorization: 'Bearer ' + SystemUtil.getTokenTest(),
+  Authorization: 'Bearer ' + localStorage.getItem('access_token'),
   'content-type': 'application/json'
 });
 
@@ -35,6 +35,17 @@ export class CategoriesService {
       .get<any>(SystemUtil.getBaseUrl() + query, {
         headers,
       })
+      .pipe(
+        catchError((httpError: any) => {
+          return throwError(httpError);
+        })
+      );
+  }
+
+  getListActiveCategory() {
+    let query = `/api/v1/categories/active`;
+    return this.http
+      .get<any>(SystemUtil.getBaseUrl() + query)
       .pipe(
         catchError((httpError: any) => {
           return throwError(httpError);
