@@ -25,9 +25,6 @@ export class PaymentChannelManagementPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.getListPaymentChannel();
-    this.paymentChannelService.RefreshData.subscribe(() => {
-      this.getListPaymentChannel();
-    })
     this.validateFormHandler();
 
   }
