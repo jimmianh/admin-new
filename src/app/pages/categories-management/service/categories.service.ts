@@ -5,7 +5,7 @@ import {SystemUtil} from "../../../util/SystemUtil";
 import {CategoriesRequest} from "../model/Categories";
 
 const headers: HttpHeaders = new HttpHeaders({
-  Authorization: 'Bearer ' + SystemUtil.getTokenTest(),
+  Authorization: 'Bearer ' + localStorage.getItem('access_token'),
   'content-type': 'application/json'
 });
 

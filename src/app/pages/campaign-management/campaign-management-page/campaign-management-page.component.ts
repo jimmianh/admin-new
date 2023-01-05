@@ -3,6 +3,8 @@ import {CampaignModel} from "../model/CampaignModel";
 import {UntypedFormBuilder, UntypedFormGroup, Validators} from "@angular/forms";
 import {CampaignService} from "../service/campaign.service";
 import * as moment from "moment/moment";
+import {NzNotificationService} from "ng-zorro-antd/notification";
+import {Message} from "../../../util/StringUtil";
 
 @Component({
   selector: 'app-campaign-management-page',
@@ -18,7 +20,8 @@ export class CampaignManagementPageComponent implements OnInit {
   pageSize!: number;
 
   constructor(private fb: UntypedFormBuilder,
-              private campaignService: CampaignService
+              private campaignService: CampaignService,
+              private notificationService: NzNotificationService
   ) {
   }
 
@@ -51,7 +54,22 @@ export class CampaignManagementPageComponent implements OnInit {
   }
 
   onChange($event: any, id: number) {
+    let status = $event ? 1 : 0;
+    this.updateStatusCampaign(id, status);
+  }
 
+  updateStatusCampaign(id: number, status: number) {
+    this.campaignService.updateStatus(id, status)
+      .subscribe(
+        res => {
+          if (res.status) {
+            this.notificationService.success(Message.NOTIFICATION, Message.UPDATE_SUCCESS)
+          } else {
+            this.notificationService.success(Message.NOTIFICATION, Message.UPDATE_FAIL)
+          }
+        },
+        () => this.notificationService.success(Message.NOTIFICATION, Message.UPDATE_FAIL)
+      )
   }
 
   onChangePage($event: number) {

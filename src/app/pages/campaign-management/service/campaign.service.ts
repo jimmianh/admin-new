@@ -5,7 +5,7 @@ import {SystemUtil} from "../../../util/SystemUtil";
 
 
 const headers: HttpHeaders = new HttpHeaders({
-  Authorization: 'Bearer ' + SystemUtil.getTokenTest(),
+  Authorization: 'Bearer ' + localStorage.getItem('access_token'),
   'content-type': 'application/json'
 });
 
@@ -56,8 +56,20 @@ export class CampaignService {
   }
 
   create(request: any) {
-    return this.http.post<any>(SystemUtil.getBaseUrl() + '/api/v1/admin/campaigns',
+    return this.http.post<any>(`${SystemUtil.getBaseUrl()}/api/v1/admin/campaigns`,
       JSON.stringify(request), {headers})
+      .pipe(catchError((error: any) => {
+          return throwError(error);
+        }),
+        tap(() => {
+          this.RefreshData.next()
+        }))
+  }
+
+  updateStatus(id: number, status: number) {
+    return this.http
+      .put<any>(`${SystemUtil.getBaseUrl()}/api/v1/admin/campaigns/update/status?id=${id}&status=${status}`,
+      {}, {headers})
       .pipe(catchError((error: any) => {
           return throwError(error);
         }),
