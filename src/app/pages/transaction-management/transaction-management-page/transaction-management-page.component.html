@@ -75,7 +75,7 @@
     </thead>
     <tbody>
     <tr *ngFor="let data of listOfData; let i = index">
-      <td>{{ i + 1 }}</td>
+      <td>{{getStt(i)}}</td>
       <td>{{ data.campaign }}</td>
       <td>{{ data.senderName }}</td>
       <td>{{ data.amount }}</td>

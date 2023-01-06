@@ -3,18 +3,18 @@
   <h6>Chỉnh sửa thông tin người dùng</h6>
   <form nz-form [formGroup]="validateForm">
     <nz-form-item>
-      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">User name</nz-form-label>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="username">User name</nz-form-label>
       <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid name!">
-        <input nz-input formControlName="username" id="name"/>
+        <input nz-input formControlName="username" id="username"/>
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
-      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="description" nzRequired>Role</nz-form-label>
-      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your description!">
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="role" nzRequired>Role</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input user role!">
         <input
           nz-input
-          type="description"
-          id="description"
+          type="role"
+          id="role"
           formControlName="role"
         />
       </nz-form-control>
