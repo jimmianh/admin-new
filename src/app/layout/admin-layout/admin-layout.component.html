@@ -20,9 +20,16 @@
         </li>
       </ng-template>
     </ul>
+    <ul class="logout" nz-menu nzTheme="dark" nzMode="inline" [routerLink]="'/login'" (click)="logout()">
+      <li style="margin-left: 25px; margin-top: 20px" class="nav-url">
+        <span nz-icon nzType="logout"></span>
+        <span style="margin-left: 10px">Đăng xuất</span>
+      </li>
+    </ul>
   </nz-sider>
   <nz-layout class="right-layout">
-    <nz-header></nz-header>
+    <nz-header>
+    </nz-header>
     <nz-content>
       <nz-breadcrumb>
         <nz-breadcrumb-item>ADMIN</nz-breadcrumb-item>
