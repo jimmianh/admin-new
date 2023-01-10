@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpEvent, HttpHandler, HttpHeaders, HttpRequest} from "@angular/common/http";
 import {catchError, Observable, throwError} from "rxjs";
-import {SystemConfig} from "../util/SystemConfig";
 
 @Injectable({
   providedIn: 'root'
