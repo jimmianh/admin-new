@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('access_token', res.accessToken)
         console.log('res', res)
         if(res.accessToken) {
-          this.router.navigate(['/dashboard']);
+          this.router.navigate(['']);
           // window.location.reload()
         }
         if (res.status === false){
