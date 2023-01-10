@@ -1,0 +1,55 @@
+.pagination{
+  margin-top: 20px;
+  margin-right: 20px;
+  float: right;
+}
+
+.ant-advanced-search-form {
+  padding: 24px;
+  background: #fbfbfb;
+  border: 1px solid #d9d9d9;
+  border-radius: 6px;
+}
+
+.search-result-list {
+  margin-top: 16px;
+  border: 1px dashed #e9e9e9;
+  border-radius: 6px;
+  background-color: #fafafa;
+  min-height: 200px;
+  text-align: center;
+  padding-top: 80px;
+}
+
+[nz-form-label] {
+  overflow: visible;
+}
+
+button {
+  margin-left: 8px;
+}
+
+.collapse {
+  margin-left: 8px;
+  font-size: 12px;
+}
+
+.search-area {
+  text-align: right;
+}
+
+.__amount{
+  display: flex;
+}
+
+.__amount input {
+  width: 45%;
+}
+
+.__amount_end{
+  float: right;
+}
+
+td {
+  text-align: center;
+}

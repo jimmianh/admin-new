@@ -19,6 +19,12 @@ import {NzCardModule} from "ng-zorro-antd/card";
 import {AuthService} from "./auth/auth.service";
 import {AuthGuardService} from "./auth/auth-guard.service";
 import {JwtModule} from "@auth0/angular-jwt";
+import {AdminLayoutComponent} from "./layout/admin-layout/admin-layout.component";
+import {LoginLayoutComponent} from "../login-layout/login-layout.component";
+import {NzFormModule} from "ng-zorro-antd/form";
+import {NzInputModule} from "ng-zorro-antd/input";
+import {NzCheckboxModule} from "ng-zorro-antd/checkbox";
+import {NzButtonModule} from "ng-zorro-antd/button";
 
 registerLocaleData(en);
 
@@ -29,27 +35,33 @@ export function tokenGetter() {
 @NgModule({
   declarations: [
     AppComponent,
+    AdminLayoutComponent,
+    LoginLayoutComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        FormsModule,
-        HttpClientModule,
-        BrowserAnimationsModule,
-        IconsProviderModule,
-        NzLayoutModule,
-        NzMenuModule,
-        NzBreadCrumbModule,
-        NgbModule,
-        NzCardModule,
-        ReactiveFormsModule,
-      JwtModule.forRoot({
-        config: {
-          tokenGetter: tokenGetter,
-          allowedDomains: ["https://herofund.up.railway.app", "foo.com", "bar.com"]
-        },
-      }),
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    IconsProviderModule,
+    NzLayoutModule,
+    NzMenuModule,
+    NzBreadCrumbModule,
+    NgbModule,
+    NzCardModule,
+    ReactiveFormsModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+        allowedDomains: ["https://herofund.up.railway.app", "foo.com", "bar.com"]
+      },
+    }),
+    NzFormModule,
+    NzInputModule,
+    NzCheckboxModule,
+    NzButtonModule,
+  ],
   providers: [
     AuthGuardService,
     AuthService,
