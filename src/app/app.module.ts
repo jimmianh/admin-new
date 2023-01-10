@@ -19,6 +19,7 @@ import {NzCardModule} from "ng-zorro-antd/card";
 import {AuthService} from "./auth/auth.service";
 import {AuthGuardService} from "./auth/auth-guard.service";
 import {JwtModule} from "@auth0/angular-jwt";
+import {AdminLayoutComponent} from "./layout/admin-layout/admin-layout.component";
 
 registerLocaleData(en);
 
@@ -29,6 +30,7 @@ export function tokenGetter() {
 @NgModule({
   declarations: [
     AppComponent,
+    AdminLayoutComponent,
   ],
     imports: [
         BrowserModule,

@@ -1,0 +1,57 @@
+.logo {
+  margin: 20px 0 15px 20px;
+  display: flex;
+  align-items: center;
+}
+
+.logo > p {
+  color: white;
+  margin: 0 0 0 5px;
+  font-size: 30px;
+  font-family: 'Henny Penny', cursive;
+  font-weight: 600;
+
+  letter-spacing: 0.0015em;
+  text-shadow: 0 1px #8da1ff, -1px 0 #c0cbff, -1px 2px #8da1ff, -2px 1px #c0cbff,
+  -2px 3px #8da1ff, -3px 2px #c0cbff, -3px 4px #8da1ff, -4px 3px #c0cbff,
+  -4px 5px #8da1ff, -5px 4px #c0cbff, -5px 6px #8da1ff, -6px 5px #c0cbff,
+  -6px 7px #8da1ff, -7px 6px #c0cbff, -7px 8px #8da1ff, -8px 7px #c0cbff;
+  text-align: center;
+}
+
+
+.layout {
+  min-height: 100vh;
+}
+.right-layout {
+  margin-left: 250px;
+}
+nz-sider {
+  overflow: auto;
+  height: 100%;
+  position: fixed;
+  left: 0;
+}
+
+nz-header {
+  background: #fff;
+  padding: 0;
+}
+
+nz-content {
+  margin: 0 16px;
+}
+
+nz-breadcrumb {
+  margin: 16px 0;
+}
+
+.inner-content {
+  padding: 24px;
+  background: #fff;
+  min-height: 450px;
+}
+
+nz-footer {
+  text-align: center;
+}

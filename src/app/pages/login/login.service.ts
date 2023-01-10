@@ -17,7 +17,8 @@ export class LoginService {
     return this.http
       .post<any>(SystemUtil.getBaseUrl() + `/api/v1/auth/authenticate`, payload)
       .pipe(catchError((httpError: any) => {
-        return throwError(httpError);
+        alert(httpError.error.message)
+        return httpError
       }));
   }
 }

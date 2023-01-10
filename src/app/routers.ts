@@ -15,10 +15,6 @@ export const navItems: NavData[] = [
         name: 'Danh sách',
         url: '/campaign/list',
       },
-      {
-        name: 'Tạo chiến dịch',
-        url: '/campaign/create',
-      },
     ],
   },
   {
@@ -41,10 +37,6 @@ export const navItems: NavData[] = [
         name: 'Danh sách',
         url: '/user/list',
       },
-      {
-        name: 'Tạo người dùng',
-        url: '/user/create',
-      },
     ],
   },
   {
@@ -55,10 +47,6 @@ export const navItems: NavData[] = [
       {
         name: 'Danh sách',
         url: '/categories/list',
-      },
-      {
-        name: 'Tạo danh mục',
-        url: '/categories/create',
       },
     ],
   },
@@ -71,10 +59,6 @@ export const navItems: NavData[] = [
         name: 'Danh sách',
         url: '/sponsor/list',
       },
-      {
-        name: 'Tạo nhà đồng hành',
-        url: '/sponsor/create',
-      },
     ],
   },
   {
@@ -85,10 +69,6 @@ export const navItems: NavData[] = [
       {
         name: 'Danh sách',
         url: '/article/list',
-      },
-      {
-        name: 'Tạo bài viết',
-        url: '/article/create',
       },
     ],
   },
@@ -111,10 +91,6 @@ export const navItems: NavData[] = [
       {
         name: 'Danh sách',
         url: '/faq/list',
-      },
-      {
-        name: 'Tạo người dùng',
-        url: '/faq/create',
       },
     ],
   },

@@ -3,6 +3,7 @@ import {Transaction} from "../modal/TransactionModel";
 import {TransactionService} from "../service/transaction-service.service";
 import {UntypedFormBuilder, UntypedFormGroup, Validators} from "@angular/forms";
 import * as moment from 'moment'
+import {offset} from "@popperjs/core";
 
 @Component({
   selector: 'app-transaction-management-page',
@@ -49,6 +50,9 @@ export class TransactionManagementPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.getListTransaction();
+    // this.transactionService.RefreshData.subscribe(() => {
+    //   this.getListTransaction();
+    // })
     this.createFormSearch();
   }
 
@@ -60,6 +64,10 @@ export class TransactionManagementPageComponent implements OnInit {
     }
   }
 
+  getStt(stt: number) {
+    const ind = (Number(this.offset) * this.limit + stt + 1) - this.limit;
+    return ind
+  }
   onItemChecked(id: number, checked: boolean): void {
     this.updateCheckedSet(id, checked);
     this.refreshCheckedStatus();
