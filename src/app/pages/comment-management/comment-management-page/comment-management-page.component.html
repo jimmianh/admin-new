@@ -1,1 +1,157 @@
-<p>Danh sách comment</p>
+<nz-card>
+  <a class="mb-2" nz-button [nzType]="'primary'" href="sponsor/form"><span>Tạo mới</span></a>
+  <form nz-form [formGroup]="formSearch" class="ant-advanced-search-form">
+    <div nz-row [nzGutter]="24">
+      <div nz-col [nzSpan]="8">
+        <nz-form-item>
+          <nz-form-label [nzFor]="'content'">Content</nz-form-label>
+          <nz-form-control>
+            <input
+              nz-input
+              placeholder="content"
+              [formControlName]="'content'"
+            />
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+      <div nz-col [nzSpan]="8">
+        <nz-form-item>
+          <nz-form-label [nzFor]="'articleTitle'">Article title</nz-form-label>
+          <nz-form-control>
+            <input
+              nz-input
+              placeholder="article's title"
+              [formControlName]="'articleTitle'"
+            />
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+      <div nz-col [nzSpan]="8">
+        <nz-form-item>
+          <nz-form-label [nzFor]="'status'">Status</nz-form-label>
+          <nz-form-control>
+            <nz-select formControlName="status">
+              <nz-option nzLabel="--- All ---" nzValue=""></nz-option>
+              <nz-option nzLabel="Enable" nzValue="1"></nz-option>
+              <nz-option nzLabel="Disable" nzValue="0"></nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+    </div>
+    <div nz-row [nzGutter]="24">
+      <div nz-col [nzSpan]="8">
+        <nz-form-item>
+          <nz-form-label [nzFor]="'id'">Id</nz-form-label>
+          <nz-form-control>
+            <input
+              nz-input
+              placeholder="id"
+              [formControlName]="'id'"
+            />
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+      <div nz-col [nzSpan]="8">
+        <nz-form-item>
+          <nz-form-label [nzFor]="'articleId'">Article id</nz-form-label>
+          <nz-form-control>
+            <input
+              nz-input
+              placeholder="Article's id"
+              [formControlName]="'articleId'"
+            />
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+      <div nz-col [nzSpan]="8">
+        <nz-form-item>
+          <nz-form-label [nzFor]="'accountId'">Account id</nz-form-label>
+          <nz-form-control>
+            <input
+              nz-input
+              placeholder="Account's id"
+              [formControlName]="'accountId'"
+            />
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+    </div>
+
+    <div nz-row>
+      <div nz-col [nzSpan]="24" class="search-area">
+        <button nz-button [nzType]="'primary'" (click)="search()">Search</button>
+        <button nz-button (click)="clear()">Clear</button>
+      </div>
+    </div>
+    <div nz-col [nzSpan]="8">
+      <nz-form-item>
+        <nz-form-label>Created Date</nz-form-label>
+        <nz-form-control>
+          <nz-range-picker [formControlName]="'date'" (ngModelChange)="onChangeDate($event)"></nz-range-picker>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+    <div nz-col [nzSpan]="8">
+      <nz-form-item>
+        <nz-form-label [nzFor]="'username'">Username</nz-form-label>
+        <nz-form-control>
+          <input
+            nz-input
+            placeholder="username"
+            [formControlName]="'username'"
+          />
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+  </form>
+  <div class="search-result-list">
+    <nz-table
+      nzShowSizeChanger
+      nzTableLayout="fixed"
+      [nzData]="listComment"
+      [nzShowPagination]="false"
+    >
+      <thead>
+      <tr>
+        <th>Stt</th>
+        <th>Username</th>
+        <th>Content</th>
+        <th>Article</th>
+        <th>Status</th>
+        <th>Like</th>
+        <th>Created At</th>
+        <th width="8%">Action</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let data of listComment; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>{{ data.username }}</td>
+        <td nzEllipsis>{{ data.content }}</td>
+        <td>{{ data.articleTitle }}</td>
+        <td>
+          <nz-switch [(ngModel)]="data.status" (ngModelChange)="onChange($event, data.id)"></nz-switch>
+        </td>
+        <td>{{ data.numberOfLike }}</td>
+        <td>{{ data.createdAt }}</td>
+        <td style="text-align: center">
+          <a nz-icon nzType="edit" href="article/edit/{{data.id}}" nzTheme="fill"
+             style="color: #2c2ce0; cursor: pointer"></a>
+          <nz-divider nzType="vertical"></nz-divider>
+          <a nz-icon nzType="eye" href="article/detail/{{data.id}}" nzTheme="fill"
+             style="color: #009624; cursor: pointer"></a>
+        </td>
+      </tr>
+      </tbody>
+    </nz-table>
+    <nz-pagination class="pagination"
+                   (nzPageIndexChange)="onChangePage($event)"
+                   [nzPageIndex]="offset" [nzTotal]="totalElements"
+                   [nzPageSize]="limit">
+    </nz-pagination>
+  </div>
+</nz-card>
+
+
+
