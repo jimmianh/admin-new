@@ -4,6 +4,10 @@ import {UntypedFormBuilder, UntypedFormGroup, Validators} from "@angular/forms";
 import {BaseStatusEnum} from "../../../enum/base-status-enum";
 import {UserService} from "../service/UserService";
 import {UserModel} from "../model/UserModel";
+import {Router} from "@angular/router";
+import data from "./data";
+import {PaymentChannel} from "../../payment-channel-management/model/PaymentChannel";
+import {take} from "rxjs";
 
 interface DataItem {
   name: string;
@@ -25,8 +29,10 @@ export class UserManagementPageComponent implements OnInit{
   keyword = "";
   status!: undefined;
   formSearch!: UntypedFormGroup;
+  validateForm!: UntypedFormGroup;
+  isVisible = false;
 
-  constructor(private userService: UserService, private fb: UntypedFormBuilder) {
+  constructor(private userService: UserService, private fb: UntypedFormBuilder, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -81,5 +87,47 @@ export class UserManagementPageComponent implements OnInit{
 
   updateStatus(id: number, status: number) {
     this.userService.updateStatus(id, status).subscribe(e => console.log(e))
+  }
+  onEdit(id: number ) {
+    this.router.navigate(['user', 'edit', id]).then();
+  }
+
+  getDetail(id: number) {
+    this.userService.getDetail(id).subscribe(res => {
+      this.validateForm.get('username')!.setValue(res.username)
+      this.validateForm.get('role')!.setValue(res.role)
+    })
+    this.isVisible = true;
+  }
+
+  updateUser(request: UserModel) {
+    this.userService
+      .update(request)
+      .pipe(take(1))
+      .subscribe((res) => {
+        console.log("resss:" + res)
+      });
+  }
+
+  handleOk(): void {
+    console.log("this.validateForm.value:", this.validateForm.value)
+    if (this.validateForm.valid) {
+      this.updateUser(this.validateForm.value);
+      this.isVisible = false;
+      this.resetForm();
+
+    } else {
+      Object.values(this.validateForm.controls).forEach(control => {
+        if (control.invalid) {
+          control.markAsDirty();
+          control.updateValueAndValidity({onlySelf: true});
+        }
+      });
+    }
+  }
+
+  handleCancel(): void {
+    this.resetForm();
+    this.isVisible = false;
   }
 }

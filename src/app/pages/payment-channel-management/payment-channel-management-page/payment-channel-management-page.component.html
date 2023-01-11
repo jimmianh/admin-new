@@ -55,24 +55,24 @@
 <nz-table [nzData]="listPaymentChannel">
   <thead>
   <tr>
-    <th>STT</th>
-    <th>Name</th>
-    <th>Client Id</th>
-    <th>Secret Id</th>
-    <th>Payer Id</th>
-    <th>Status</th>
-    <th>Action</th>
+    <th style="text-align: center">STT</th>
+    <th style="text-align: center">Name</th>
+    <th style="text-align: center">Client Id</th>
+    <th style="text-align: center">Secret Id</th>
+    <th style="text-align: center">Payer Id</th>
+    <th style="text-align: center">Status</th>
+    <th style="text-align: center">Action</th>
   </tr>
   </thead>
   <tbody>
   <tr *ngFor="let data of listPaymentChannel; let i = index">
-    <td>{{ i + 1 }}</td>
-    <td>{{ data.name }}</td>
-    <td>{{ data.clientId }}</td>
-    <td>{{ data.secretId }}</td>
-    <td>{{ data.payerId }}</td>
-    <td><nz-switch [(ngModel)]="data.status" (ngModelChange)="onChange($event, data.id)" ></nz-switch></td>
-    <td>
+    <td style="text-align: center">{{ i + 1 }}</td>
+    <td style="text-align: center">{{ data.name }}</td>
+    <td style="text-align: center">{{ data.clientId }}</td>
+    <td style="text-align: center">{{ data.secretId }}</td>
+    <td style="text-align: center">{{ data.payerId }}</td>
+    <td style="text-align: center"><nz-switch [(ngModel)]="data.status" (ngModelChange)="onChange($event, data.id)" ></nz-switch></td>
+    <td style="text-align: center">
       <span nz-icon nzType="edit" (click)="getDetail(data.id)" nzTheme="outline" style="color: #2c2ce0; cursor: pointer"></span>
     </td>
   </tr>
