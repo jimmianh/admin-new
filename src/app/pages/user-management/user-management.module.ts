@@ -18,6 +18,7 @@ import {NzCardModule} from "ng-zorro-antd/card";
 import {NzUploadModule} from "ng-zorro-antd/upload";
 import {CKEditorModule} from "ckeditor4-angular";
 import {NzNotificationService} from "ng-zorro-antd/notification";
+import {NzModalModule} from "ng-zorro-antd/modal";
 
 @NgModule({
   declarations: [
@@ -25,24 +26,25 @@ import {NzNotificationService} from "ng-zorro-antd/notification";
     UserManagementFormComponent,
 
   ],
-  imports: [
-    CommonModule,
-    UserManagementRoutingModule,
-    NzInputModule,
-    NzButtonModule,
-    NzDropDownModule,
-    NzTableModule,
-    NzIconModule,
-    FormsModule,
-    NzPaginationModule,
-    NzSwitchModule,
-    NzFormModule,
-    NzSelectModule,
-    ReactiveFormsModule,
-    NzCardModule,
-    NzUploadModule,
-    CKEditorModule,
-  ],
+    imports: [
+        CommonModule,
+        UserManagementRoutingModule,
+        NzInputModule,
+        NzButtonModule,
+        NzDropDownModule,
+        NzTableModule,
+        NzIconModule,
+        FormsModule,
+        NzPaginationModule,
+        NzSwitchModule,
+        NzFormModule,
+        NzSelectModule,
+        ReactiveFormsModule,
+        NzCardModule,
+        NzUploadModule,
+        CKEditorModule,
+        NzModalModule,
+    ],
   providers: [{provide: NzNotificationService}]
 })
 export class UserManagementModule { }
