@@ -5,6 +5,8 @@ import {CampaignService} from "../service/campaign.service";
 import * as moment from "moment/moment";
 import {NzNotificationService} from "ng-zorro-antd/notification";
 import {Message} from "../../../util/StringUtil";
+import {CampaignStatusEnum} from "../../../enum/PaymentStatusEnum";
+import {PaymentStatus, SystemUtil} from "../../../util/SystemUtil";
 
 @Component({
   selector: 'app-campaign-management-page',
@@ -18,6 +20,7 @@ export class CampaignManagementPageComponent implements OnInit {
   totalElements!: number;
   limit = 6;
   pageSize!: number;
+  campaignStatusEnum!: PaymentStatus[];
 
   constructor(private fb: UntypedFormBuilder,
               private campaignService: CampaignService,
@@ -28,6 +31,7 @@ export class CampaignManagementPageComponent implements OnInit {
   ngOnInit(): void {
     this.getListCampaign();
     this.createFormSearch();
+    this.campaignStatusEnum = SystemUtil.convertEnumToMap(CampaignStatusEnum)
   }
 
   search() {
@@ -53,8 +57,8 @@ export class CampaignManagementPageComponent implements OnInit {
     this.getListCampaign();
   }
 
-  onChange($event: any, id: number) {
-    let status = $event ? 1 : 0;
+  onChange(status: any, id: number) {
+    console.log(status)
     this.updateStatusCampaign(id, status);
   }
 
