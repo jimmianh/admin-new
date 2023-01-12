@@ -1,16 +1,6 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>Admin hero fund</title>
-  <base href="/">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="https://res.cloudinary.com/dyrfhqz3j/image/upload/v1672314441/e2w/logo1_cwoott.png">
-</head>
-<body>
-  <div class="row col-12" style="display: flex; justify-content: center; margin-top: 300px ;vertical-align: middle; ">
-    <div class="col-4"></div>
-    <form class="col-4" nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
+<div class="login">
+  <div class="col-4"></div>
+     <div class="col-4"><form style="margin: auto" nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
       <nz-form-item>
         <nz-form-control nzErrorTip="Please input your username!">
           <nz-input-group nzPrefixIcon="user">
@@ -33,8 +23,6 @@
         </div>
       </div>
       <button nz-button class="login-form-button login-form-margin" [nzType]="'primary'">Đăng nhập</button>
-    </form>
+    </form></div>
     <div class="col-4"></div>
   </div>
-</body>
-</html>

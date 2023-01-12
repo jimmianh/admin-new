@@ -9,6 +9,16 @@
 .login-form-button {
   width: 100%;
 }
-body{
+
+.login {
   background-image: url('https://colorlib.com/etc/lf/Login_v16/images/bg-01.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  display: flex;
+  background-size: cover;
+  justify-content: center;
+  padding-top: 300px;
+  vertical-align: middle;
+  min-height: 100%;
+  width: 100vw;
 }
