@@ -1,1 +1,49 @@
-<p>Danh sách câu hỏi</p>
+<button class="mb-2" nz-button [nzType]="'primary'" (click)="showModal()"><span>Tạo mới</span></button>
+
+<nz-modal  [(nzVisible)]="isVisible" nzTitle="Tạo mới thông tin kênh thanh toán" (nzOnCancel)="handleCancel()"
+          (nzOnOk)="handleOk()">
+  <ng-container *nzModalContent>
+    <form nz-form [formGroup]="validateForm">
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24"  nzFor="campaignId">CampaignId</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24" >
+          <input nz-input formControlName="campaignId" id="campaignId" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" hidden nzFor="campaignId">Id</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24" hidden>
+          <input nz-input formControlName="id" id="id" hidden/>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="detail">Name</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid detail!">
+          <input nz-input formControlName="detail" id="detail" />
+        </nz-form-control>
+      </nz-form-item>
+    </form>
+  </ng-container>
+</nz-modal>
+<nz-table [nzData]="listFaq">
+  <thead>
+  <tr>
+    <th style="text-align: center">STT</th>
+    <th style="text-align: center">campaignId</th>
+    <th style="text-align: center">detail</th>
+    <th style="text-align: center">Status</th>
+    <th style="text-align: center">Action</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let data of listFaq; let i = index">
+    <td style="text-align: center">{{ i + 1 }}</td>
+    <td style="text-align: center">{{ data.campaignId }}</td>
+    <td style="text-align: center">{{ data.detail }}</td>
+    <td style="text-align: center"><nz-switch [(ngModel)]="data.status" (ngModelChange)="onChange($event, data.id)" ></nz-switch></td>
+    <td style="text-align: center">
+      <span nz-icon nzType="edit" (click)="getDetail(data.id)" nzTheme="outline" style="color: #2c2ce0; cursor: pointer"></span>
+    </td>
+  </tr>
+  </tbody>
+</nz-table>
