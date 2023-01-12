@@ -13,8 +13,18 @@ export interface CampaignModel {
   description: string;
   image: string;
   portal: string;
-  categoryId: number;
-  accountId: number
+  category: {
+    id: number;
+    name: string;
+  };
+  sponsor: {
+    id: number;
+    name: string;
+  };
+  account: {
+    id: number;
+    username: string;
+  }
 }
 
 export interface FilterSearchCampaign {

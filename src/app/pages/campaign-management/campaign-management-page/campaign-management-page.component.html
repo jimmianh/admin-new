@@ -79,7 +79,9 @@
         <td style="text-align: center">{{ data.startDate }}</td>
         <td style="text-align: center">{{ data.endDate }}</td>
         <td style="text-align: center">
-          <nz-switch [(ngModel)]="data.status" (ngModelChange)="onChange($event, data.id)"></nz-switch>
+          <nz-select [(ngModel)]="data.status" (ngModelChange)="onChange($event, data.id)">
+            <nz-option *ngFor="let p of campaignStatusEnum" [nzValue]="p.key" [nzLabel]="p.value"></nz-option>
+          </nz-select>
         </td>
         <td style="text-align: center">{{ data.createdAt }}</td>
         <td style="text-align: center">
