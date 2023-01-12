@@ -101,4 +101,17 @@ export class SponsorService {
         })
       );
   }
+
+  getAllSponsorActive() {
+    return this.http
+      .get<any>(SystemUtil.getBaseUrl() + `/api/v1/sponsors`)
+      .pipe(
+        catchError((error: any) => {
+          return throwError(error);
+        }),
+        tap(()=>{
+          this.RefreshData.next()
+        })
+      );
+  }
 }

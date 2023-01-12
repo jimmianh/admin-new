@@ -20,37 +20,33 @@ import {NzCardModule} from "ng-zorro-antd/card";
 import {NzUploadModule} from "ng-zorro-antd/upload";
 import {CKEditorModule} from "ckeditor4-angular";
 import {NzNotificationService} from "ng-zorro-antd/notification";
-import {NzModalModule} from "ng-zorro-antd/modal";
-import {CommentManagementDetailComponent} from "./comment-management-detail/comment-management-detail.component";
 
 
 @NgModule({
-    declarations: [
-        CommentManagementPageComponent,
-        CommentManagementDetailComponent,
-    ],
-    imports: [
-        CommonModule,
-        CommentManagementRoutingModule,
-        ReactiveFormsModule,
-        NzGridModule,
-        NzButtonModule,
-        NzInputModule,
-        NzDatePickerModule,
-        NzSelectModule,
-        NzTableModule,
-        NzSwitchModule,
-        NzPaginationModule,
-        FormsModule,
-        NzIconModule,
-        NzImageModule,
-        NzFormModule,
-        NzDividerModule,
-        NzCardModule,
-        NzUploadModule,
-        CKEditorModule,
-        NzModalModule,
-    ],
+  declarations: [
+    CommentManagementPageComponent,
+  ],
+  imports: [
+    CommonModule,
+    CommentManagementRoutingModule,
+    ReactiveFormsModule,
+    NzGridModule,
+    NzButtonModule,
+    NzInputModule,
+    NzDatePickerModule,
+    NzSelectModule,
+    NzTableModule,
+    NzSwitchModule,
+    NzPaginationModule,
+    FormsModule,
+    NzIconModule,
+    NzImageModule,
+    NzFormModule,
+    NzDividerModule,
+    NzCardModule,
+    NzUploadModule,
+    CKEditorModule,
+  ],
   providers: [NzNotificationService]
 })
 export class CommentManagementModule {

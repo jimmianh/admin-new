@@ -137,7 +137,7 @@
         <td style="text-align: center">{{ data.createdAt }}</td>
         <td style="text-align: center">
 <!--          <nz-divider nzType="vertical"></nz-divider>-->
-          <a nz-icon nzType="eye" (click)="showModal(data)" nzTheme="fill"
+          <a nz-icon nzType="eye" href="article/detail/{{data.id}}" nzTheme="fill"
              style="color: #009624; cursor: pointer"></a>
         </td>
       </tr>
@@ -150,8 +150,6 @@
     </nz-pagination>
   </div>
 </nz-card>
-<app-comment-management-detail #myModal></app-comment-management-detail>
-
 
 
 

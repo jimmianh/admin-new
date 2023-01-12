@@ -1,18 +1,16 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {CommentModel} from "../model/CommentModel";
 import {UntypedFormBuilder, UntypedFormGroup, Validators} from "@angular/forms";
 import {CommentService} from "../service/comment.service";
 import * as moment from "moment/moment";
 import {NzNotificationService} from "ng-zorro-antd/notification";
 import {Message} from "../../../util/StringUtil";
-import {CommentManagementDetailComponent} from "../comment-management-detail/comment-management-detail.component";
 
 @Component({
   selector: 'app-comment-management-page',
   templateUrl: './comment-management-page.component.html',
   styleUrls: ['./comment-management-page.component.scss']
 })
-
 export class CommentManagementPageComponent implements OnInit {
   formSearch!: UntypedFormGroup;
   listComment: CommentModel[] = [];
@@ -20,17 +18,11 @@ export class CommentManagementPageComponent implements OnInit {
   totalElements!: number;
   limit = 6;
   pageSize!: number;
-  isVisible = false;
-  @ViewChild('myModal') modal!: CommentManagementDetailComponent;
 
   constructor(private fb: UntypedFormBuilder,
               private commentService: CommentService,
-              private notificationService: NzNotificationService,
+              private notificationService: NzNotificationService
   ) {
-  }
-
-  showModal(data: CommentModel): void {
-    this.modal.open(data);
   }
 
   ngOnInit(): void {
@@ -134,4 +126,5 @@ export class CommentManagementPageComponent implements OnInit {
     this.commentService.getPageComment(this.offset, this.limit)
       .subscribe(res => this.handlerResponseListComment(res));
   }
+
 }

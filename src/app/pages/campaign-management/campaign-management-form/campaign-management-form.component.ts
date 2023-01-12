@@ -8,6 +8,8 @@ import {NzNotificationService} from "ng-zorro-antd/notification";
 import {Message} from "../../../util/StringUtil";
 import {FileService} from "../../../service/FileService";
 import {NzUploadFile} from "ng-zorro-antd/upload";
+import {SponsorModal} from "../../sponsor-management/model/SponsorModal";
+import {SponsorService} from "../../sponsor-management/service/SponsorService";
 
 
 @Component({
@@ -24,10 +26,12 @@ export class CampaignManagementFormComponent implements OnInit {
   file?: File;
   dateFormat = 'dd/MM/yyyy';
   listCategory: Categories[] = [];
+  listSponsor: SponsorModal[] = [];
   date = null;
 
   constructor(
     private categoryService: CategoriesService,
+    private sponsorService: SponsorService,
     private fileService: FileService,
     private campaignService: CampaignService,
     private notificationService: NzNotificationService,
@@ -38,6 +42,7 @@ export class CampaignManagementFormComponent implements OnInit {
   ngOnInit(): void {
     this.createForm();
     this.getListActiveCategory();
+    this.getSponsorActive();
   }
 
   uploadImage(info: { file: NzUploadFile }): void {
@@ -76,12 +81,17 @@ export class CampaignManagementFormComponent implements OnInit {
       image: [null, [Validators.required]],
       targetAmount: [null, [Validators.required]],
       categoryId: [null, [Validators.required]],
+      sponsorId: [null, [Validators.nullValidator]],
     });
   }
 
   getListActiveCategory() {
     this.categoryService.getListActiveCategory()
       .subscribe(res => this.listCategory = res)
+  }
+
+  getSponsorActive(){
+    this.sponsorService.getAllSponsorActive().subscribe(sponsors => sponsors && (this.listSponsor = sponsors))
   }
 
   createCampaign(request: any) {
