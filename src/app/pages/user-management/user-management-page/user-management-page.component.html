@@ -39,22 +39,22 @@
   >
     <thead>
     <tr>
-      <th>Stt</th>
-      <th>Name</th>
-      <th>Role</th>
-      <th>Status</th>
-      <th>Action</th>
+      <th style="text-align: center">Stt</th>
+      <th style="text-align: center">Name</th>
+      <th style="text-align: center">Role</th>
+      <th style="text-align: center">Status</th>
+<!--      <th>Action</th>-->
     </tr>
     </thead>
     <tbody>
     <tr *ngFor="let data of listUser; let i = index">
-      <td>{{ i + 1 }}</td>
-      <td>{{ data.username }}</td>
-      <td>{{ data.role }}</td>
-      <td><nz-switch [(ngModel)]="data.status" (ngModelChange)="onChange($event, data.id)" ></nz-switch></td>
-      <td style="text-align: center">
-        <a nz-icon nzType="edit"  href="user/edit/{{data.id}}"  nzTheme="outline" style="color: #2c2ce0; cursor: pointer"></a>
-      </td>
+      <td style="text-align: center">{{ i + 1 }}</td>
+      <td style="text-align: center">{{ data.username }}</td>
+      <td style="text-align: center">{{ data.role }}</td>
+      <td style="text-align: center"><nz-switch [(ngModel)]="data.status" (ngModelChange)="onChange($event, data.id)" ></nz-switch></td>
+<!--      <td style="text-align: center">-->
+<!--        <span nz-icon nzType="edit" (click)="getDetail(data.id)" nzTheme="outline" style="color: #2c2ce0; cursor: pointer"></span>-->
+<!--      </td>-->
     </tr>
     </tbody>
   </nz-table>
@@ -64,3 +64,28 @@
                  [nzPageSize]="limit">
   </nz-pagination>
 </div>
+
+<nz-modal [(nzVisible)]="isVisible" nzTitle="Tạo mới thông tin kênh thanh toán" (nzOnCancel)="handleCancel()"
+          (nzOnOk)="handleOk()">
+  <ng-container *nzModalContent>
+    <form nz-form [formGroup]="validateForm">
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="username">username</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid Name!">
+          <input nz-input formControlName="username" id="username" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="role" nzRequired>role</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your role!">
+          <input
+            nz-input
+            type="role"
+            id="role"
+            formControlName="role"
+          />
+        </nz-form-control>
+      </nz-form-item>
+    </form>
+  </ng-container>
+</nz-modal>

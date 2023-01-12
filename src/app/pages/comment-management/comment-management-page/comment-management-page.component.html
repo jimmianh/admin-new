@@ -114,32 +114,30 @@
     >
       <thead>
       <tr>
-        <th>Stt</th>
-        <th>Username</th>
-        <th>Content</th>
-        <th>Article</th>
-        <th>Status</th>
-        <th>Like</th>
-        <th>Created At</th>
-        <th width="8%">Action</th>
+        <th style="text-align: center">Stt</th>
+        <th style="text-align: center">Username</th>
+        <th style="text-align: center">Content</th>
+        <th style="text-align: center">Article</th>
+        <th style="text-align: center">Status</th>
+        <th style="text-align: center">Like</th>
+        <th style="text-align: center">Created At</th>
+        <th style="text-align: center" width="8%">Action</th>
       </tr>
       </thead>
       <tbody>
       <tr *ngFor="let data of listComment; let i = index">
-        <td>{{ i + 1 }}</td>
-        <td>{{ data.username }}</td>
-        <td nzEllipsis>{{ data.content }}</td>
-        <td>{{ data.articleTitle }}</td>
-        <td>
+        <td style="text-align: center">{{ i + 1 }}</td>
+        <td style="text-align: center">{{ data.username }}</td>
+        <td style="text-align: center" nzEllipsis>{{ data.content }}</td>
+        <td style="text-align: center">{{ data.articleTitle }}</td>
+        <td style="text-align: center">
           <nz-switch [(ngModel)]="data.status" (ngModelChange)="onChange($event, data.id)"></nz-switch>
         </td>
-        <td>{{ data.numberOfLike }}</td>
-        <td>{{ data.createdAt }}</td>
+        <td style="text-align: center">{{ data.numberOfLike }}</td>
+        <td style="text-align: center">{{ data.createdAt }}</td>
         <td style="text-align: center">
-          <a nz-icon nzType="edit" href="article/edit/{{data.id}}" nzTheme="fill"
-             style="color: #2c2ce0; cursor: pointer"></a>
-          <nz-divider nzType="vertical"></nz-divider>
-          <a nz-icon nzType="eye" href="article/detail/{{data.id}}" nzTheme="fill"
+<!--          <nz-divider nzType="vertical"></nz-divider>-->
+          <a nz-icon nzType="eye" (click)="showModal(data)" nzTheme="fill"
              style="color: #009624; cursor: pointer"></a>
         </td>
       </tr>
@@ -152,6 +150,8 @@
     </nz-pagination>
   </div>
 </nz-card>
+<app-comment-management-detail #myModal></app-comment-management-detail>
+
 
 
 

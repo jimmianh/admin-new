@@ -1,6 +1,6 @@
+<div class="bg-image"></div>
 <div class="login">
-  <div class="col-4"></div>
-     <div class="col-4"><form style="margin: auto" nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
+    <form class="col-4" nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
       <nz-form-item>
         <nz-form-control nzErrorTip="Please input your username!">
           <nz-input-group nzPrefixIcon="user">
@@ -16,13 +16,12 @@
         </nz-form-control>
       </nz-form-item>
       <div nz-row class="login-form-margin">
-        <div nz-col [nzSpan]="12">
-          <label nz-checkbox formControlName="remember">
-            <span>Lưu đăng nhập</span>
+        <div nz-col [nzSpan]="24">
+          <label style="float: left" nz-checkbox formControlName="remember">
+            <span style="color:white; ">Lưu đăng nhập</span>
           </label>
         </div>
       </div>
-      <button nz-button class="login-form-button login-form-margin" [nzType]="'primary'">Đăng nhập</button>
-    </form></div>
-    <div class="col-4"></div>
+      <button nz-button class="login-form-button login-form-margin" style="background-image: linear-gradient(to right, #6D1D6C , #9B47EB); color: white;">Đăng nhập</button>
+    </form>
   </div>

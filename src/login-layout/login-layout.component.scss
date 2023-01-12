@@ -1,5 +1,5 @@
 .login-form {
-  max-width: 300px;
+  width: 80%;
 }
 
 .login-form-margin {
@@ -10,15 +10,37 @@
   width: 100%;
 }
 
-.login {
-  background-image: url('https://colorlib.com/etc/lf/Login_v16/images/bg-01.jpg');
+.bg-image{
+  background-image: url('../assets/backgourd-img.png');
   background-repeat: no-repeat;
   background-position: center;
-  display: flex;
   background-size: cover;
-  justify-content: center;
-  padding-top: 300px;
-  vertical-align: middle;
   min-height: 100%;
-  width: 100vw;
+  filter: blur(3px);
+  -webkit-filter: blur(3px);
 }
+
+.login {
+  display: flex;
+  justify-content: center;
+  padding-top: 70px;
+  padding-bottom: 70px;
+  vertical-align: middle;
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0, 0.4); /* Black w/opacity/see-through */
+  color: white;
+  font-weight: bold;
+  //border: 3px solid #f1f1f1;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  width: 20%;
+  text-align: center;
+}
+.ant-checkbox-checked .ant-checkbox-inner {
+  background-color: red !important;
+  border-color: red !important;
+}
+
