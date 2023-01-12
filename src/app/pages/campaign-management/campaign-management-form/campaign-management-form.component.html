@@ -36,6 +36,15 @@
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="sponsorId">Sponsor</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24">
+        <nz-select class="input_w_30" nzShowSearch nzAllowClear nzPlaceHolder="Select a sponsor"
+                   formControlName="sponsorId">
+          <nz-option *ngFor="let item of listSponsor" nzLabel="{{item.name}}" nzValue="{{item.id}}"></nz-option>
+        </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
       <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="description" nzRequired>Description</nz-form-label>
       <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your description!">
         <textarea rows="4" nz-input formControlName="description"></textarea>
