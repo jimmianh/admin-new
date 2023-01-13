@@ -31,20 +31,20 @@
           </nz-form-control>
         </nz-form-item>
       </div>
+      <div nz-col [nzSpan]="8">
+        <nz-form-item>
+          <nz-form-label>Created Date</nz-form-label>
+          <nz-form-control>
+            <nz-range-picker [formControlName]="'date'" (ngModelChange)="onChangeDate($event)"></nz-range-picker>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
     </div>
     <div nz-row>
       <div nz-col [nzSpan]="24" class="search-area">
         <button nz-button [nzType]="'primary'" (click)="search()">Search</button>
         <button nz-button (click)="clear()">Clear</button>
       </div>
-    </div>
-    <div nz-col [nzSpan]="8">
-      <nz-form-item>
-        <nz-form-label>Created Date</nz-form-label>
-        <nz-form-control>
-          <nz-range-picker [formControlName]="'date'" (ngModelChange)="onChangeDate($event)"></nz-range-picker>
-        </nz-form-control>
-      </nz-form-item>
     </div>
   </form>
   <div class="search-result-list">
