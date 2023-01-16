@@ -34,7 +34,7 @@ export class TransactionService {
         catchError((error: any) => {
           return throwError(error);
         }),
-        tap(()=>{
+        tap(() => {
           this.RefreshData.next()
         })
       );
@@ -49,9 +49,14 @@ export class TransactionService {
         catchError((error: any) => {
           return throwError(error);
         }),
-        tap(()=>{
+        tap(() => {
           this.RefreshData.next()
         })
       );
+  }
+
+  getTransactionByCampaignId(id: number, offset: number, limit: number) {
+    let url = `${SystemUtil.getBaseUrl()}/api/v1/admin/transactions/campaign?offset=${offset}&limit=${limit}&campaignId=${id}`;
+    return this.http.get<any>( url, {headers})
   }
 }

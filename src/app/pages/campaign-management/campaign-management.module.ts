@@ -21,12 +21,21 @@ import {NzCardModule} from "ng-zorro-antd/card";
 import {NzUploadModule} from "ng-zorro-antd/upload";
 import {CKEditorModule} from "ckeditor4-angular";
 import {NzNotificationService} from "ng-zorro-antd/notification";
+import { CampaignManagementDetailComponent } from './campaign-management-detail/campaign-management-detail.component';
+import {NzDescriptionsModule} from "ng-zorro-antd/descriptions";
+import {NzBadgeModule} from "ng-zorro-antd/badge";
+import {NzAvatarModule} from "ng-zorro-antd/avatar";
+import { CampaignTransactionPageComponent } from './campaign-transaction-page/campaign-transaction-page.component';
+import {NzToolTipModule} from "ng-zorro-antd/tooltip";
+import {NzTagModule} from "ng-zorro-antd/tag";
 
 
 @NgModule({
   declarations: [
     CampaignManagementPageComponent,
-    CampaignManagementFormComponent
+    CampaignManagementFormComponent,
+    CampaignManagementDetailComponent,
+    CampaignTransactionPageComponent
   ],
   imports: [
     CommonModule,
@@ -48,6 +57,11 @@ import {NzNotificationService} from "ng-zorro-antd/notification";
     NzCardModule,
     NzUploadModule,
     CKEditorModule,
+    NzDescriptionsModule,
+    NzBadgeModule,
+    NzAvatarModule,
+    NzToolTipModule,
+    NzTagModule,
   ],
   providers: [NzNotificationService]
 })

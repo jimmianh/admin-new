@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {catchError, Subject, tap, throwError} from "rxjs";
 import {SystemUtil} from "../../../util/SystemUtil";
+import {CampaignModel} from "../model/CampaignModel";
 
 
 const headers: HttpHeaders = new HttpHeaders({
@@ -40,6 +41,12 @@ export class CampaignService {
       );
   }
 
+  getDetail(id: string | null) {
+    let urlDetail = SystemUtil.getBaseUrl() + `/api/v1/admin/campaigns/detail?id=${id}`;
+    return this.http
+      .get<CampaignModel>(urlDetail, {headers})
+  }
+
   search(filter: any) {
     return this.http
       .post<any>(SystemUtil.getBaseUrl() + `/api/v1/admin/campaigns/search`,
@@ -58,6 +65,12 @@ export class CampaignService {
   create(request: any) {
     return this.http.post<any>(`${SystemUtil.getBaseUrl()}/api/v1/admin/campaigns`,
       JSON.stringify(request), {headers})
+  }
+
+  updateStatus(id: number, status: number) {
+    return this.http
+      .put<any>(`${SystemUtil.getBaseUrl()}/api/v1/admin/campaigns/update/status?id=${id}&status=${status}`,
+        {}, {headers})
       .pipe(catchError((error: any) => {
           return throwError(error);
         }),
@@ -66,15 +79,10 @@ export class CampaignService {
         }))
   }
 
-  updateStatus(id: number, status: number) {
+  updateCampaign(campaign: any) {
+    let url = `${SystemUtil.getBaseUrl()}/api/v1/admin/campaigns`;
     return this.http
-      .put<any>(`${SystemUtil.getBaseUrl()}/api/v1/admin/campaigns/update/status?id=${id}&status=${status}`,
-      {}, {headers})
-      .pipe(catchError((error: any) => {
-          return throwError(error);
-        }),
-        tap(() => {
-          this.RefreshData.next()
-        }))
+      .put<any>(url, JSON.stringify(campaign), {headers})
+
   }
 }

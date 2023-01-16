@@ -8,5 +8,5 @@ export enum CampaignStatusEnum {
   ENABLE,
   WAIT,
   REJECT,
-  URGENT
+  URGENT,
 }
