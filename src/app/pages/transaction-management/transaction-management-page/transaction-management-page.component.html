@@ -2,8 +2,8 @@
   <div nz-row [nzGutter]="24">
     <div nz-col [nzSpan]="8">
       <nz-form-item>
-        <nz-form-label>Keyword</nz-form-label>
-        <nz-form-control>
+        <nz-form-label nz-col [nzSpan]="6">Keyword</nz-form-label>
+        <nz-form-control nz-col [nzSpan]="18">
           <input
             nz-input
             placeholder="Vui lòng từ khóa"
@@ -14,16 +14,16 @@
     </div>
     <div nz-col [nzSpan]="8">
       <nz-form-item>
-        <nz-form-label>Sending Time</nz-form-label>
-        <nz-form-control>
+        <nz-form-label nz-col [nzSpan]="6">Sending Time</nz-form-label>
+        <nz-form-control nz-col [nzSpan]="18">
           <nz-range-picker [formControlName]="'date'" (ngModelChange)="onChange($event)"></nz-range-picker>
         </nz-form-control>
       </nz-form-item>
     </div>
-    <div nz-col [nzSpan]="4">
+    <div nz-col [nzSpan]="6">
       <nz-form-item>
-        <nz-form-label>Status</nz-form-label>
-        <nz-form-control>
+        <nz-form-label nz-col [nzSpan]="6">Status</nz-form-label>
+        <nz-form-control nz-col [nzSpan]="18">
           <nz-select nzShowSearch nzAllowClear nzPlaceHolder="status" [formControlName]="'paymentStatus'">
             <nz-option nzLabel="DONE" nzValue="DONE"></nz-option>
             <nz-option nzLabel="UNPAID" nzValue="UNPAID"></nz-option>
@@ -31,10 +31,13 @@
         </nz-form-control>
       </nz-form-item>
     </div>
+
+  </div>
+  <div nz-row [nzGutter]="24">
     <div nz-col [nzSpan]="8">
       <nz-form-item>
-        <nz-form-label>Amount ($)</nz-form-label>
-        <nz-form-control class="__amount">
+        <nz-form-label nz-col [nzSpan]="6">Amount ($)</nz-form-label>
+        <nz-form-control class="__amount" nz-col [nzSpan]="18">
           <input
             class="__amount_start"
             nz-input

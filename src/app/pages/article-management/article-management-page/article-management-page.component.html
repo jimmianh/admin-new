@@ -4,8 +4,8 @@
     <div nz-row [nzGutter]="24">
       <div nz-col [nzSpan]="8">
         <nz-form-item>
-          <nz-form-label [nzFor]="'keyword'">Title</nz-form-label>
-          <nz-form-control>
+          <nz-form-label nz-col [nzSpan]="6" [nzFor]="'keyword'">Title</nz-form-label>
+          <nz-form-control nz-col [nzSpan]="18">
             <input
               nz-input
               placeholder="title"
@@ -16,8 +16,8 @@
       </div>
       <div nz-col [nzSpan]="8">
         <nz-form-item>
-          <nz-form-label [nzFor]="'campaignTitle'">Campaign title</nz-form-label>
-          <nz-form-control>
+          <nz-form-label nz-col [nzSpan]="6" [nzFor]="'campaignTitle'">Campaign title</nz-form-label>
+          <nz-form-control nz-col [nzSpan]="18">
             <input
               nz-input
               placeholder="campaign's title"
@@ -28,8 +28,8 @@
       </div>
       <div nz-col [nzSpan]="8">
         <nz-form-item>
-          <nz-form-label [nzFor]="'status'">Status</nz-form-label>
-          <nz-form-control>
+          <nz-form-label nz-col [nzSpan]="6" [nzFor]="'status'">Status</nz-form-label>
+          <nz-form-control nz-col [nzSpan]="18">
             <nz-select formControlName="status">
               <nz-option nzLabel="--- All ---" nzValue=""></nz-option>
               <nz-option nzLabel="Enable" nzValue="1"></nz-option>
@@ -42,8 +42,8 @@
     <div nz-row [nzGutter]="24">
       <div nz-col [nzSpan]="8">
         <nz-form-item>
-          <nz-form-label [nzFor]="'id'">Id</nz-form-label>
-          <nz-form-control>
+          <nz-form-label nz-col [nzSpan]="6" [nzFor]="'id'">Id</nz-form-label>
+          <nz-form-control nz-col [nzSpan]="18">
             <input
               nz-input
               placeholder="id"
@@ -54,8 +54,8 @@
       </div>
       <div nz-col [nzSpan]="8">
         <nz-form-item>
-          <nz-form-label [nzFor]="'campaignId'">Campaign id</nz-form-label>
-          <nz-form-control>
+          <nz-form-label nz-col [nzSpan]="6" [nzFor]="'campaignId'">Campaign id</nz-form-label>
+          <nz-form-control nz-col [nzSpan]="18">
             <input
               nz-input
               placeholder="campaign's id"
@@ -72,13 +72,15 @@
         <button nz-button (click)="clear()">Clear</button>
       </div>
     </div>
-    <div nz-col [nzSpan]="8">
+    <div nz-row [nzGutter]="24">
+      <div nz-col [nzSpan]="8">
       <nz-form-item>
-        <nz-form-label>Created Date</nz-form-label>
-        <nz-form-control>
+        <nz-form-label nz-col [nzSpan]="6">Created Date</nz-form-label>
+        <nz-form-control nz-col [nzSpan]="18">
           <nz-range-picker [formControlName]="'date'" (ngModelChange)="onChangeDate($event)"></nz-range-picker>
         </nz-form-control>
       </nz-form-item>
+    </div>
     </div>
   </form>
   <div class="search-result-list">
