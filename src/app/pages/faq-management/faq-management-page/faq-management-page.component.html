@@ -1,1 +1,71 @@
-<p>Danh sách câu hỏi</p>
+<a class="mb-2" nz-button [nzType]="'primary'" [routerLink]="'/faq/form'" ><span>Tạo mới</span></a>
+<form nz-form [formGroup]="formSearch" class="ant-advanced-search-form">
+  <div nz-row [nzGutter]="24">
+    <div nz-col [nzSpan]="8">
+      <nz-form-item>
+        <nz-form-label class="label__keyword">Chiến dịch</nz-form-label>
+        <nz-form-control>
+          <input
+            nz-input
+            placeholder="Vui lòng nhập từ khóa"
+            [formControlName]="'campaign'"
+          />
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+    <div nz-col [nzSpan]="4">
+      <nz-form-item>
+        <nz-form-label class="label__keyword">Câu hỏi</nz-form-label>
+        <nz-form-control>
+          <input
+            nz-input
+            placeholder="Vui lòng từ khóa"
+            [formControlName]="'faqId'"
+          />
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+  </div>
+  <div nz-row>
+    <div nz-col [nzSpan]="24" class="search-area">
+      <button nz-button [nzType]="'primary'" (click)="search()">Search</button>
+      <button nz-button (click)="resetForm()">Clear</button>
+    </div>
+  </div>
+</form>
+<div class="search-result-list">
+  <nz-table
+    nzShowSizeChanger
+    [nzShowPagination]="false"
+    [nzData]="listFaq"
+  >
+    <thead>
+    <tr>
+      <th style="text-align: center">Stt</th>
+      <th style="text-align: center">Article</th>
+      <th style="text-align: center">Detail</th>
+      <th style="text-align: center">Status</th>
+      <th style="text-align: center">Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let data of listFaq; let i = index">
+      <td style="text-align: center">{{ i + 1 }}</td>
+      <td style="text-align: center">{{ data.campaignId }}</td>
+      <td style="text-align: center">{{ data.detail }}</td>
+      <td>
+        <nz-switch [(ngModel)]="data.status" (ngModelChange)="onChange($event, data.id)"></nz-switch>
+      </td>
+      <td style="text-align: center">
+        <a nz-icon nzType="edit" href="faqs/edit/{{data.id}}" nzTheme="outline" style="color: #2c2ce0; cursor: pointer"></a>
+      </td>
+    </tr>
+    </tbody>
+  </nz-table>
+  <nz-pagination class="pagination"
+                 (nzPageIndexChange)="onChangePage($event)"
+                 [nzPageIndex]="offset" [nzTotal]="totalElements"
+                 [nzPageSize]="limit">
+  </nz-pagination>
+</div>
+
