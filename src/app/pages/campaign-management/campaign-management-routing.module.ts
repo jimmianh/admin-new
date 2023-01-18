@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {CampaignManagementPageComponent} from "./campaign-management-page/campaign-management-page.component";
 import {CampaignManagementFormComponent} from "./campaign-management-form/campaign-management-form.component";
+import {CampaignManagementDetailComponent} from "./campaign-management-detail/campaign-management-detail.component";
+import {CampaignTransactionPageComponent} from "./campaign-transaction-page/campaign-transaction-page.component";
 
 const routes: Routes = [
   {
@@ -32,8 +34,8 @@ const routes: Routes = [
         }
       },
       {
-        path: 'view/:id',
-        component: CampaignManagementFormComponent,
+        path: 'detail/:id',
+        component: CampaignManagementDetailComponent,
         data: {
           title: 'Xem chi tiết chiến dịch'
         }
@@ -43,6 +45,13 @@ const routes: Routes = [
         component: CampaignManagementFormComponent,
         data: {
           title: 'Chỉnh sửa chiến dịch'
+        }
+      },
+      {
+        path: 'transaction/:id',
+        component: CampaignTransactionPageComponent,
+        data: {
+          title: 'Lịch sử giao dịch'
         }
       },
     ]

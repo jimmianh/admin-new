@@ -31,7 +31,7 @@ export class CampaignManagementPageComponent implements OnInit {
   ngOnInit(): void {
     this.getListCampaign();
     this.createFormSearch();
-    this.campaignStatusEnum = SystemUtil.convertEnumToMap(CampaignStatusEnum)
+    this.campaignStatusEnum = SystemUtil.convertEnumToPaymentStatusList(CampaignStatusEnum)
   }
 
   search() {
@@ -58,7 +58,6 @@ export class CampaignManagementPageComponent implements OnInit {
   }
 
   onChange(status: any, id: number) {
-    console.log(status)
     this.updateStatusCampaign(id, status);
   }
 
@@ -126,6 +125,10 @@ export class CampaignManagementPageComponent implements OnInit {
   getListCampaign() {
     this.campaignService.getPageCampaign(this.offset, this.limit)
       .subscribe(res => this.handlerResponseListCampaign(res));
+  }
+
+  handlerCreatedDate(date: string) {
+    return SystemUtil.handlerCreatedDate(date)
   }
 
 }

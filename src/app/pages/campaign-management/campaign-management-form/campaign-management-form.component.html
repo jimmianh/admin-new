@@ -1,4 +1,4 @@
-<a class="mb-2" nz-button [nzType]="'primary'" href="campaign/list"><span>Quay lại trang danh sách</span></a>
+<a class="mb-2" nz-button [nzType]="'primary'" [routerLink]="'/campaign/list'"><span>Quay lại trang danh sách</span></a>
 <nz-card>
   <h6>Tạo mới</h6>
   <form nz-form [formGroup]="validateForm">
@@ -11,9 +11,10 @@
     <nz-form-item>
       <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="date">Date</nz-form-label>
       <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid date!">
-        <input class="input_w_30" nz-input formControlName="startDate" hidden />
-        <input class="input_w_30" nz-input formControlName="endDate" hidden />
+        <input class="input_w_30" nz-input formControlName="startDate" hidden/>
+        <input class="input_w_30" nz-input formControlName="endDate" hidden/>
         <nz-range-picker
+
           [ngModelOptions]="{standalone: true}"
           [nzFormat]="dateFormat" [(ngModel)]="date"
           (ngModelChange)="onChangeDate($event)">
@@ -30,7 +31,7 @@
       <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="categoryId">Category</nz-form-label>
       <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid category!">
         <nz-select class="input_w_30" nzShowSearch nzAllowClear nzPlaceHolder="Select a category"
-                   formControlName="categoryId">
+                   ngModel="{{campaign?.category?.id}}" formControlName="categoryId">
           <nz-option *ngFor="let item of listCategory" nzLabel="{{item.name}}" nzValue="{{item.id}}"></nz-option>
         </nz-select>
       </nz-form-control>
@@ -38,7 +39,8 @@
     <nz-form-item>
       <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="sponsorId">Sponsor</nz-form-label>
       <nz-form-control [nzSm]="14" [nzXs]="24">
-        <nz-select class="input_w_30" nzShowSearch nzAllowClear nzPlaceHolder="Select a sponsor"
+        <nz-select ngModel="{{campaign?.sponsor?.id}}" class="input_w_30" nzShowSearch nzAllowClear
+                   nzPlaceHolder="Select a sponsor"
                    formControlName="sponsorId">
           <nz-option *ngFor="let item of listSponsor" nzLabel="{{item.name}}" nzValue="{{item.id}}"></nz-option>
         </nz-select>

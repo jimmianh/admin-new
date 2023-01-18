@@ -1,106 +1,115 @@
-<nz-card>
-  <a class="mb-2" nz-button [nzType]="'primary'" href="campaign/form"><span>Tạo mới</span></a>
-  <form nz-form [formGroup]="formSearch" class="ant-advanced-search-form">
-    <div nz-row [nzGutter]="24">
-      <div nz-col [nzSpan]="8">
-        <nz-form-item>
-          <nz-form-label [nzFor]="'keyword'">Keyword</nz-form-label>
-          <nz-form-control>
-            <input
-              nz-input
-              placeholder="keyword"
-              [formControlName]="'keyword'"
-            />
-          </nz-form-control>
-        </nz-form-item>
-      </div>
-      <div nz-col [nzSpan]="8">
-        <nz-form-item>
-          <nz-form-label>Target Amount ($)</nz-form-label>
-          <nz-form-control class="__amount">
-            <input
-              class="__amount_start"
-              nz-input
-              placeholder="start"
-              [formControlName]="'targetAmountStart'"/>
-            <input
-              class="__amount_end"
-              nz-input
-              placeholder="end"
-              [formControlName]="'targetAmountEnd'"/>
-          </nz-form-control>
-        </nz-form-item>
-      </div>
-      <div nz-col [nzSpan]="8">
-        <nz-form-item>
-          <nz-form-label>Created Date</nz-form-label>
-          <nz-form-control>
-            <nz-range-picker [formControlName]="'date'" (ngModelChange)="onChangeDate($event)"></nz-range-picker>
-          </nz-form-control>
-        </nz-form-item>
-      </div>
+<a class="mb-2" nz-button [nzType]="'primary'" [routerLink]="'/campaign/form'"><span>Tạo mới</span></a>
+<form nz-form [formGroup]="formSearch" class="ant-advanced-search-form">
+  <div nz-row [nzGutter]="24">
+    <div nz-col [nzSpan]="8">
+      <nz-form-item>
+        <nz-form-label [nzFor]="'keyword'">Keyword</nz-form-label>
+        <nz-form-control>
+          <input
+            nz-input
+            placeholder="keyword"
+            [formControlName]="'keyword'"
+          />
+        </nz-form-control>
+      </nz-form-item>
     </div>
-    <div nz-row>
-      <div nz-col [nzSpan]="24" class="search-area">
-        <button nz-button [nzType]="'primary'" (click)="search()">Search</button>
-        <button nz-button (click)="clear()">Clear</button>
-      </div>
+    <div nz-col [nzSpan]="8">
+      <nz-form-item>
+        <nz-form-label>Target Amount ($)</nz-form-label>
+        <nz-form-control class="__amount">
+          <input
+            class="__amount_start"
+            nz-input
+            placeholder="start"
+            [formControlName]="'targetAmountStart'"/>
+          <input
+            class="__amount_end"
+            nz-input
+            placeholder="end"
+            [formControlName]="'targetAmountEnd'"/>
+        </nz-form-control>
+      </nz-form-item>
     </div>
-  </form>
-  <div class="search-result-list">
-    <nz-table
-      nzShowSizeChanger
-      [nzData]="listCampaign"
-      [nzShowPagination]="false"
-    >
-      <thead>
-      <tr>
-        <th style="text-align: center">Stt</th>
-        <th style="text-align: center">Image</th>
-        <th style="text-align: center">Title</th>
-        <th width="15%" style="text-align: center">Target Amount( $ )</th>
-        <th width="10%" style="text-align: center">Start Date</th>
-        <th width="10%" style="text-align: center">End Date</th>
-        <th style="text-align: center">Status</th>
-        <th style="text-align: center">Created At</th>
-        <th width="8%" style="text-align: center">Action</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr *ngFor="let data of listCampaign; let i = index">
-        <td style="text-align: center">{{ i + 1 }}</td>
-        <td style="text-align: center"><img
-          nz-image
-          width="150px"
-          nzSrc="{{ data.image }}"
-          alt="sponsor" src="{{data.image}}"/></td>
-        <td style="text-align: center">{{ data.title }}</td>
-        <td style="text-align: center">{{ data.targetAmount }}</td>
-        <td style="text-align: center">{{ data.startDate }}</td>
-        <td style="text-align: center">{{ data.endDate }}</td>
-        <td style="text-align: center">
-          <nz-select [(ngModel)]="data.status" (ngModelChange)="onChange($event, data.id)">
-            <nz-option *ngFor="let p of campaignStatusEnum" [nzValue]="p.key" [nzLabel]="p.value"></nz-option>
-          </nz-select>
-        </td>
-        <td style="text-align: center">{{ data.createdAt }}</td>
-        <td style="text-align: center">
-          <a nz-icon nzType="edit" href="campaign/edit/{{data.id}}" nzTheme="fill"
-             style="color: #2c2ce0; cursor: pointer"></a>
-          <nz-divider nzType="vertical"></nz-divider>
-          <a nz-icon nzType="eye" href="campaign/detail/{{data.id}}" nzTheme="fill"
-             style="color: #009624; cursor: pointer"></a>
-        </td>
-      </tr>
-      </tbody>
-    </nz-table>
-    <nz-pagination class="pagination"
-                   (nzPageIndexChange)="onChangePage($event)"
-                   [nzPageIndex]="offset" [nzTotal]="totalElements"
-                   [nzPageSize]="limit">
-    </nz-pagination>
+    <div nz-col [nzSpan]="8">
+      <nz-form-item>
+        <nz-form-label>Created Date</nz-form-label>
+        <nz-form-control>
+          <nz-range-picker [formControlName]="'date'" (ngModelChange)="onChangeDate($event)"></nz-range-picker>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
   </div>
-</nz-card>
+  <div nz-row>
+    <div nz-col [nzSpan]="24" class="search-area">
+      <button nz-button [nzType]="'primary'" (click)="search()">Search</button>
+      <button nz-button (click)="clear()">Clear</button>
+    </div>
+  </div>
+</form>
+<div class="search-result-list">
+  <nz-table
+    nzShowSizeChanger
+    [nzData]="listCampaign"
+    [nzShowPagination]="false"
+  >
+    <thead>
+    <tr>
+      <th style="text-align: center">Stt</th>
+      <th style="text-align: center">Image</th>
+      <th>Title</th>
+      <th width="9%" style="text-align: center">Target( $ )</th>
+      <th width="10%" style="text-align: center">Start Date</th>
+      <th width="10%" style="text-align: center">End Date</th>
+      <th style="text-align: center">Status</th>
+      <th width="10%" style="text-align: center">Created Date</th>
+      <th width="10%" style="text-align: center">Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let data of listCampaign; let i = index">
+      <td style="text-align: center">{{ i + 1 }}</td>
+      <td style="text-align: center"><img
+        nz-image
+        width="150px"
+        nzSrc="{{ data.image }}"
+        alt="sponsor" src="{{data.image}}"/></td>
+      <td>{{ data.title }}</td>
+      <td style="text-align: center">{{ data.targetAmount }}</td>
+      <td style="text-align: center">{{ data.startDate }}</td>
+      <td style="text-align: center">{{ data.endDate }}</td>
+
+      <td style="text-align: center">
+        <nz-select style="width: 95px" [(ngModel)]="data.status" (ngModelChange)="onChange($event, data.id)">
+          <nz-option *ngFor="let p of campaignStatusEnum" [nzValue]="p.key" [nzLabel]="p.value"></nz-option>
+        </nz-select>
+      </td>
+      <td style="text-align: center">{{ handlerCreatedDate(data.createdAt) }}</td>
+      <td style="text-align: center">
+        <a
+          nzTooltipTitle="Chỉnh sửa" nzTooltipPlacement="bottom" nz-tooltip
+          nz-icon nzType="edit" [routerLink]="'/campaign/edit/' + data.id" nzTheme="fill"
+          style="color: #2c2ce0; cursor: pointer"></a>
+        <nz-divider nzType="vertical"></nz-divider>
+        <a
+          nzTooltipTitle="Xem chi tiết" nzTooltipPlacement="bottom" nz-tooltip
+          nz-icon nzType="eye" [routerLink]="'/campaign/detail/' + data.id" nzTheme="fill"
+          style="color: #009624; cursor: pointer"></a>
+        <nz-divider nzType="vertical"></nz-divider>
+        <a
+          nzTooltipTitle="Danh sách donate" nzTooltipPlacement="bottom" nz-tooltip
+          nz-icon nzType="transaction" [routerLink]="'/campaign/transaction/' + data.id" nzTheme="outline"
+          style="color: #b001af; cursor: pointer"></a>
+      </td>
+    </tr>
+    </tbody>
+  </nz-table>
+  <nz-pagination class="pagination"
+                 (nzPageIndexChange)="onChangePage($event)"
+                 [nzPageIndex]="offset" [nzTotal]="totalElements"
+                 [nzPageSize]="limit">
+  </nz-pagination>
+</div>
+
 
 
 

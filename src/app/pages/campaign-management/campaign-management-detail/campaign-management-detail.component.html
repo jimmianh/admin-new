@@ -1,0 +1,58 @@
+<div>
+  <a style="float: right" class="mb-2" nz-button [nzType]="'primary'"
+     [routerLink]="'/campaign/list'"><span>Quay lại trang danh sách</span></a>
+</div>
+<nz-descriptions nzTitle="Thông tin chi tiết chiến dịch" nzBordered>
+  <nz-descriptions-item nzTitle="Name" [nzSpan]="3">{{campaign?.title}}</nz-descriptions-item>
+</nz-descriptions>
+<br>
+<nz-descriptions nzBordered nzLayout="vertical">
+  <nz-descriptions-item nzTitle="Image">
+    <img style="text-align: center" alt="givest" width="500px" src="{{campaign?.image}}">
+  </nz-descriptions-item>
+  <nz-descriptions-item nzTitle="Sponsor">
+    <div class="image_detail">
+      <nz-avatar class="mb-2" [nzSize]="100" nzSrc="{{campaign?.sponsor?.image}}"></nz-avatar>
+      <p>{{campaign?.sponsor?.name}}</p>
+    </div>
+  </nz-descriptions-item>
+  <nz-descriptions-item nzTitle="Category">
+    <div class="image_detail">
+      <nz-avatar class="mb-2" [nzSize]="100" nzSrc="{{campaign?.category?.image}}"></nz-avatar>
+      <p> {{campaign?.category?.name}}</p>
+    </div>
+  </nz-descriptions-item>
+</nz-descriptions>
+<br>
+
+<nz-descriptions nzBordered nzLayout="vertical">
+  <nz-descriptions-item nzTitle="Description" [nzSpan]="4">{{campaign?.description}}</nz-descriptions-item>
+  <nz-descriptions-item nzTitle="Target Amount ($)">{{campaign?.targetAmount}}</nz-descriptions-item>
+  <nz-descriptions-item nzTitle="Current Amount ($)">{{campaign?.currentAmount}}</nz-descriptions-item>
+  <nz-descriptions-item nzTitle="Start Date - End Date">
+    <nz-tag style="font-size: 13px" [nzColor]="'geekblue'">{{campaign?.startDate}}</nz-tag>
+    <span style="margin-right: 7px">||</span>
+    <nz-tag style="font-size: 13px" [nzColor]="'geekblue'">{{campaign?.endDate}}</nz-tag>
+  </nz-descriptions-item>
+  <nz-descriptions-item nzTitle="Donations">{{campaign?.donations}}</nz-descriptions-item>
+  <nz-descriptions-item nzTitle="Portal Create">
+    <nz-tag [nzColor]="colorPortal"> {{campaign?.portal}}</nz-tag>
+  </nz-descriptions-item>
+
+  <nz-descriptions-item nzTitle="Account">{{campaign?.account?.username}}</nz-descriptions-item>
+  <nz-descriptions-item nzTitle="Status">
+    <nz-tag [nzColor]="colorStatus">{{paymentStatus}}</nz-tag>
+  </nz-descriptions-item>
+  <nz-descriptions-item nzTitle="Created At">{{campaign?.createdAt}}</nz-descriptions-item>
+  <nz-descriptions-item nzTitle="Updated At">{{campaign?.updatedAt}}</nz-descriptions-item>
+</nz-descriptions>
+<br>
+<hr>
+<p style="font-weight: 600; font-size: 18px">Detail</p>
+<div [innerHTML]="campaign?.detail"></div>
+<br>
+<hr>
+<div>
+  <a style="float: right" class="mb-2" nz-button [nzType]="'primary'"
+     [routerLink]="'/campaign/list'"><span>Quay lại trang danh sách</span></a>
+</div>

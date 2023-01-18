@@ -10,6 +10,8 @@ import {FileService} from "../../../service/FileService";
 import {NzUploadFile} from "ng-zorro-antd/upload";
 import {SponsorModal} from "../../sponsor-management/model/SponsorModal";
 import {SponsorService} from "../../sponsor-management/service/SponsorService";
+import {ActivatedRoute, Router} from "@angular/router";
+import {CampaignModel} from "../model/CampaignModel";
 
 
 @Component({
@@ -20,14 +22,15 @@ import {SponsorService} from "../../sponsor-management/service/SponsorService";
 export class CampaignManagementFormComponent implements OnInit {
 
   validateForm!: UntypedFormGroup;
-  id!: number;
+  id!: any;
   loading = false;
   avatarUrl?: string;
   file?: File;
   dateFormat = 'dd/MM/yyyy';
   listCategory: Categories[] = [];
   listSponsor: SponsorModal[] = [];
-  date = null;
+  date: Date[] = [];
+  campaign?: CampaignModel;
 
   constructor(
     private categoryService: CategoriesService,
@@ -35,11 +38,17 @@ export class CampaignManagementFormComponent implements OnInit {
     private fileService: FileService,
     private campaignService: CampaignService,
     private notificationService: NzNotificationService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
     private fb: UntypedFormBuilder,
   ) {
   }
 
   ngOnInit(): void {
+    this.id = this.activatedRoute.snapshot.paramMap.get('id')
+    if (this.id) {
+      this.getDetail(this.id);
+    }
     this.createForm();
     this.getListActiveCategory();
     this.getSponsorActive();
@@ -52,9 +61,22 @@ export class CampaignManagementFormComponent implements OnInit {
     })
   }
 
+  getDetail(id: any) {
+    this.campaignService.getDetail(id)
+      .subscribe(res => {
+        res && this.updateFormDetail(res);
+        res && (this.campaign = res);
+      });
+  }
+
   btnSave() {
+    console.log(this.id)
     if (this.validateForm.valid) {
-      this.createCampaign(this.validateForm.value);
+      if (this.id) {
+        this.updateCampaign(this.validateForm.value)
+      } else {
+        this.createCampaign(this.validateForm.value);
+      }
     } else {
       Object.values(this.validateForm.controls).forEach(control => {
         if (control.invalid) {
@@ -90,7 +112,7 @@ export class CampaignManagementFormComponent implements OnInit {
       .subscribe(res => this.listCategory = res)
   }
 
-  getSponsorActive(){
+  getSponsorActive() {
     this.sponsorService.getAllSponsorActive().subscribe(sponsors => sponsors && (this.listSponsor = sponsors))
   }
 
@@ -100,11 +122,42 @@ export class CampaignManagementFormComponent implements OnInit {
         res => {
           if (res.status === true) {
             this.notificationService.success(Message.NOTIFICATION, Message.CREATE_SUCCESS)
+            this.router.navigate(['/campaign/list']).then((r) => console.log(r))
           } else {
             this.notificationService.error(Message.NOTIFICATION, Message.CREATE_FAIL)
           }
         },
         () => this.notificationService.error(Message.NOTIFICATION, Message.CREATE_FAIL)
+      )
+  }
+
+  updateFormDetail(campaign: CampaignModel) {
+    this.validateForm.controls['id'].setValue(campaign.id)
+    this.validateForm.controls['title'].setValue(campaign.title)
+    this.validateForm.controls['startDate'].setValue(campaign.startDate)
+    this.validateForm.controls['endDate'].setValue(campaign.endDate)
+    this.validateForm.controls['description'].setValue(campaign.description)
+    this.validateForm.controls['detail'].setValue(campaign.detail)
+    this.validateForm.controls['image'].setValue(campaign.image)
+    this.avatarUrl = campaign.image;
+    this.date = [new Date(campaign.startDate), new Date(campaign.endDate)];
+    this.validateForm.controls['targetAmount'].setValue(campaign.targetAmount)
+    this.validateForm.controls['categoryId'].setValue(campaign?.category?.id)
+    this.validateForm.controls['sponsorId'].setValue(campaign.sponsor.id)
+  }
+
+  updateCampaign(campaign: any) {
+    this.campaignService.updateCampaign(campaign)
+      .subscribe(
+        res => {
+          if (res.status === true) {
+            this.notificationService.success(Message.NOTIFICATION, Message.UPDATE_SUCCESS)
+            this.router.navigate(['/campaign/list']).then((r) => console.log(r))
+          } else {
+            this.notificationService.error(Message.NOTIFICATION, Message.UPDATE_FAIL)
+          }
+        },
+        () => this.notificationService.error(Message.NOTIFICATION, Message.UPDATE_FAIL)
       )
   }
 

@@ -13,18 +13,22 @@ export interface CampaignModel {
   description: string;
   image: string;
   portal: string;
-  category: {
-    id: number;
-    name: string;
-  };
+  category: Category;
   sponsor: {
     id: number;
     name: string;
+    image: string;
   };
   account: {
     id: number;
     username: string;
   }
+}
+
+export interface Category {
+  id: number;
+  name: string;
+  image: string;
 }
 
 export interface FilterSearchCampaign {
@@ -38,4 +42,23 @@ export interface FilterSearchCampaign {
   id: number;
   limit: number;
   offset: number;
+}
+
+export interface ResponseTransactionCampaign {
+  totalElements: number,
+  totalPages: number,
+  offset: number,
+  limit: number,
+  items: TransactionDto[]
+}
+
+export interface TransactionDto {
+  senderName: string;
+  message: string;
+  amount: number;
+  sendingTime: string;
+  campaign: string;
+  paymentChannel: string;
+  paymentStatus: string;
+  paypalTransactionId: string;
 }
