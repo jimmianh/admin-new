@@ -65,21 +65,23 @@
         <thead>
         <tr>
           <th style="text-align: center">Stt</th>
-          <th width="15%">Transaction Id</th>
+
           <th>Sender</th>
           <th>Message</th>
           <th style="text-align: center">Amount ($)</th>
+          <th width="15%">Transaction Id</th>
           <th width="15%" style="text-align: center">Sending Time</th>
         </tr>
         </thead>
         <tbody>
         <tr *ngFor="let data of listTransaction; let i = index">
           <td style="text-align: center">{{ i + 1 }}</td>
-          <td>{{ data.paypalTransactionId }}</td>
+
           <td>{{ data.senderName }}</td>
           <td>{{ data.message }}</td>
           <td style="text-align: center">{{ data.amount }}</td>
-          <td>{{ data.sendingTime }}</td>
+          <td>{{ data.paypalTransactionId }}</td>
+          <td style="text-align: center">{{ handlerCreatedDate(data.sendingTime) }}</td>
 
 
         </tbody>

@@ -56,11 +56,12 @@
     <tr>
       <th style="text-align: center">Stt</th>
       <th style="text-align: center">Image</th>
-      <th style="text-align: center">Title</th>
-      <th width="15%" style="text-align: center">Target Amount( $ )</th>
+      <th>Title</th>
+      <th width="9%" style="text-align: center">Target( $ )</th>
       <th width="10%" style="text-align: center">Start Date</th>
       <th width="10%" style="text-align: center">End Date</th>
       <th style="text-align: center">Status</th>
+      <th width="10%" style="text-align: center">Created Date</th>
       <th width="10%" style="text-align: center">Action</th>
     </tr>
     </thead>
@@ -72,30 +73,32 @@
         width="150px"
         nzSrc="{{ data.image }}"
         alt="sponsor" src="{{data.image}}"/></td>
-      <td style="text-align: center">{{ data.title }}</td>
+      <td>{{ data.title }}</td>
       <td style="text-align: center">{{ data.targetAmount }}</td>
       <td style="text-align: center">{{ data.startDate }}</td>
       <td style="text-align: center">{{ data.endDate }}</td>
+
       <td style="text-align: center">
-        <nz-select [(ngModel)]="data.status" (ngModelChange)="onChange($event, data.id)">
+        <nz-select style="width: 95px" [(ngModel)]="data.status" (ngModelChange)="onChange($event, data.id)">
           <nz-option *ngFor="let p of campaignStatusEnum" [nzValue]="p.key" [nzLabel]="p.value"></nz-option>
         </nz-select>
       </td>
+      <td style="text-align: center">{{ handlerCreatedDate(data.createdAt) }}</td>
       <td style="text-align: center">
         <a
           nzTooltipTitle="Chỉnh sửa" nzTooltipPlacement="bottom" nz-tooltip
           nz-icon nzType="edit" [routerLink]="'/campaign/edit/' + data.id" nzTheme="fill"
-           style="color: #2c2ce0; cursor: pointer"></a>
+          style="color: #2c2ce0; cursor: pointer"></a>
         <nz-divider nzType="vertical"></nz-divider>
         <a
           nzTooltipTitle="Xem chi tiết" nzTooltipPlacement="bottom" nz-tooltip
           nz-icon nzType="eye" [routerLink]="'/campaign/detail/' + data.id" nzTheme="fill"
-           style="color: #009624; cursor: pointer"></a>
+          style="color: #009624; cursor: pointer"></a>
         <nz-divider nzType="vertical"></nz-divider>
         <a
           nzTooltipTitle="Danh sách donate" nzTooltipPlacement="bottom" nz-tooltip
           nz-icon nzType="transaction" [routerLink]="'/campaign/transaction/' + data.id" nzTheme="outline"
-           style="color: #b001af; cursor: pointer"></a>
+          style="color: #b001af; cursor: pointer"></a>
       </td>
     </tr>
     </tbody>

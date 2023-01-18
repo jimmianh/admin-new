@@ -4,6 +4,7 @@ import {CampaignModel, ResponseTransactionCampaign, TransactionDto} from "../mod
 import {ActivatedRoute} from "@angular/router";
 import {CampaignService} from "../service/campaign.service";
 import {UntypedFormBuilder, UntypedFormGroup, Validators} from "@angular/forms";
+import {SystemUtil} from "../../../util/SystemUtil";
 
 @Component({
   selector: 'app-campaign-transaction-page',
@@ -95,5 +96,9 @@ export class CampaignTransactionPageComponent implements OnInit {
       endDateSendingTime: ["", [Validators.nullValidator]],
       date: ["", [Validators.nullValidator]],
     });
+  }
+
+  handlerCreatedDate(date: string) {
+    return SystemUtil.handlerCreatedDate(date)
   }
 }

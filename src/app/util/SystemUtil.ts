@@ -29,6 +29,16 @@ export class SystemUtil {
     return map;
   }
 
+
+  static handlerCreatedDate(date: string) {
+    let str = new Date(date)
+    let day = str.getDate() < 10 ? `0${str.getDate()}` : str.getDate()
+    let month = str.getMonth() < 10 ? `0${str.getMonth() + 1}` : str.getMonth()
+    let hours = str.getHours() < 10 ? `0${str.getHours()}` : str.getHours()
+    let minutes = str.getMinutes() < 10 ? `0${str.getMinutes()}` : str.getMinutes()
+    return `${day}/${month}/${str.getFullYear()}  ${hours}:${minutes}`
+  }
+
   static local: 'http://localhost:8080';
   static prod: 'https://herofund.up.railway.app';
 }

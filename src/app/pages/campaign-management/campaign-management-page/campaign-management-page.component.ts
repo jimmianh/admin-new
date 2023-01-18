@@ -127,4 +127,8 @@ export class CampaignManagementPageComponent implements OnInit {
       .subscribe(res => this.handlerResponseListCampaign(res));
   }
 
+  handlerCreatedDate(date: string) {
+    return SystemUtil.handlerCreatedDate(date)
+  }
+
 }
