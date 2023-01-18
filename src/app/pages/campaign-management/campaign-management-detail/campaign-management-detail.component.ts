@@ -42,4 +42,10 @@ export class CampaignManagementDetailComponent implements OnInit {
 
       })
   }
+
+  handlerCreatedDate(date: string) {
+    if (date === undefined) return "";
+    if (date === null) return "";
+    return SystemUtil.handlerCreatedDate(date)
+  }
 }

@@ -43,8 +43,8 @@
   <nz-descriptions-item nzTitle="Status">
     <nz-tag [nzColor]="colorStatus">{{paymentStatus}}</nz-tag>
   </nz-descriptions-item>
-  <nz-descriptions-item nzTitle="Created At">{{campaign?.createdAt}}</nz-descriptions-item>
-  <nz-descriptions-item nzTitle="Updated At">{{campaign?.updatedAt}}</nz-descriptions-item>
+  <nz-descriptions-item nzTitle="Created At">{{handlerCreatedDate(campaign.createdAt)}}</nz-descriptions-item>
+  <nz-descriptions-item nzTitle="Updated At">{{handlerCreatedDate(campaign.updatedAt)}}</nz-descriptions-item>
 </nz-descriptions>
 <br>
 <hr>
