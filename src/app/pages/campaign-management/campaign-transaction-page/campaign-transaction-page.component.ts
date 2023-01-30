@@ -99,6 +99,6 @@ export class CampaignTransactionPageComponent implements OnInit {
   }
 
   handlerCreatedDate(date: string) {
-    return SystemUtil.handlerCreatedDate(date)
+    return SystemUtil.handlerDateTime(date)
   }
 }

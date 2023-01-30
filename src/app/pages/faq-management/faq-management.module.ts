@@ -18,6 +18,7 @@ import {NzCardModule} from "ng-zorro-antd/card";
 import {NzSwitchModule} from "ng-zorro-antd/switch";
 import {NzDividerModule} from "ng-zorro-antd/divider";
 import {NzUploadModule} from "ng-zorro-antd/upload";
+import {NzNotificationService} from "ng-zorro-antd/notification";
 
 
 @NgModule({
@@ -42,6 +43,7 @@ import {NzUploadModule} from "ng-zorro-antd/upload";
     NzUploadModule,
     CKEditorModule,
     ReactiveFormsModule,
-  ]
+  ],
+  providers: [NzNotificationService]
 })
 export class FAQManagementModule { }

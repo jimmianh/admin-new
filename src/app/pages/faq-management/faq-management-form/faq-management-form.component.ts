@@ -19,6 +19,7 @@ export class FaqManagementFormComponent implements OnInit {
   loading = false;
   avatarUrl?: string;
   file?: File;
+  isUpdate = false;
 
   constructor(private router: ActivatedRoute,
               private faqService: FaqService,
@@ -40,10 +41,7 @@ export class FaqManagementFormComponent implements OnInit {
   getDetail(id: number) {
     this.faqService.getDetail(id).subscribe(res => {
       this.validateForm.get('id')!.setValue(res.id)
-      this.validateForm.get('name')!.setValue(res.name)
-      this.validateForm.get('image')!.setValue(res.image)
-      this.avatarUrl = res.image;
-      this.validateForm.get('description')!.setValue(res.description)
+      this.validateForm.get('campaignId')!.setValue(res.campaignId)
       this.validateForm.get('detail')!.setValue(res.detail)
     })
   }
