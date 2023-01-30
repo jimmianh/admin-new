@@ -5,6 +5,7 @@ import {ArticleService} from "../service/article.service";
 import * as moment from "moment/moment";
 import {NzNotificationService} from "ng-zorro-antd/notification";
 import {Message} from "../../../util/StringUtil";
+import {SystemUtil} from "../../../util/SystemUtil";
 
 @Component({
   selector: 'app-article-management-page',
@@ -125,6 +126,9 @@ export class ArticleManagementPageComponent implements OnInit {
   getListArticle() {
     this.articleService.getPageArticle(this.offset, this.limit)
       .subscribe(res => this.handlerResponseListCampaign(res));
+  }
+  handlerDateTime(date: string) {
+    return SystemUtil.handlerDateTime(date)
   }
 
 }

@@ -21,6 +21,7 @@ export class SponsorManagementFormComponent implements OnInit {
   file?: File;
 
   constructor(private router: ActivatedRoute,
+              private _route: Router,
               private sponsorService: SponsorService,
               private r: Router,
               private fileService: FileService,
@@ -70,6 +71,7 @@ export class SponsorManagementFormComponent implements OnInit {
       .subscribe(
         () => {
           this.notification.success(Message.NOTIFICATION, Message.CREATE_SUCCESS)
+          this._route.navigate(['/sponsor/list'])
         },
         (e) => {
           console.log("error: ", e)
@@ -83,6 +85,7 @@ export class SponsorManagementFormComponent implements OnInit {
       .subscribe(
         () => {
           this.notification.success(Message.NOTIFICATION, Message.UPDATE_SUCCESS)
+          this._route.navigate(['/sponsor/list'])
         },
         (e) => {
           console.log("error: ", e)

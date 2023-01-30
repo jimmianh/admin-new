@@ -80,9 +80,9 @@
     <tr *ngFor="let data of listOfData; let i = index">
       <td>{{getStt(i)}}</td>
       <td>{{ data.campaign }}</td>
-      <td>{{ data.senderName }}</td>
+      <td width="15%">{{ data.senderName }}</td>
       <td>{{ data.amount }}</td>
-      <td>{{ data.sendingTime }}</td>
+      <td style="text-align: center">{{ handlerDateTime(data.sendingTime) }}</td>
       <td>{{ data.paymentStatus }}</td>
       <td>{{ data.paypalTransactionId }}</td>
     </tr>

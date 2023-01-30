@@ -3,6 +3,9 @@ import {SponsorModal} from "../model/SponsorModal";
 import {SponsorService} from "../service/SponsorService";
 import {UntypedFormBuilder, UntypedFormGroup, Validators} from "@angular/forms";
 import {BaseStatusEnum} from "../../../enum/base-status-enum";
+import {SystemUtil} from "../../../util/SystemUtil";
+import {NzNotificationService} from "ng-zorro-antd/notification";
+import {Message, StringUtil} from "../../../util/StringUtil";
 
 @Component({
   selector: 'app-sponsor-management-page',
@@ -20,7 +23,9 @@ export class SponsorManagementPageComponent implements OnInit {
   status!: undefined;
   formSearch!: UntypedFormGroup;
 
-  constructor(private sponsorService: SponsorService, private fb: UntypedFormBuilder) {
+  constructor(private sponsorService: SponsorService,
+              private nzNotificationService: NzNotificationService,
+              private fb: UntypedFormBuilder) {
   }
 
   ngOnInit(): void {
@@ -74,6 +79,20 @@ export class SponsorManagementPageComponent implements OnInit {
   }
 
   updateStatus(id: number, status: number) {
-    this.sponsorService.updateStatus(id, status).subscribe(e => console.log(e))
+    this.sponsorService.updateStatus(id, status)
+      .subscribe(
+        e => {
+          if (e.status){
+            this.nzNotificationService.success("Action", e.message)
+          }else {
+            this.nzNotificationService.success("Action", e.message)
+          }
+        },
+        () => this.nzNotificationService.success("Action", Message.UPDATE_FAIL)
+      )
+  }
+
+  handlerDateTime(date: string) {
+    return SystemUtil.handlerDateTime(date)
   }
 }

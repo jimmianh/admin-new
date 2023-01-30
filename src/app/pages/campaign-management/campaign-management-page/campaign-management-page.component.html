@@ -20,11 +20,13 @@
           <input
             class="__amount_start"
             nz-input
+            type="number"
             placeholder="start"
             [formControlName]="'targetAmountStart'"/>
           <input
             class="__amount_end"
             nz-input
+            type="number"
             placeholder="end"
             [formControlName]="'targetAmountEnd'"/>
         </nz-form-control>
@@ -62,6 +64,7 @@
       <th width="10%" style="text-align: center">End Date</th>
       <th style="text-align: center">Status</th>
       <th width="10%" style="text-align: center">Created Date</th>
+      <th width="10%" style="text-align: center">Created By</th>
       <th width="10%" style="text-align: center">Action</th>
     </tr>
     </thead>
@@ -84,6 +87,7 @@
         </nz-select>
       </td>
       <td style="text-align: center">{{ handlerCreatedDate(data.createdAt) }}</td>
+      <td style="text-align: center">{{ data.account.username }}</td>
       <td style="text-align: center">
         <a
           nzTooltipTitle="Chỉnh sửa" nzTooltipPlacement="bottom" nz-tooltip

@@ -97,7 +97,7 @@
         <th>Campaign</th>
         <th>Status</th>
         <th>Like</th>
-        <th>Created At</th>
+        <th style="text-align: center">Created At</th>
         <th width="8%">Action</th>
       </tr>
       </thead>
@@ -115,7 +115,7 @@
           <nz-switch [(ngModel)]="data.status" (ngModelChange)="onChange($event, data.id)"></nz-switch>
         </td>
         <td>{{ data.numberOfLike }}</td>
-        <td>{{ data.createdAt }}</td>
+        <td>{{ handlerDateTime(data.createdAt) }}</td>
         <td style="text-align: center">
           <a nz-icon nzType="edit" href="article/edit/{{data.id}}" nzTheme="fill"
              style="color: #2c2ce0; cursor: pointer"></a>

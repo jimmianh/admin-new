@@ -7,6 +7,7 @@ import {Categories, CategoriesRequest} from "../model/Categories";
 import {NzUploadFile} from "ng-zorro-antd/upload";
 import {FileService} from "../../../service/FileService";
 import {NzNotificationService} from "ng-zorro-antd/notification";
+import {SystemUtil} from "../../../util/SystemUtil";
 
 @Component({
   selector: 'app-categories-management-page',
@@ -90,7 +91,7 @@ export class CategoriesManagementPageComponent implements OnInit {
     }
   }
 
-  resetView(){
+  resetView() {
     this.categoriesService.RefreshData.subscribe(() => {
       this.getListCategories();
     })
@@ -187,5 +188,9 @@ export class CategoriesManagementPageComponent implements OnInit {
       this.avatarUrl = res.data;
       this.validateForm.controls['image'].setValue(res.data);
     })
+  }
+
+  handlerDateTime(date: string) {
+    return SystemUtil.handlerDateTime(date);
   }
 }

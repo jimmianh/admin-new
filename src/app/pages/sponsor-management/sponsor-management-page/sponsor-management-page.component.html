@@ -54,15 +54,15 @@
       <td style="text-align: center">{{ i + 1 }}</td>
       <td style="text-align: center"><img
         nz-image
-        width="200px"
+        width="150px"
         nzSrc="{{ data.image }}"
         alt="sponsor" src="{{data.image}}"/></td>
       <td style="text-align: center">{{ data.name }}</td>
       <td style="text-align: center"><nz-switch [(ngModel)]="data.status" (ngModelChange)="onChange($event, data.id)" ></nz-switch></td>
-      <td style="text-align: center">{{ data.createdAt }}</td>
-      <td style="text-align: center">{{ data.updatedAt }}</td>
+      <td style="text-align: center">{{ handlerDateTime(data.createdAt) }}</td>
+      <td style="text-align: center">{{ handlerDateTime(data.updatedAt) }}</td>
       <td style="text-align: center">
-        <a nz-icon nzType="edit" href="sponsor/edit/{{data.id}}" nzTheme="outline" style="color: #2c2ce0; cursor: pointer"></a>
+        <a nz-icon nzType="edit" routerLink="/sponsor/edit/{{data.id}}" nzTheme="outline" style="color: #2c2ce0; cursor: pointer"></a>
       </td>
     </tr>
     </tbody>

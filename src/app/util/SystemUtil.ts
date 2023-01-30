@@ -1,7 +1,7 @@
 export class SystemUtil {
 
   static getBaseUrl() {
-    return 'https://herofund.up.railway.app';
+    return 'http://localhost:8080';
   }
 
   static getTokenTest() {
@@ -30,7 +30,8 @@ export class SystemUtil {
   }
 
 
-  static handlerCreatedDate(date: string) {
+  static handlerDateTime(date: string) {
+    if (date === null) return null;
     let str = new Date(date)
     let day = str.getDate() < 10 ? `0${str.getDate()}` : str.getDate()
     let month = str.getMonth() < 10 ? `0${str.getMonth() + 1}` : str.getMonth()

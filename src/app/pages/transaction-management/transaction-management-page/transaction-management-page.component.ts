@@ -4,6 +4,7 @@ import {TransactionService} from "../service/transaction-service.service";
 import {UntypedFormBuilder, UntypedFormGroup, Validators} from "@angular/forms";
 import * as moment from 'moment'
 import {offset} from "@popperjs/core";
+import {SystemUtil} from "../../../util/SystemUtil";
 
 @Component({
   selector: 'app-transaction-management-page',
@@ -166,5 +167,9 @@ export class TransactionManagementPageComponent implements OnInit {
     let endDate = moment($event[1]).format('DD/MM/YYYY');
     this.formSearch.value.startDateSendingTime = startDate;
     this.formSearch.value.endDateSendingTime = endDate;
+  }
+
+  handlerDateTime(date: string) {
+    return SystemUtil.handlerDateTime(date)
   }
 }

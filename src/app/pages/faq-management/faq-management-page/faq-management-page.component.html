@@ -51,13 +51,13 @@
     <tbody>
     <tr *ngFor="let data of listFaq; let i = index">
       <td style="text-align: center">{{ i + 1 }}</td>
-      <td style="text-align: center">{{ data.campaignId }}</td>
+      <td style="text-align: center">{{ data.campaignTitle }}</td>
       <td style="text-align: center">{{ data.detail }}</td>
       <td>
         <nz-switch [(ngModel)]="data.status" (ngModelChange)="onChange($event, data.id)"></nz-switch>
       </td>
       <td style="text-align: center">
-        <a nz-icon nzType="edit" href="faqs/edit/{{data.id}}" nzTheme="outline" style="color: #2c2ce0; cursor: pointer"></a>
+        <a nz-icon nzType="edit" routerLink="/faq/edit/{{data.id}}" nzTheme="outline" style="color: #2c2ce0; cursor: pointer"></a>
       </td>
     </tr>
     </tbody>
