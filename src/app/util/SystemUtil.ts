@@ -37,7 +37,7 @@ export class SystemUtil {
     let month = str.getMonth() < 10 ? `0${str.getMonth() + 1}` : str.getMonth()
     let hours = str.getHours() < 10 ? `0${str.getHours()}` : str.getHours()
     let minutes = str.getMinutes() < 10 ? `0${str.getMinutes()}` : str.getMinutes()
-    return `${day}/${month}/${str.getFullYear()}  ${hours}:${minutes}`
+    return `${day}-${month}-${str.getFullYear()}`
   }
 
   static local: 'http://localhost:8080';
