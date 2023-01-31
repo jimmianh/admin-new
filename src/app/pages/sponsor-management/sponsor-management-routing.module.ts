@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {SponsorManagementPageComponent} from "./sponsor-management-page/sponsor-management-page.component";
 import {SponsorManagementFormComponent} from "./sponsor-management-form/sponsor-management-form.component";
+import {SponsorViewDetailComponent} from "./sponsor-view-detail/sponsor-view-detail.component";
 
 const routes: Routes = [
   {
@@ -33,7 +34,7 @@ const routes: Routes = [
       },
       {
         path: 'view/:id',
-        component: SponsorManagementFormComponent,
+        component: SponsorViewDetailComponent,
         data: {
           title: 'Xem chi tiết'
         }

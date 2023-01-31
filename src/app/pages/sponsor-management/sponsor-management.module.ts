@@ -20,12 +20,15 @@ import {NzFormModule} from "ng-zorro-antd/form";
 import {NzUploadModule} from "ng-zorro-antd/upload";
 import {CKEditorModule} from "ckeditor4-angular";
 import {NzNotificationService} from "ng-zorro-antd/notification";
+import { SponsorViewDetailComponent } from './sponsor-view-detail/sponsor-view-detail.component';
+import {NzDropDownModule} from "ng-zorro-antd/dropdown";
 
 
 @NgModule({
   declarations: [
     SponsorManagementPageComponent,
-    SponsorManagementFormComponent
+    SponsorManagementFormComponent,
+    SponsorViewDetailComponent
   ],
   imports: [
     CommonModule,
@@ -46,6 +49,7 @@ import {NzNotificationService} from "ng-zorro-antd/notification";
     NzFormModule,
     NzUploadModule,
     CKEditorModule,
+    NzDropDownModule,
   ],
   providers: [{provide: NzNotificationService}]
 })

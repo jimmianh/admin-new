@@ -21,6 +21,7 @@ import {NzCardModule} from "ng-zorro-antd/card";
 import {NzUploadModule} from "ng-zorro-antd/upload";
 import {CKEditorModule} from "ckeditor4-angular";
 import {NzNotificationService} from "ng-zorro-antd/notification";
+import {NzDropDownModule} from "ng-zorro-antd/dropdown";
 
 
 @NgModule({
@@ -28,27 +29,28 @@ import {NzNotificationService} from "ng-zorro-antd/notification";
     ArticleManagementPageComponent,
     // CampaignManagementFormComponent
   ],
-  imports: [
-    CommonModule,
-    ArticleManagementRoutingModule,
-    ReactiveFormsModule,
-    NzGridModule,
-    NzButtonModule,
-    NzInputModule,
-    NzDatePickerModule,
-    NzSelectModule,
-    NzTableModule,
-    NzSwitchModule,
-    NzPaginationModule,
-    FormsModule,
-    NzIconModule,
-    NzImageModule,
-    NzFormModule,
-    NzDividerModule,
-    NzCardModule,
-    NzUploadModule,
-    CKEditorModule,
-  ],
+    imports: [
+        CommonModule,
+        ArticleManagementRoutingModule,
+        ReactiveFormsModule,
+        NzGridModule,
+        NzButtonModule,
+        NzInputModule,
+        NzDatePickerModule,
+        NzSelectModule,
+        NzTableModule,
+        NzSwitchModule,
+        NzPaginationModule,
+        FormsModule,
+        NzIconModule,
+        NzImageModule,
+        NzFormModule,
+        NzDividerModule,
+        NzCardModule,
+        NzUploadModule,
+        CKEditorModule,
+        NzDropDownModule,
+    ],
   providers: [NzNotificationService]
 })
 export class ArticleManagementModule {

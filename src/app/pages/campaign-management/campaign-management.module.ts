@@ -28,6 +28,7 @@ import {NzAvatarModule} from "ng-zorro-antd/avatar";
 import { CampaignTransactionPageComponent } from './campaign-transaction-page/campaign-transaction-page.component';
 import {NzToolTipModule} from "ng-zorro-antd/tooltip";
 import {NzTagModule} from "ng-zorro-antd/tag";
+import {NzDropDownModule} from "ng-zorro-antd/dropdown";
 
 
 @NgModule({
@@ -37,32 +38,33 @@ import {NzTagModule} from "ng-zorro-antd/tag";
     CampaignManagementDetailComponent,
     CampaignTransactionPageComponent
   ],
-  imports: [
-    CommonModule,
-    CampaignManagementRoutingModule,
-    ReactiveFormsModule,
-    NzGridModule,
-    NzButtonModule,
-    NzInputModule,
-    NzDatePickerModule,
-    NzSelectModule,
-    NzTableModule,
-    NzSwitchModule,
-    NzPaginationModule,
-    FormsModule,
-    NzIconModule,
-    NzImageModule,
-    NzFormModule,
-    NzDividerModule,
-    NzCardModule,
-    NzUploadModule,
-    CKEditorModule,
-    NzDescriptionsModule,
-    NzBadgeModule,
-    NzAvatarModule,
-    NzToolTipModule,
-    NzTagModule,
-  ],
+    imports: [
+        CommonModule,
+        CampaignManagementRoutingModule,
+        ReactiveFormsModule,
+        NzGridModule,
+        NzButtonModule,
+        NzInputModule,
+        NzDatePickerModule,
+        NzSelectModule,
+        NzTableModule,
+        NzSwitchModule,
+        NzPaginationModule,
+        FormsModule,
+        NzIconModule,
+        NzImageModule,
+        NzFormModule,
+        NzDividerModule,
+        NzCardModule,
+        NzUploadModule,
+        CKEditorModule,
+        NzDescriptionsModule,
+        NzBadgeModule,
+        NzAvatarModule,
+        NzToolTipModule,
+        NzTagModule,
+        NzDropDownModule,
+    ],
   providers: [NzNotificationService]
 })
 export class CampaignManagementModule {

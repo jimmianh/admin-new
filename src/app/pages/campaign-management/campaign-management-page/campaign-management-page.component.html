@@ -89,20 +89,25 @@
       <td style="text-align: center">{{ handlerCreatedDate(data.createdAt) }}</td>
       <td style="text-align: center">{{ data.account.username }}</td>
       <td style="text-align: center">
-        <a
-          nzTooltipTitle="Chỉnh sửa" nzTooltipPlacement="bottom" nz-tooltip
-          nz-icon nzType="edit" [routerLink]="'/campaign/edit/' + data.id" nzTheme="fill"
-          style="color: #2c2ce0; cursor: pointer"></a>
-        <nz-divider nzType="vertical"></nz-divider>
-        <a
-          nzTooltipTitle="Xem chi tiết" nzTooltipPlacement="bottom" nz-tooltip
-          nz-icon nzType="eye" [routerLink]="'/campaign/detail/' + data.id" nzTheme="fill"
-          style="color: #009624; cursor: pointer"></a>
-        <nz-divider nzType="vertical"></nz-divider>
-        <a
-          nzTooltipTitle="Danh sách donate" nzTooltipPlacement="bottom" nz-tooltip
-          nz-icon nzType="transaction" [routerLink]="'/campaign/transaction/' + data.id" nzTheme="outline"
-          style="color: #b001af; cursor: pointer"></a>
+        <a nz-dropdown [nzDropdownMenu]="menu"
+           nz-icon nzType="down" nzTheme="outline">
+        </a>
+        <nz-dropdown-menu #menu="nzDropdownMenu">
+          <ul nz-menu nzSelectable>
+            <li nz-menu-item><a
+              nzTooltipTitle="Chỉnh sửa" nzTooltipPlacement="bottom" nz-tooltip
+              nz-icon nzType="edit" [routerLink]="'/campaign/edit/' + data.id" nzTheme="fill"
+              style="color: #2c2ce0; cursor: pointer"></a></li>
+            <li nz-menu-item><a
+              nzTooltipTitle="Xem chi tiết" nzTooltipPlacement="bottom" nz-tooltip
+              nz-icon nzType="eye" [routerLink]="'/campaign/detail/' + data.id" nzTheme="fill"
+              style="color: #009624; cursor: pointer"></a></li>
+            <li nz-menu-item><a
+              nzTooltipTitle="Danh sách donate" nzTooltipPlacement="bottom" nz-tooltip
+              nz-icon nzType="transaction" [routerLink]="'/campaign/transaction/' + data.id" nzTheme="outline"
+              style="color: #b001af; cursor: pointer"></a></li>
+          </ul>
+        </nz-dropdown-menu>
       </td>
     </tr>
     </tbody>
