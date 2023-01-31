@@ -74,13 +74,13 @@
     </div>
     <div nz-row [nzGutter]="24">
       <div nz-col [nzSpan]="8">
-      <nz-form-item>
-        <nz-form-label nz-col [nzSpan]="6">Created Date</nz-form-label>
-        <nz-form-control nz-col [nzSpan]="18">
-          <nz-range-picker [formControlName]="'date'" (ngModelChange)="onChangeDate($event)"></nz-range-picker>
-        </nz-form-control>
-      </nz-form-item>
-    </div>
+        <nz-form-item>
+          <nz-form-label nz-col [nzSpan]="6">Created Date</nz-form-label>
+          <nz-form-control nz-col [nzSpan]="18">
+            <nz-range-picker [formControlName]="'date'" (ngModelChange)="onChangeDate($event)"></nz-range-picker>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
     </div>
   </form>
   <div class="search-result-list">
@@ -98,7 +98,7 @@
         <th>Status</th>
         <th>Like</th>
         <th style="text-align: center">Created At</th>
-        <th width="8%">Action</th>
+        <th width="8%" style="text-align: center">Action</th>
       </tr>
       </thead>
       <tbody>
@@ -117,11 +117,18 @@
         <td>{{ data.numberOfLike }}</td>
         <td>{{ handlerDateTime(data.createdAt) }}</td>
         <td style="text-align: center">
-          <a nz-icon nzType="edit" href="article/edit/{{data.id}}" nzTheme="fill"
-             style="color: #2c2ce0; cursor: pointer"></a>
-          <nz-divider nzType="vertical"></nz-divider>
-          <a nz-icon nzType="eye" href="article/detail/{{data.id}}" nzTheme="fill"
-             style="color: #009624; cursor: pointer"></a>
+          <a nz-dropdown [nzDropdownMenu]="menu"
+             nz-icon nzType="down" nzTheme="outline">
+          </a>
+          <nz-dropdown-menu #menu="nzDropdownMenu">
+            <ul nz-menu nzSelectable>
+              <li nz-menu-item><a nz-icon nzType="edit" href="article/edit/{{data.id}}" nzTheme="fill"
+                                  style="color: #2c2ce0; cursor: pointer"></a></li>
+              <li nz-menu-item><a nz-icon nzType="eye" href="article/detail/{{data.id}}" nzTheme="fill"
+                                  style="color: #009624; cursor: pointer"></a></li>
+
+            </ul>
+          </nz-dropdown-menu>
         </td>
       </tr>
       </tbody>

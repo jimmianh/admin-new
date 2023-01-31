@@ -62,7 +62,15 @@
       <td style="text-align: center">{{ handlerDateTime(data.createdAt) }}</td>
       <td style="text-align: center">{{ handlerDateTime(data.updatedAt) }}</td>
       <td style="text-align: center">
-        <a nz-icon nzType="edit" routerLink="/sponsor/edit/{{data.id}}" nzTheme="outline" style="color: #2c2ce0; cursor: pointer"></a>
+        <a nz-dropdown [nzDropdownMenu]="menu"
+           nz-icon nzType="down" nzTheme="outline">
+        </a>
+        <nz-dropdown-menu #menu="nzDropdownMenu">
+          <ul nz-menu nzSelectable>
+            <li nz-menu-item><a nz-icon nzType="edit" routerLink="/sponsor/edit/{{data.id}}" nzTheme="outline" style="color: #2c2ce0; cursor: pointer"></a></li>
+            <li nz-menu-item><a nz-icon nzType="eye" routerLink="/sponsor/view/{{data.id}}" nzTheme="outline" style="color: green; cursor: pointer"></a></li>
+          </ul>
+        </nz-dropdown-menu>
       </td>
     </tr>
     </tbody>
