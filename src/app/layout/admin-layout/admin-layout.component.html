@@ -1,8 +1,7 @@
 <nz-layout>
   <nz-sider nzCollapsible="false" nzWidth="250px">
     <div class="logo">
-      <img src="./assets/logo1.png" alt=""/>
-      <p>Herofund</p>
+      <img src="./assets/logoadmin.png" alt=""/>
     </div>
     <ul nz-menu nzTheme="dark" *ngFor="let nav of navItems; let i = index" nzMode="inline">
       <div *ngIf="!nav.children; then thenBlock; else elseBlock"></div>
