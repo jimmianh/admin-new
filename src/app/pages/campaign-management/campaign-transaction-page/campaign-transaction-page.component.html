@@ -3,7 +3,7 @@
      [routerLink]="'/campaign/list'"><span>Quay lại trang danh sách</span></a>
 </div>
 <nz-descriptions nzBordered>
-  <nz-descriptions-item nzTitle="Campaign" [nzSpan]="3">{{campaign?.title}}</nz-descriptions-item>
+  <nz-descriptions-item nzTitle="Campaign" [nzSpan]="3">{{campaign && campaign.title}}</nz-descriptions-item>
 </nz-descriptions>
 <br>
 <form nz-form [formGroup]="formSearch" class="ant-advanced-search-form">
@@ -88,7 +88,7 @@
       </nz-table>
       <nz-pagination class="pagination"
                      (nzPageIndexChange)="onChangePage($event)"
-                     [nzPageIndex]="offset" [nzTotal]="responseTransaction?.totalElements"
+                     [nzPageIndex]="offset" [nzTotal]="responseTransaction && responseTransaction.totalElements"
                      [nzPageSize]="limit">
       </nz-pagination>
     </div>
