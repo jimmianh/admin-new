@@ -63,12 +63,18 @@
       <td style="text-align: center">{{ handlerDateTime(data.updatedAt) }}</td>
       <td style="text-align: center">
         <a nz-dropdown [nzDropdownMenu]="menu"
-           nz-icon nzType="down" nzTheme="outline">
+           nz-icon nzType="menu-fold" nzTheme="outline">
         </a>
         <nz-dropdown-menu #menu="nzDropdownMenu">
           <ul nz-menu nzSelectable>
-            <li nz-menu-item><a nz-icon nzType="edit" routerLink="/sponsor/edit/{{data.id}}" nzTheme="outline" style="color: #2c2ce0; cursor: pointer"></a></li>
-            <li nz-menu-item><a nz-icon nzType="eye" routerLink="/sponsor/view/{{data.id}}" nzTheme="outline" style="color: green; cursor: pointer"></a></li>
+            <li nz-menu-item routerLink="/sponsor/edit/{{data.id}}" style=" cursor: pointer" >
+              <span nz-icon nzType="edit" style="color: #2c2ce0;"  nzTheme="outline" ></span>
+              <span style="margin-left: 5px" >Chỉnh sửa</span>
+            </li>
+            <li nz-menu-item routerLink="/sponsor/view/{{data.id}} "  style="cursor: pointer">
+              <span nz-icon nzType="eye" style="color: green;"  nzTheme="outline"></span>
+              <span style="margin-left: 5px">Xem chi tiết</span>
+            </li>
           </ul>
         </nz-dropdown-menu>
       </td>
