@@ -1,27 +1,22 @@
-<div class="bg-image"></div>
-<div class="login">
-    <form class="col-4" nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
-      <nz-form-item>
-        <nz-form-control nzErrorTip="Please input your username!">
-          <nz-input-group nzPrefixIcon="user">
-            <input type="text" nz-input formControlName="userName" placeholder="Username" />
-          </nz-input-group>
-        </nz-form-control>
-      </nz-form-item>
-      <nz-form-item>
-        <nz-form-control nzErrorTip="Please input your Password!">
-          <nz-input-group nzPrefixIcon="lock">
-            <input type="password" nz-input formControlName="password" placeholder="Password" />
-          </nz-input-group>
-        </nz-form-control>
-      </nz-form-item>
-      <div nz-row class="login-form-margin">
-        <div nz-col [nzSpan]="24">
-          <label style="float: left" nz-checkbox formControlName="remember">
-            <span style="color:white; ">Lưu đăng nhập</span>
-          </label>
-        </div>
+
+<div class="center">
+  <div class="container">
+    <div class="text">
+      Hệ Thống Quản Lý
+    </div>
+    <form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+      <div class="data">
+        <label>Username</label>
+        <input formControlName="userName" type="text" required>
       </div>
-      <button nz-button class="login-form-button login-form-margin" style="background-image: linear-gradient(to right, #6D1D6C , #9B47EB); color: white;">Đăng nhập</button>
+      <div class="data">
+        <label>Password</label>
+        <input formControlName="password" type="password" required>
+      </div>
+      <div class="btn">
+        <div class="inner"></div>
+        <button type="submit">login</button>
+      </div>
     </form>
   </div>
+</div>

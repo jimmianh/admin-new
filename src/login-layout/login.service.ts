@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {catchError, Observable, throwError} from "rxjs";
 import {HttpClient} from "@angular/common/http";
-import {SystemUtil} from "../../util/SystemUtil";
+import {SystemUtil} from "../app/util/SystemUtil";
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +17,6 @@ export class LoginService {
     return this.http
       .post<any>(SystemUtil.getBaseUrl() + `/api/v1/auth/authenticate`, payload)
       .pipe(catchError((httpError: any) => {
-        alert(httpError.error.message)
         return httpError
       }));
   }
