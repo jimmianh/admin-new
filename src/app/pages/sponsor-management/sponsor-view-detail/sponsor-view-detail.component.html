@@ -1,5 +1,26 @@
-<a class="mb-2" nz-button [nzType]="'primary'" [routerLink]="'/sponsor/list'"><span>Quay lại trang danh sách</span></a>
-
 <div>
-  <h1>{{data.name}}</h1>
+  <a style="float: right" class="mb-2" nz-button [nzType]="'primary'"
+     [routerLink]="'/sponsor/list'"><span>Quay lại trang danh sách</span></a>
 </div>
+<nz-descriptions nzTitle="Thông tin chi tiết chiến dịch" nzBordered>
+  <nz-descriptions-item nzTitle="Name" [nzSpan]="3">{{data && data.name}}</nz-descriptions-item>
+</nz-descriptions>
+<br>
+<nz-descriptions nzBordered nzLayout="vertical">
+  <nz-descriptions-item nzTitle="Image">
+    <div class="image_detail">
+    <img style="text-align: center" alt="givest" width="500px" src="{{data && data.image}}">
+    </div>
+  </nz-descriptions-item>
+</nz-descriptions>
+<br>
+
+<nz-descriptions nzBordered nzLayout="vertical">
+  <nz-descriptions-item nzTitle="Description" [nzSpan]="4">{{data && data.description}}</nz-descriptions-item>
+</nz-descriptions>
+<br>
+<hr>
+<p style="font-weight: 600; font-size: 18px">Detail</p>
+<div [innerHTML]="data && data.detail"></div>
+<br>
+<hr>

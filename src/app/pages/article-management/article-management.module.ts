@@ -22,11 +22,13 @@ import {NzUploadModule} from "ng-zorro-antd/upload";
 import {CKEditorModule} from "ckeditor4-angular";
 import {NzNotificationService} from "ng-zorro-antd/notification";
 import {NzDropDownModule} from "ng-zorro-antd/dropdown";
+import {ArticleManagementFormComponent} from "./article-management-form/article-management-form.component";
 
 
 @NgModule({
   declarations: [
     ArticleManagementPageComponent,
+    ArticleManagementFormComponent
     // CampaignManagementFormComponent
   ],
     imports: [
