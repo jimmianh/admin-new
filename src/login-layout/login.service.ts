@@ -11,11 +11,9 @@ export class LoginService {
   constructor(private http: HttpClient) {
   }
 
-  postLogin(params: any): Observable<any> {
-    const payload =  params;
-
+  postLogin(params: any) {
     return this.http
-      .post<any>(SystemUtil.getBaseUrl() + `/api/v1/auth/authenticate`, payload)
+      .post<any>(SystemUtil.getBaseUrl() + `/api/v1/auth/authenticate`, params)
       .pipe(catchError((httpError: any) => {
         return httpError
       }));

@@ -104,7 +104,7 @@ export class SponsorService {
 
   getAllSponsorActive() {
     return this.http
-      .get<any>(SystemUtil.getBaseUrl() + `/api/v1/sponsors`)
+      .get<any>(SystemUtil.getBaseUrl() + `/api/v1/sponsors/all`)
       .pipe(
         catchError((error: any) => {
           return throwError(error);

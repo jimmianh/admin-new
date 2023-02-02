@@ -15,7 +15,7 @@ export class LoginLayoutComponent implements OnInit {
   // @ts-ignore
   validateForm: FormGroup;
 
-  async submitForm(): Promise<void> {
+   submitForm() {
     if(this.validateForm.invalid){
       this.nzNotificationService.error("Error", "Vui lòng kiểm tra lại thông tin đăng nhập");
       return ;
@@ -24,7 +24,7 @@ export class LoginLayoutComponent implements OnInit {
       username: this.validateForm.get('userName')?.value,
       password: this.validateForm.get('password')?.value
     }
-    await this.loginService.postLogin(payLoad).pipe(take(1))
+     this.loginService.postLogin(payLoad)
       .subscribe((res) => {
           if (res.accessToken) {
             localStorage.setItem('access_token', res.accessToken)
