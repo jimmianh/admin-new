@@ -57,15 +57,15 @@
     <thead>
     <tr>
       <th style="text-align: center">Stt</th>
-      <th style="text-align: center">Image</th>
-      <th>Title</th>
-      <th width="9%" style="text-align: center">Target( $ )</th>
-      <th width="10%" style="text-align: center">Start Date</th>
-      <th width="10%" style="text-align: center">End Date</th>
-      <th style="text-align: center">Status</th>
-      <th width="10%" style="text-align: center">Created Date</th>
-      <th width="10%" style="text-align: center">Created By</th>
-      <th width="10%" style="text-align: center">Action</th>
+      <th style="text-align: center">Ảnh</th>
+      <th>Tên</th>
+      <th width="10%" style="text-align: center">Mục tiêu( $ )</th>
+      <th width="10%" style="text-align: center">Ngày bắt đầu</th>
+      <th width="11%" style="text-align: center">Ngày kết thúc</th>
+      <th style="text-align: center">Trạng thái</th>
+      <th width="10%" style="text-align: center">Ngày tạo</th>
+      <th width="10%" style="text-align: center">Người tạo</th>
+      <th width="10%" style="text-align: center">Thao tác</th>
     </tr>
     </thead>
     <tbody>
@@ -73,7 +73,7 @@
       <td style="text-align: center">{{ i + 1 }}</td>
       <td style="text-align: center"><img
         nz-image
-        width="150px"
+        width="100px"
         nzSrc="{{ data.image }}"
         alt="sponsor" src="{{data.image}}"/></td>
       <td>{{ data.title }}</td>
@@ -89,23 +89,21 @@
       <td style="text-align: center">{{ handlerCreatedDate(data.createdAt) }}</td>
       <td style="text-align: center">{{ data.account.username }}</td>
       <td style="text-align: center">
-        <a nz-dropdown [nzDropdownMenu]="menu"
-           nz-icon nzType="down" nzTheme="outline">
-        </a>
+        <a nz-dropdown [nzDropdownMenu]="menu" nz-icon nzType="menu-fold" nzTheme="outline"></a>
         <nz-dropdown-menu #menu="nzDropdownMenu">
           <ul nz-menu nzSelectable>
-            <li nz-menu-item><a
-              nzTooltipTitle="Chỉnh sửa" nzTooltipPlacement="bottom" nz-tooltip
-              nz-icon nzType="edit" [routerLink]="'/campaign/edit/' + data.id" nzTheme="fill"
-              style="color: #2c2ce0; cursor: pointer"></a></li>
-            <li nz-menu-item><a
-              nzTooltipTitle="Xem chi tiết" nzTooltipPlacement="bottom" nz-tooltip
-              nz-icon nzType="eye" [routerLink]="'/campaign/detail/' + data.id" nzTheme="fill"
-              style="color: #009624; cursor: pointer"></a></li>
-            <li nz-menu-item><a
-              nzTooltipTitle="Danh sách donate" nzTooltipPlacement="bottom" nz-tooltip
-              nz-icon nzType="transaction" [routerLink]="'/campaign/transaction/' + data.id" nzTheme="outline"
-              style="color: #b001af; cursor: pointer"></a></li>
+            <li nz-menu-item [routerLink]="'/campaign/edit/' + data.id" style="cursor: pointer">
+              <span nz-icon nzType="edit" nzTheme="fill" style="color: #2c2ce0;"></span>
+              <span style="margin-left: 5px;">Chỉnh sửa</span>
+            </li>
+            <li nz-menu-item [routerLink]="'/campaign/detail/' + data.id" style="cursor: pointer">
+              <span nz-icon nzType="eye"  nzTheme="fill" style="color: #009624;"></span>
+              <span style="margin-left: 5px">Xem chi tiết</span>
+            </li>
+            <li nz-menu-item [routerLink]="'/campaign/transaction/' + data.id" style="cursor: pointer">
+              <span nz-icon nzType="transaction" nzTheme="outline" style="color: #b001af;"></span>
+              <span style="margin-left: 5px" >Danh sách quyên góp</span>
+            </li>
           </ul>
         </nz-dropdown-menu>
       </td>

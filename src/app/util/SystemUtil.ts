@@ -4,10 +4,6 @@ export class SystemUtil {
     return 'https://herofund.up.railway.app';
   }
 
-  static getTokenTest() {
-    return "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsInBob25lIjoiMDk2OTQ1MTY5MSIsInByb2ZpbGVJZCI6MSwiZXhwIjoxNjcyODkxMTk5LCJpYXQiOjE2NzI4MDQ3OTksImF1dGhvcml0aWVzIjpbeyJhdXRob3JpdHkiOiJST0xFX0FETUlOIn1dfQ.PRtrFN4rIQT5WdSCQfz3vkPPWzdKaNdJejMxLbKbgTg";
-  }
-
   static convertEnumToPaymentStatusList(enums: any) {
     let map: PaymentStatus[] = [];
     const keys2 = Object.keys(enums).filter((v) => isNaN(Number(v)));
