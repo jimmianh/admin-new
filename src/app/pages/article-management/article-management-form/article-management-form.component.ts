@@ -7,6 +7,8 @@ import {NzNotificationService} from "ng-zorro-antd/notification";
 import {NzUploadFile} from "ng-zorro-antd/upload";
 import {Message} from "../../../util/StringUtil";
 import {ArticleService} from "../service/article.service";
+import {ArticleModel} from "../model/ArticleModel";
+import {CampaignModel} from "../../campaign-management/model/CampaignModel";
 
 @Component({
   selector: 'app-article-management-form',
@@ -15,33 +17,70 @@ import {ArticleService} from "../service/article.service";
 })
 export class ArticleManagementFormComponent implements OnInit {
 
-  id!: number;
+  id!: any;
+  campaignId: any;
   validateForm!: UntypedFormGroup;
   loading = false;
   avatarUrl?: string;
   file?: File;
+  article?: ArticleModel;
+  pageTitle: string = "Tạo mới bài viết";
+  returnTitle: string = "Quay lại trang danh sách chiến dịch";
+  returnUrl: string = "/campaign/list";
 
-  constructor(private router: ActivatedRoute,
-              private _route: Router,
+  constructor(private router: Router,
+              private activatedRoute: ActivatedRoute,
               private articleService: ArticleService,
               private r: Router,
               private fileService: FileService,
-              private notification: NzNotificationService,
+              private notificationService: NzNotificationService,
               private fb: UntypedFormBuilder) {
   }
 
   ngOnInit(): void {
-    this.createForm();
-    let a = this.router.snapshot.paramMap.get('id');
-    if (a) {
-      this.id = parseInt(a)
+    this.id = this.activatedRoute.snapshot.paramMap.get('id');
+    this.campaignId = this.activatedRoute.snapshot.paramMap.get('campaignId');
+    if (this.id) {
+      this.pageTitle = "Chỉnh sửa bài viết"
+      this.returnTitle = "Quay lại trang danh sách bài viết"
+      this.returnUrl = "/article/list"
+      this.getDetail(this.id);
     }
+    this.createForm();
+  }
+
+  uploadImage(info: { file: NzUploadFile }): void {
+    this.fileService.upload(info.file!.originFileObj!).subscribe(res => {
+      this.avatarUrl = res.data;
+      this.validateForm.controls['image'].setValue(res.data);
+    })
+  }
+
+  getDetail(id: any) {
+    this.articleService.getDetail(id)
+      .subscribe(res => {
+        res && this.updateFormDetail(res.data);
+        res && (this.article = res.data);
+      });
+  }
+
+  updateFormDetail(article: ArticleModel) {
+    this.validateForm.controls['id'].setValue(article.id)
+    this.validateForm.controls['campaignId'].setValue(article.campaignId)
+    this.validateForm.controls['title'].setValue(article.title)
+    this.validateForm.controls['description'].setValue(article.description)
+    this.validateForm.controls['detail'].setValue(article.detail)
+    this.validateForm.controls['image'].setValue(article.image)
+    this.avatarUrl = article.image;
+    this.campaignId = article.campaignId
   }
 
   createForm(): void {
     this.validateForm = this.fb.group({
       id: [null, [Validators.nullValidator]],
-      name: [null, [Validators.required]],
+      title: [null, [Validators.nullValidator]],
+      campaignId: [null, [Validators.required]],
+      detail: [null, [Validators.required]],
       description: [null, [Validators.required]],
       image: [null, [Validators.required]],
     });
@@ -54,30 +93,14 @@ export class ArticleManagementFormComponent implements OnInit {
     })
   }
 
-  create(article: any) {
-    this.articleService.create(article)
-      .subscribe(
-        () => {
-          this.notification.success(Message.NOTIFICATION, Message.CREATE_SUCCESS)
-          this._route.navigate(['/article/list'])
-        },
-        (e) => {
-          console.log("error: ", e)
-          this.notification.error(Message.NOTIFICATION, Message.CREATE_FAIL);
-        }
-      )
-  }
-
-
   btnSave() {
-    this.validateForm.controls['image'].setValue(this.avatarUrl);
     if (this.validateForm.valid) {
-      if (this.r.url.includes('/sponsor/form')) {
-        this.create(this.validateForm.value);
+      if (this.id) {
+        this.updateArticle(this.validateForm.value)
+      } else {
+        this.createArticle(this.validateForm.value);
       }
-
     } else {
-      console.log('errr')
       Object.values(this.validateForm.controls).forEach(control => {
         if (control.invalid) {
           control.markAsDirty();
@@ -85,6 +108,37 @@ export class ArticleManagementFormComponent implements OnInit {
         }
       });
     }
+
+  }
+
+  updateArticle(article: any) {
+    this.articleService.updateArticle(article)
+      .subscribe(
+        res => {
+          if (res.status === true) {
+            this.notificationService.success(Message.NOTIFICATION, Message.UPDATE_SUCCESS)
+            this.router.navigate(['/article/list']).then((r) => console.log(r))
+          } else {
+            this.notificationService.error(Message.NOTIFICATION, Message.UPDATE_FAIL)
+          }
+        },
+        () => this.notificationService.error(Message.NOTIFICATION, Message.UPDATE_FAIL)
+      )
+  }
+
+  createArticle(article: any) {
+    this.articleService.create(article)
+      .subscribe(
+        res => {
+          if (res.status === true) {
+            this.notificationService.success(Message.NOTIFICATION, Message.CREATE_SUCCESS)
+            this.router.navigate(['/article/list']).then((r) => console.log(r))
+          } else {
+            this.notificationService.error(Message.NOTIFICATION, Message.CREATE_FAIL)
+          }
+        },
+        () => this.notificationService.error(Message.NOTIFICATION, Message.CREATE_FAIL)
+      )
   }
 
   btnReset() {

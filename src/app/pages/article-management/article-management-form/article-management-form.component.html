@@ -1,11 +1,18 @@
-<a class="mb-2" nz-button [nzType]="'primary'" [routerLink]="'/article/list'"><span>Quay lại trang danh sách</span></a>
+<a class="mb-2" nz-button [nzType]="'primary'" [routerLink]="returnUrl">
+  <span>{{returnTitle}}</span></a>
 <nz-card>
-  <h6>Tạo mới bài viết</h6>
+  <h6>{{pageTitle}}</h6>
   <form nz-form [formGroup]="validateForm">
     <nz-form-item>
-      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">Title</nz-form-label>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="campaignId">Campaign Id</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24">
+        <input nz-input [(ngModel)]="campaignId" [disabled]="true" formControlName="campaignId" id="campaignId"/>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="title">Title</nz-form-label>
       <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid name!">
-        <input nz-input formControlName="name" id="name"/>
+        <input nz-input formControlName="title" id="title"/>
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
@@ -22,13 +29,14 @@
     <nz-form-item>
       <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="image" nzRequired>Image</nz-form-label>
       <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your image!">
+        <input nz-input formControlName="image" id="image" hidden/>
         <nz-upload
           class="avatar-uploader"
           nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76"
           nzName="avatar"
           nzListType="picture-card"
           [nzShowUploadList]="false"
-          (nzChange)="handleChange($event)"
+          (nzChange)="uploadImage($event)"
         >
           <ng-container *ngIf="!avatarUrl">
             <span class="upload-icon" nz-icon [nzType]="loading ? 'loading' : 'plus'"></span>
@@ -36,6 +44,12 @@
           </ng-container>
           <img *ngIf="avatarUrl" [src]="avatarUrl" style="width: 100%" alt=""/>
         </nz-upload>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="detail" nzRequired>Detail</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your detail!">
+        <ckeditor formControlName="detail"></ckeditor>
       </nz-form-control>
     </nz-form-item>
     <nz-form-item class="__btn_save">

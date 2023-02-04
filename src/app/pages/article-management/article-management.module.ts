@@ -23,36 +23,42 @@ import {CKEditorModule} from "ckeditor4-angular";
 import {NzNotificationService} from "ng-zorro-antd/notification";
 import {NzDropDownModule} from "ng-zorro-antd/dropdown";
 import {ArticleManagementFormComponent} from "./article-management-form/article-management-form.component";
+import {ArticleManagementDetailComponent} from "./article-management-detail/article-management-detail.component";
+import {NzDescriptionsModule} from "ng-zorro-antd/descriptions";
+import {NzTagModule} from "ng-zorro-antd/tag";
 
 
 @NgModule({
   declarations: [
     ArticleManagementPageComponent,
-    ArticleManagementFormComponent
+    ArticleManagementFormComponent,
+    ArticleManagementDetailComponent
     // CampaignManagementFormComponent
   ],
-    imports: [
-        CommonModule,
-        ArticleManagementRoutingModule,
-        ReactiveFormsModule,
-        NzGridModule,
-        NzButtonModule,
-        NzInputModule,
-        NzDatePickerModule,
-        NzSelectModule,
-        NzTableModule,
-        NzSwitchModule,
-        NzPaginationModule,
-        FormsModule,
-        NzIconModule,
-        NzImageModule,
-        NzFormModule,
-        NzDividerModule,
-        NzCardModule,
-        NzUploadModule,
-        CKEditorModule,
-        NzDropDownModule,
-    ],
+  imports: [
+    CommonModule,
+    ArticleManagementRoutingModule,
+    ReactiveFormsModule,
+    NzGridModule,
+    NzButtonModule,
+    NzInputModule,
+    NzDatePickerModule,
+    NzSelectModule,
+    NzTableModule,
+    NzSwitchModule,
+    NzPaginationModule,
+    FormsModule,
+    NzIconModule,
+    NzImageModule,
+    NzFormModule,
+    NzDividerModule,
+    NzCardModule,
+    NzUploadModule,
+    CKEditorModule,
+    NzDropDownModule,
+    NzDescriptionsModule,
+    NzTagModule,
+  ],
   providers: [NzNotificationService]
 })
 export class ArticleManagementModule {

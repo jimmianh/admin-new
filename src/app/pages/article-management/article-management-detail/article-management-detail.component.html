@@ -1,0 +1,26 @@
+<div>
+  <a style="float: right" class="mb-2" nz-button [nzType]="'primary'"
+     [routerLink]="'/article/list'"><span>Quay lại trang danh sách</span></a>
+</div>
+<nz-descriptions nzTitle="Thông tin chi tiết bài đăng" nzBordered>
+  <nz-descriptions-item nzTitle="Id" [nzSpan]="3">{{article && article.id}}</nz-descriptions-item>
+  <nz-descriptions-item nzTitle="Campaign Id" [nzSpan]="3">{{article && article.campaignId}}</nz-descriptions-item>
+  <nz-descriptions-item nzTitle="Like" [nzSpan]="3">{{article && article.numberOfLike}}</nz-descriptions-item>
+  <nz-descriptions-item nzTitle="Title" [nzSpan]="3">{{article && article.title}}</nz-descriptions-item>
+  <nz-descriptions-item nzTitle="Description" [nzSpan]="3">{{article && article.description}}</nz-descriptions-item>
+  <nz-descriptions-item nzTitle="Image" [nzSpan]="3">
+    <img style="text-align: center" alt="img" height="300px" src="{{article && article.image}}">
+  </nz-descriptions-item>
+  <nz-descriptions-item nzTitle="Created at" [nzSpan]="3">{{article && article.createdAt}}</nz-descriptions-item>
+  <nz-descriptions-item nzTitle="Updated at" [nzSpan]="3">{{article && article.updatedAt}}</nz-descriptions-item>
+  <nz-descriptions-item nzTitle="Status" [nzSpan]="3">
+    <nz-tag [nzColor]="colorStatus">{{stringStatus}}</nz-tag>
+  </nz-descriptions-item>
+
+</nz-descriptions>
+<br>
+<hr>
+<p style="font-weight: 600; font-size: 18px">Detail</p>
+<div [innerHTML]="article && article.detail"></div>
+<br>
+<hr>

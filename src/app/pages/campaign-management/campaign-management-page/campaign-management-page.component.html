@@ -100,6 +100,10 @@
               <span nz-icon nzType="eye"  nzTheme="fill" style="color: #009624;"></span>
               <span style="margin-left: 5px">Xem chi tiết</span>
             </li>
+            <li nz-menu-item [routerLink]="'/article/create/' + data.id" style="cursor: pointer">
+              <span nz-icon nzType="file-text"  nzTheme="fill" style="color: #FFFF66;"></span>
+              <span style="margin-left: 5px">Tạo mới bài viết</span>
+            </li>
             <li nz-menu-item [routerLink]="'/campaign/transaction/' + data.id" style="cursor: pointer">
               <span nz-icon nzType="transaction" nzTheme="outline" style="color: #b001af;"></span>
               <span style="margin-left: 5px" >Danh sách quyên góp</span>
