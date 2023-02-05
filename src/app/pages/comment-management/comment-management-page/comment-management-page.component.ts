@@ -6,6 +6,7 @@ import * as moment from "moment/moment";
 import {NzNotificationService} from "ng-zorro-antd/notification";
 import {Message} from "../../../util/StringUtil";
 import {CommentManagementDetailComponent} from "../comment-management-detail/comment-management-detail.component";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-comment-management-page',
@@ -21,11 +22,14 @@ export class CommentManagementPageComponent implements OnInit {
   limit = 6;
   pageSize!: number;
   isVisible = false;
+  articleId: any
+
   @ViewChild('myModal') modal!: CommentManagementDetailComponent;
 
   constructor(private fb: UntypedFormBuilder,
               private commentService: CommentService,
               private notificationService: NzNotificationService,
+              private route: ActivatedRoute
   ) {
   }
 
@@ -34,8 +38,14 @@ export class CommentManagementPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getListComment();
     this.createFormSearch();
+    this.articleId = this.route.snapshot.queryParamMap.get('article_id');
+    if (this.articleId){
+      this.formSearch.value.articleId = this.articleId;
+      this.search();
+    }else {
+      this.getListComment();
+    }
   }
 
   search() {

@@ -59,6 +59,7 @@
               nz-input
               placeholder="campaign's id"
               [formControlName]="'campaignId'"
+              [(ngModel)]="campaignId"
             />
           </nz-form-control>
         </nz-form-item>
@@ -128,6 +129,10 @@
               <li nz-menu-item [routerLink]="'/article/detail/' + data.id" style="cursor: pointer">
                 <span nz-icon nzType="eye"  nzTheme="fill" style="color: #009624;"></span>
                 <span style="margin-left: 5px">Xem chi tiết</span>
+              </li>
+              <li nz-menu-item [routerLink]="'/comment/list'" [queryParams]="{ article_id: data.id }" style="cursor: pointer">
+                <span nz-icon nzType="snippets"  nzTheme="fill" style="color: #f5511b;"></span>
+                <span style="margin-left: 5px">Danh sách bình luận</span>
               </li>
             </ul>
           </nz-dropdown-menu>
