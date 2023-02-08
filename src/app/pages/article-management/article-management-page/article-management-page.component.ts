@@ -6,6 +6,7 @@ import * as moment from "moment/moment";
 import {NzNotificationService} from "ng-zorro-antd/notification";
 import {Message} from "../../../util/StringUtil";
 import {SystemUtil} from "../../../util/SystemUtil";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-article-management-page',
@@ -19,16 +20,24 @@ export class ArticleManagementPageComponent implements OnInit {
   totalElements!: number;
   limit = 6;
   pageSize!: number;
+  campaignId: any
 
   constructor(private fb: UntypedFormBuilder,
               private articleService: ArticleService,
-              private notificationService: NzNotificationService
+              private notificationService: NzNotificationService,
+              private route: ActivatedRoute
   ) {
   }
 
   ngOnInit(): void {
-    this.getListArticle();
     this.createFormSearch();
+    this.campaignId = this.route.snapshot.queryParamMap.get('campaign_id');
+    if (this.campaignId){
+      this.formSearch.value.campaignId = this.campaignId;
+      this.search();
+    }else {
+      this.getListArticle();
+    }
   }
 
   search() {

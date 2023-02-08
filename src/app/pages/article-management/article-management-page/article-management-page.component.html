@@ -1,5 +1,4 @@
 <nz-card>
-  <a class="mb-2" nz-button [nzType]="'primary'" href="sponsor/form"><span>Tạo mới</span></a>
   <form nz-form [formGroup]="formSearch" class="ant-advanced-search-form">
     <div nz-row [nzGutter]="24">
       <div nz-col [nzSpan]="8">
@@ -60,6 +59,7 @@
               nz-input
               placeholder="campaign's id"
               [formControlName]="'campaignId'"
+              [(ngModel)]="campaignId"
             />
           </nz-form-control>
         </nz-form-item>
@@ -94,7 +94,7 @@
         <th>Stt</th>
         <th>Image</th>
         <th>Title</th>
-        <th>Campaign</th>
+        <th>Campaign Id</th>
         <th>Status</th>
         <th>Like</th>
         <th style="text-align: center">Created At</th>
@@ -109,24 +109,31 @@
           width="150px"
           nzSrc="{{ data.image }}"
           alt="sponsor" src="{{data.image}}"/></td>
-        <td>{{ data.title }}</td>
-        <td>{{ data.campaignTitle }}</td>
+        <td style="text-align: left">{{ data.title }}</td>
+        <td style="text-align: center" [routerLink]="'/campaign/detail/' + data.campaignId">
+          <a>{{ data.campaignId }}</a>
+        </td>
         <td>
           <nz-switch [(ngModel)]="data.status" (ngModelChange)="onChange($event, data.id)"></nz-switch>
         </td>
-        <td>{{ data.numberOfLike }}</td>
-        <td>{{ handlerDateTime(data.createdAt) }}</td>
+        <td style="text-align: center">{{ data.numberOfLike }}</td>
+        <td style="text-align: center">{{ data.createdAt }}</td>
         <td style="text-align: center">
-          <a nz-dropdown [nzDropdownMenu]="menu"
-             nz-icon nzType="down" nzTheme="outline">
-          </a>
+          <a nz-dropdown [nzDropdownMenu]="menu" nz-icon nzType="menu-fold" nzTheme="outline"></a>
           <nz-dropdown-menu #menu="nzDropdownMenu">
             <ul nz-menu nzSelectable>
-              <li nz-menu-item><a nz-icon nzType="edit" href="article/edit/{{data.id}}" nzTheme="fill"
-                                  style="color: #2c2ce0; cursor: pointer"></a></li>
-              <li nz-menu-item><a nz-icon nzType="eye" href="article/detail/{{data.id}}" nzTheme="fill"
-                                  style="color: #009624; cursor: pointer"></a></li>
-
+              <li nz-menu-item [routerLink]="'/article/edit/' + data.id" style="cursor: pointer">
+                <span nz-icon nzType="edit" nzTheme="fill" style="color: #2c2ce0;"></span>
+                <span style="margin-left: 5px;">Chỉnh sửa</span>
+              </li>
+              <li nz-menu-item [routerLink]="'/article/detail/' + data.id" style="cursor: pointer">
+                <span nz-icon nzType="eye"  nzTheme="fill" style="color: #009624;"></span>
+                <span style="margin-left: 5px">Xem chi tiết</span>
+              </li>
+              <li nz-menu-item [routerLink]="'/comment/list'" [queryParams]="{ article_id: data.id }" style="cursor: pointer">
+                <span nz-icon nzType="snippets"  nzTheme="fill" style="color: #f5511b;"></span>
+                <span style="margin-left: 5px">Danh sách bình luận</span>
+              </li>
             </ul>
           </nz-dropdown-menu>
         </td>

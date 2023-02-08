@@ -22,6 +22,7 @@ import {CKEditorModule} from "ckeditor4-angular";
 import {NzNotificationService} from "ng-zorro-antd/notification";
 import { SponsorViewDetailComponent } from './sponsor-view-detail/sponsor-view-detail.component';
 import {NzDropDownModule} from "ng-zorro-antd/dropdown";
+import {NzDescriptionsModule} from "ng-zorro-antd/descriptions";
 
 
 @NgModule({
@@ -30,27 +31,28 @@ import {NzDropDownModule} from "ng-zorro-antd/dropdown";
     SponsorManagementFormComponent,
     SponsorViewDetailComponent
   ],
-  imports: [
-    CommonModule,
-    SponsorManagementRoutingModule,
-    NzGridModule,
-    ReactiveFormsModule,
-    NzSelectModule,
-    NzButtonModule,
-    NzTableModule,
-    NzPaginationModule,
-    NzInputModule,
-    NzImageModule,
-    FormsModule,
-    NzSwitchModule,
-    NzDividerModule,
-    NzIconModule,
-    NzCardModule,
-    NzFormModule,
-    NzUploadModule,
-    CKEditorModule,
-    NzDropDownModule,
-  ],
+    imports: [
+        CommonModule,
+        SponsorManagementRoutingModule,
+        NzGridModule,
+        ReactiveFormsModule,
+        NzSelectModule,
+        NzButtonModule,
+        NzTableModule,
+        NzPaginationModule,
+        NzInputModule,
+        NzImageModule,
+        FormsModule,
+        NzSwitchModule,
+        NzDividerModule,
+        NzIconModule,
+        NzCardModule,
+        NzFormModule,
+        NzUploadModule,
+        CKEditorModule,
+        NzDropDownModule,
+        NzDescriptionsModule,
+    ],
   providers: [{provide: NzNotificationService}]
 })
 export class SponsorManagementModule {

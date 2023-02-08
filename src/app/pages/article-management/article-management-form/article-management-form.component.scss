@@ -1,0 +1,22 @@
+:host ::ng-deep .avatar-uploader > .ant-upload {
+  width: 128px;
+  height: 128px;
+}
+
+.__btn_save{
+  box-sizing: border-box;
+  justify-content: center;
+}
+
+.__btn_save button{
+  margin-right: 10px;
+}
+
+nz-date-picker,
+nz-range-picker {
+  margin: 0 8px 12px 0;
+}
+
+.input_w_30{
+  width: 30%;
+}
