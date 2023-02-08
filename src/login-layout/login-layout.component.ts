@@ -28,7 +28,7 @@ export class LoginLayoutComponent implements OnInit {
       .subscribe((res) => {
           if (res.accessToken) {
             localStorage.setItem('access_token', res.accessToken)
-            this.router.navigate(['/dashboard']);
+            this.router.navigate(['/dashboard/generality']);
             // window.location.reload()
           } else {
             this.nzNotificationService.error("Error", "Vui lòng kiểm tra lại thông tin đăng nhập")

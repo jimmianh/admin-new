@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuardService as AuthGuard } from './auth/auth-guard.service';
-import {DashboardComponent} from "./pages/dashboard/dashboard.component";
 import {AdminLayoutComponent} from "./layout/admin-layout/admin-layout.component";
 import {LoginLayoutComponent} from "../login-layout/login-layout.component";
 const routes: Routes = [
@@ -14,12 +13,14 @@ const routes: Routes = [
       path: 'campaign',
       canActivate: [AuthGuard],
       loadChildren: () =>
-        import('./pages/campaign-management/campaign-management.module').then((m) => m.CampaignManagementModule)
+        import('./pages/campaign-management/campaign-management.module')
+          .then((m) => m.CampaignManagementModule)
     },
     {
       path: 'dashboard',
       canActivate: [AuthGuard],
-      component: DashboardComponent
+      loadChildren: () =>
+        import("./pages/dashboard/dashboard.module").then(m => m.DashboardModule)
     },
     {
       path: 'article',

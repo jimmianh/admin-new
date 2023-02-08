@@ -1,0 +1,47 @@
+<nz-row [nzGutter]="16">
+  <nz-col [nzSpan]="6">
+    <nz-card style="background-color: #17a2b8!important; position: relative" class="border-radius-10 p-b-20">
+      <h6 class="title-generality">Số người dùng hoạt động</h6>
+      <h3 class="value-generality">{{generalityDto && generalityDto.totalUser}}</h3>
+      <a [routerLink]="'/user/list'" class="detail-btn">Xem chi tiết</a>
+    </nz-card>
+  </nz-col>
+  <nz-col [nzSpan]="6">
+    <nz-card style="background-color: #28a745!important; position: relative" class="border-radius-10 p-b-20">
+      <h6 class="title-generality">Số chiến dịch</h6>
+      <h3 class="value-generality">{{generalityDto && generalityDto.totalCampaign}}</h3>
+      <a routerLink="/campaign/list" class="detail-btn">Xem chi tiết</a>
+    </nz-card>
+  </nz-col>
+  <nz-col [nzSpan]="6">
+    <nz-card style="background-color: #ffc107!important; position: relative" class="border-radius-10 p-b-20">
+      <h6 class="title-generality">Số tiền quyên góp($)</h6>
+      <h3 class="value-generality">{{generalityDto && generalityDto.totalAmount}}</h3>
+      <a routerLink="/transaction/list" class="detail-btn">Xem chi tiết</a>
+    </nz-card>
+  </nz-col>
+  <nz-col [nzSpan]="6">
+    <nz-card style="background-color: #dc3545!important; position: relative" class="border-radius-10 p-b-20">
+      <h6 class="title-generality">Số nhà tài trợ</h6>
+      <h3 class="value-generality">{{generalityDto && generalityDto.totalSponsor}}</h3>
+      <a [routerLink]="'/sponsor/list'" class="detail-btn">Xem chi tiết</a>
+    </nz-card>
+  </nz-col>
+</nz-row>
+<hr>
+
+<div style="background: #f5f5f5;padding:30px; margin-top: 30px">
+  <nz-card style="width:100%;" [nzTitle]="'Số tiền quyên góp theo tháng'">
+    <div id="chart">
+      <apx-chart
+        [series]="chartOptions && chartOptions.series"
+        [chart]="chartOptions && chartOptions.chart"
+        [xaxis]="chartOptions && chartOptions.xaxis"
+        [dataLabels]="chartOptions && chartOptions.dataLabels"
+        [grid]="chartOptions && chartOptions.grid"
+        [stroke]="chartOptions && chartOptions.stroke"
+      ></apx-chart>
+    </div>
+  </nz-card>
+</div>
+

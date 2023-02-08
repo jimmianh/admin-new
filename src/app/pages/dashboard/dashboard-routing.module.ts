@@ -1,14 +1,22 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {DashboardComponent} from "./dashboard.component";
+import {GeneralityComponent} from "./generality/generality.component";
 
 const routes: Routes = [
   {
     path: '',
-    component: DashboardComponent,
     data: {
-      title: `Dashboard`
-    }
+      title: `Thống kê`
+    },
+    children: [
+      {
+        path: 'generality',
+        component: GeneralityComponent,
+        data: {
+          title: 'Tổng quan'
+        }
+      }
+    ]
   }
 ];
 

@@ -5,6 +5,12 @@ export const navItems: NavData[] = [
     name: 'Thống kê',
     url: '/dashboard',
     icon: { name: 'pie-chart' },
+    children: [
+      {
+        name: 'Tổng quan',
+        url: '/dashboard/generality',
+      },
+    ],
   },
   {
     name: 'Quản lý chiến dịch',
