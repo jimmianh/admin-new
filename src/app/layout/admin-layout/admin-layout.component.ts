@@ -29,6 +29,10 @@ export class AdminLayoutComponent implements OnInit {
     this.href = this.location.path()
   }
 
+  notify(): void {
+    console.log('notify');
+  }
+
   onClick(url: any) {
     let navUrls = document.getElementsByClassName('nav-url');
     // @ts-ignore
