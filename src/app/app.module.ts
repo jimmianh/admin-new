@@ -26,6 +26,7 @@ import {NzInputModule} from "ng-zorro-antd/input";
 import {NzCheckboxModule} from "ng-zorro-antd/checkbox";
 import {NzButtonModule} from "ng-zorro-antd/button";
 import {NzNotificationService} from "ng-zorro-antd/notification";
+import {NzBackTopModule} from "ng-zorro-antd/back-top";
 
 registerLocaleData(en);
 
@@ -62,6 +63,7 @@ export function tokenGetter() {
     NzInputModule,
     NzCheckboxModule,
     NzButtonModule,
+    NzBackTopModule,
   ],
   providers: [
     AuthGuardService,
