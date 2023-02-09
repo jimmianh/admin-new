@@ -1,14 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import {UntypedFormBuilder, UntypedFormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
-import {SponsorService} from "../../sponsor-management/service/SponsorService";
 import {FileService} from "../../../service/FileService";
 import {NzNotificationService} from "ng-zorro-antd/notification";
 import {NzUploadFile} from "ng-zorro-antd/upload";
 import {Message} from "../../../util/StringUtil";
 import {ArticleService} from "../service/article.service";
 import {ArticleModel} from "../model/ArticleModel";
-import {CampaignModel} from "../../campaign-management/model/CampaignModel";
+import {CampaignService} from "../../campaign-management/service/campaign.service";
 
 @Component({
   selector: 'app-article-management-form',
@@ -27,10 +26,12 @@ export class ArticleManagementFormComponent implements OnInit {
   pageTitle: string = "Tạo mới bài viết";
   returnTitle: string = "Quay lại trang danh sách chiến dịch";
   returnUrl: string = "/campaign/list";
+  nameCampaign!: undefined | string;
 
   constructor(private router: Router,
               private activatedRoute: ActivatedRoute,
               private articleService: ArticleService,
+              private campaignService: CampaignService,
               private r: Router,
               private fileService: FileService,
               private notificationService: NzNotificationService,
@@ -40,6 +41,9 @@ export class ArticleManagementFormComponent implements OnInit {
   ngOnInit(): void {
     this.id = this.activatedRoute.snapshot.paramMap.get('id');
     this.campaignId = this.activatedRoute.snapshot.paramMap.get('campaignId');
+    if (this.campaignId){
+      this.getDetailCampaign(this.campaignId)
+    }
     if (this.id) {
       this.pageTitle = "Chỉnh sửa bài viết"
       this.returnTitle = "Quay lại trang danh sách bài viết"
@@ -56,11 +60,15 @@ export class ArticleManagementFormComponent implements OnInit {
     })
   }
 
+  getDetailCampaign(id: any){
+    this.campaignService.getDetail(id).subscribe(res => res && (this.nameCampaign = res.title))
+  }
   getDetail(id: any) {
     this.articleService.getDetail(id)
       .subscribe(res => {
         res && this.updateFormDetail(res.data);
         res && (this.article = res.data);
+        res && (this.nameCampaign = res.data.campaignTitle)
       });
   }
 

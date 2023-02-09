@@ -6,7 +6,8 @@
     <nz-form-item>
       <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="campaignId">Campaign Id</nz-form-label>
       <nz-form-control [nzSm]="14" [nzXs]="24">
-        <input nz-input [(ngModel)]="campaignId" [disabled]="true" formControlName="campaignId" id="campaignId"/>
+        <input nz-input [(ngModel)]="campaignId" [hidden]="true" formControlName="campaignId" id="campaignId"/>
+        <input nz-input value="{{nameCampaign}}" disabled style="color: #000; font-weight: 500"/>
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
@@ -20,7 +21,6 @@
       <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your description!">
         <input
           nz-input
-          type="description"
           id="description"
           formControlName="description"
         />
