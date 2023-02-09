@@ -1,4 +1,4 @@
-import {AmountByMonth} from "../pages/dashboard/model/Dashboard";
+import {AmountByMonth, AmountCategories} from "../pages/dashboard/model/Dashboard";
 
 export class SystemUtil {
 
@@ -48,18 +48,29 @@ export class SystemUtil {
     let amountArr = [];
     for (let i = 1; i <= now.getMonth() + 1; i++) {
       monthArr.push(`T${i}`);
-      if (amountByMonth.length > 0){
-        for (let j = 0; j < amountByMonth.length; j++) {
-          if (amountByMonth[j].month === i) {
-            map.set(i, amountByMonth[j].amount)
-            amountArr.push(amountByMonth[j].amount)
-            break;
-          }
-          map.set(i, 0);
+      for (let j = 0; j < amountByMonth.length; j++) {
+        if (amountByMonth[j].month === i) {
+          map.set(i, amountByMonth[j].amount)
+          amountArr.push(amountByMonth[j].amount)
+          break;
         }
+        map.set(i, 0);
       }
     }
     map.set("month", monthArr)
+    map.set("amount", amountArr)
+    return map;
+  }
+
+  static handlerResponseAmountByCategory(amountByCate : Array<AmountCategories>){
+    let map = new Map();
+    let cateArr = [];
+    let amountArr = [];
+    for (let i = 0; i < amountByCate.length; i++) {
+      cateArr.push(`${amountByCate[i].name}`);
+      amountArr.push(amountByCate[i].amount);
+    }
+    map.set("name", cateArr)
     map.set("amount", amountArr)
     return map;
   }

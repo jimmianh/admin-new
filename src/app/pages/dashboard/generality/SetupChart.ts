@@ -2,7 +2,7 @@ import {
   ApexAxisChartSeries,
   ApexChart,
   ApexDataLabels,
-  ApexGrid,
+  ApexGrid, ApexNonAxisChartSeries,
   ApexStroke,
   ApexTitleSubtitle,
   ApexXAxis

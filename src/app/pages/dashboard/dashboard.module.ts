@@ -7,9 +7,11 @@ import {NzGridModule} from "ng-zorro-antd/grid";
 import {NzCardModule} from "ng-zorro-antd/card";
 import {NzStatisticModule} from "ng-zorro-antd/statistic";
 import {NgApexchartsModule} from "ng-apexcharts";
+import {PiechartComponent} from "./component/piechart/piechart.component";
+import { LinechartComponent } from './component/linechart/linechart.component';
 
 @NgModule({
-  declarations: [GeneralityComponent],
+  declarations: [GeneralityComponent, PiechartComponent, LinechartComponent],
   imports: [
     CommonModule,
     DashboardRoutingModule,

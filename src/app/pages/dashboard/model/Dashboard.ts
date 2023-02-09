@@ -4,9 +4,15 @@ export interface GeneralityDto {
   totalCampaign: number;
   totalSponsor: number;
    amountByMonth: AmountByMonth[];
+  amountCategories: AmountCategories[];
 }
 
 export interface AmountByMonth{
   month: number;
+  amount: number;
+}
+
+export interface AmountCategories{
+  name: string;
   amount: number;
 }
