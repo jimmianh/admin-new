@@ -15,7 +15,7 @@ import {UserService} from "../service/UserService";
 })
 export class UserManagementFormComponent implements OnInit {
 
-  id!: number;
+  id!: string;
   validateForm!: UntypedFormGroup;
   loading = false;
   avatarUrl?: string;
@@ -33,12 +33,11 @@ export class UserManagementFormComponent implements OnInit {
     this.createForm();
     let a = this.router.snapshot.paramMap.get('id');
     if (a) {
-      this.id = parseInt(a)
       this.getDetail(this.id)
     }
   }
 
-  getDetail(id: number) {
+  getDetail(id: string) {
     this.userService.getDetail(id).subscribe(res => {
       this.validateForm.get('username')!.setValue(res.username)
       this.validateForm.get('role')!.setValue(res.role)
