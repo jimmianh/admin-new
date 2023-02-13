@@ -68,10 +68,10 @@ export class CampaignManagementPageComponent implements OnInit {
           if (res.status) {
             this.notificationService.success(Message.NOTIFICATION, Message.UPDATE_SUCCESS)
           } else {
-            this.notificationService.success(Message.NOTIFICATION, Message.UPDATE_FAIL)
+            this.notificationService.error(Message.NOTIFICATION, Message.UPDATE_FAIL)
           }
         },
-        () => this.notificationService.success(Message.NOTIFICATION, Message.UPDATE_FAIL)
+        () => this.notificationService.error(Message.NOTIFICATION, Message.UPDATE_FAIL)
       )
   }
 
