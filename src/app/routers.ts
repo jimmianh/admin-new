@@ -89,17 +89,17 @@ export const navItems: NavData[] = [
       },
     ],
   },
-  {
-    name: 'Quản lý FAQ',
-    url: '/faq',
-    icon: { name: 'question' },
-    children: [
-      {
-        name: 'Danh sách',
-        url: '/faq/list',
-      },
-    ],
-  },
+  // {
+  //   name: 'Quản lý FAQ',
+  //   url: '/faq',
+  //   icon: { name: 'question' },
+  //   children: [
+  //     {
+  //       name: 'Danh sách',
+  //       url: '/faq/list',
+  //     },
+  //   ],
+  // },
   {
     name: 'Quản lý kênh thanh toán',
     url: '/payment-channel',

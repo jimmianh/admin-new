@@ -123,7 +123,7 @@
         <th style="text-align: center">Content</th>
         <th style="text-align: center">Article Id</th>
         <th style="text-align: center">Status</th>
-        <th style="text-align: center">Like</th>
+<!--        <th style="text-align: center">Like</th>-->
         <th style="text-align: center">Created At</th>
         <th style="text-align: center" width="8%">Action</th>
       </tr>
@@ -137,8 +137,8 @@
         <td style="text-align: center">
           <nz-switch [(ngModel)]="data.status" (ngModelChange)="onChange($event, data.id)"></nz-switch>
         </td>
-        <td style="text-align: center">{{ data.numberOfLike }}</td>
-        <td style="text-align: center">{{ data.createdAt }}</td>
+<!--        <td style="text-align: center">{{ data.numberOfLike }}</td>-->
+        <td style="text-align: center">{{ handlerCreatedDate(data.createdAt) }}</td>
         <td style="text-align: center">
 <!--          <nz-divider nzType="vertical"></nz-divider>-->
           <a nz-icon nzType="eye" (click)="showModal(data)" nzTheme="fill"

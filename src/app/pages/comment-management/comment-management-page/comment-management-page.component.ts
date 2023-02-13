@@ -7,6 +7,7 @@ import {NzNotificationService} from "ng-zorro-antd/notification";
 import {Message} from "../../../util/StringUtil";
 import {CommentManagementDetailComponent} from "../comment-management-detail/comment-management-detail.component";
 import {ActivatedRoute} from "@angular/router";
+import {SystemUtil} from "../../../util/SystemUtil";
 
 @Component({
   selector: 'app-comment-management-page',
@@ -143,5 +144,9 @@ export class CommentManagementPageComponent implements OnInit {
   getListComment() {
     this.commentService.getPageComment(this.offset, this.limit)
       .subscribe(res => this.handlerResponseListComment(res));
+  }
+
+  handlerCreatedDate(d: string){
+    return SystemUtil.handlerDateTime(d);
   }
 }
