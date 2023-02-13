@@ -5,6 +5,9 @@ import {UntypedFormBuilder, UntypedFormGroup, Validators} from "@angular/forms";
 import * as moment from 'moment'
 import {offset} from "@popperjs/core";
 import {SystemUtil} from "../../../util/SystemUtil";
+import {take} from "rxjs";
+import {PaymentChannelService} from "../../payment-channel-management/service/payment-channel.service";
+import {PaymentChannel} from "../../payment-channel-management/model/PaymentChannel";
 
 @Component({
   selector: 'app-transaction-management-page',
@@ -13,7 +16,10 @@ import {SystemUtil} from "../../../util/SystemUtil";
 })
 export class TransactionManagementPageComponent implements OnInit {
 
-  constructor(private transactionService: TransactionService, private fb: UntypedFormBuilder) {
+  constructor(private transactionService: TransactionService,
+              private fb: UntypedFormBuilder,
+              private paymentChannelService : PaymentChannelService
+  ) {
   }
 
   listOfSelection = [
@@ -48,13 +54,22 @@ export class TransactionManagementPageComponent implements OnInit {
   offset: number = 1;
   limit: number = 6;
   formSearch!: UntypedFormGroup;
+  listPaymentChannel: PaymentChannel[] = [];
+  paymentChannel!: number;
 
   ngOnInit(): void {
+    this.getListPaymentChannel();
     this.getListTransaction();
-    // this.transactionService.RefreshData.subscribe(() => {
-    //   this.getListTransaction();
-    // })
     this.createFormSearch();
+  }
+
+  getListPaymentChannel(): void {
+    this.paymentChannelService
+      .getListPaymentChannel()
+      .pipe(take(1))
+      .subscribe((res) => {
+        this.listPaymentChannel = res;
+      });
   }
 
   updateCheckedSet(id: number, checked: boolean): void {
@@ -149,13 +164,17 @@ export class TransactionManagementPageComponent implements OnInit {
 
   createFormSearch() {
     this.formSearch = this.fb.group({
-      keyword: ["", [Validators.nullValidator]],
+      campaignTitle: ["", [Validators.nullValidator]],
       campaignId: ["", [Validators.nullValidator]],
+      senderName: ["", [Validators.nullValidator]],
+      username: ["", [Validators.nullValidator]],
+      accountId: ["", [Validators.nullValidator]],
+      transactionId: ["", [Validators.nullValidator]],
       paymentStatus: ["", [Validators.nullValidator]],
+      paymentChannelId: ["", [Validators.nullValidator]],
       startAmount: ["", [Validators.nullValidator]],
       endAmount: ["", [Validators.nullValidator]],
       status: ["", [Validators.nullValidator]],
-      accountId: ["", [Validators.nullValidator]],
       startDateSendingTime: ["", [Validators.nullValidator]],
       endDateSendingTime: ["", [Validators.nullValidator]],
       date: ["", [Validators.nullValidator]],
