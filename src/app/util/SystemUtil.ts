@@ -3,7 +3,7 @@ import {AmountByMonth, AmountCategories} from "../pages/dashboard/model/Dashboar
 export class SystemUtil {
 
   static getBaseUrl() {
-    return 'http://localhost:8080';
+    return 'https://herofund.up.railway.app';
   }
 
   static local: 'http://localhost:8080';
