@@ -28,7 +28,7 @@
       <nz-form-item>
         <nz-form-label nz-col [nzSpan]="6" [nzFor]="'status'">Trạng thái</nz-form-label>
         <nz-form-control nz-col [nzSpan]="18">
-          <nz-select formControlName="status">
+          <nz-select ngModel="{{status}}" (ngModelChange)="search()" formControlName="status">
             <nz-option nzLabel="Tất cả" nzValue=""></nz-option>
             <nz-option nzLabel="Hoạt động" nzValue="1"></nz-option>
             <nz-option nzLabel="Khóa" nzValue="0"></nz-option>
@@ -92,7 +92,7 @@
       <nz-form-item>
         <nz-form-label nz-col [nzSpan]="6" [nzFor]="'role'">Chức danh</nz-form-label>
         <nz-form-control nz-col [nzSpan]="18">
-          <nz-select formControlName="role">
+          <nz-select ngModel="{{role}}" (ngModelChange)="search()" formControlName="role">
             <nz-option nzLabel="Tất cả" nzValue=""></nz-option>
             <nz-option nzLabel="Quản trị viên" nzValue="ROLE_ADMIN"></nz-option>
             <nz-option nzLabel="Người dùng" nzValue="ROLE_USER"></nz-option>

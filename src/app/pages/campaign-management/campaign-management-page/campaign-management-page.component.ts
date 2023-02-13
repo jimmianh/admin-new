@@ -7,6 +7,8 @@ import {NzNotificationService} from "ng-zorro-antd/notification";
 import {Message} from "../../../util/StringUtil";
 import {CampaignStatusEnum} from "../../../enum/PaymentStatusEnum";
 import {PaymentStatus, SystemUtil} from "../../../util/SystemUtil";
+import {Categories} from "../../categories-management/model/Categories";
+import {CategoriesService} from "../../categories-management/service/categories.service";
 
 @Component({
   selector: 'app-campaign-management-page',
@@ -21,17 +23,36 @@ export class CampaignManagementPageComponent implements OnInit {
   limit = 6;
   pageSize!: number;
   campaignStatusEnum!: PaymentStatus[];
+  listCategories: Categories[] = [];
+  status!: number;
+  category!: number;
+
 
   constructor(private fb: UntypedFormBuilder,
               private campaignService: CampaignService,
-              private notificationService: NzNotificationService
+              private notificationService: NzNotificationService,
+              private categoriesService : CategoriesService
   ) {
   }
 
   ngOnInit(): void {
+    this.getListCategories();
     this.getListCampaign();
     this.createFormSearch();
     this.campaignStatusEnum = SystemUtil.convertEnumToPaymentStatusList(CampaignStatusEnum)
+  }
+
+  getListCategories(): void {
+    this.categoriesService
+      .getListCategories(this.offset, this.limit, "", "")
+      .subscribe(
+        res => this.handlerDataResponse(res),
+        e => console.log(e)
+      );
+  }
+
+  handlerDataResponse(res: any) {
+    this.listCategories = res?.items
   }
 
   search() {
@@ -90,6 +111,11 @@ export class CampaignManagementPageComponent implements OnInit {
     if (this.formSearch.value.targetAmountStart) return true;
     if (this.formSearch.value.startDateCreateAt) return true;
     if (this.formSearch.value.endDateCreateAt) return true;
+    if (this.formSearch.value.status) return true;
+    if (this.formSearch.value.id) return true;
+    if (this.formSearch.value.accountId) return true;
+    if (this.formSearch.value.username) return true;
+    if (this.formSearch.value.category) return true;
     return false;
   }
 
@@ -108,6 +134,9 @@ export class CampaignManagementPageComponent implements OnInit {
       startDateCreateAt: ["", [Validators.nullValidator]],
       category: ["", [Validators.nullValidator]],
       status: ["", [Validators.nullValidator]],
+      id: ["", [Validators.nullValidator]],
+      accountId: ["", [Validators.nullValidator]],
+      username: ["", [Validators.nullValidator]],
       targetAmountStart: ["", [Validators.nullValidator]],
       targetAmountEnd: ["", [Validators.nullValidator]],
       date: [null, [Validators.nullValidator]],

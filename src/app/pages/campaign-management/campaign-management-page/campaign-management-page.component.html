@@ -3,11 +3,11 @@
   <div nz-row [nzGutter]="24">
     <div nz-col [nzSpan]="8">
       <nz-form-item>
-        <nz-form-label [nzFor]="'keyword'">Keyword</nz-form-label>
-        <nz-form-control>
+        <nz-form-label nz-col [nzSpan]="6" [nzFor]="'keyword'">Tên</nz-form-label>
+        <nz-form-control nz-col [nzSpan]="18">
           <input
             nz-input
-            placeholder="keyword"
+            placeholder="Tên chiến dịch"
             [formControlName]="'keyword'"
           />
         </nz-form-control>
@@ -15,8 +15,8 @@
     </div>
     <div nz-col [nzSpan]="8">
       <nz-form-item>
-        <nz-form-label>Target Amount ($)</nz-form-label>
-        <nz-form-control class="__amount">
+        <nz-form-label nz-col [nzSpan]="6">Mục tiêu ($)</nz-form-label>
+        <nz-form-control nz-col [nzSpan]="18" class="__amount">
           <input
             class="__amount_start"
             nz-input
@@ -34,13 +34,75 @@
     </div>
     <div nz-col [nzSpan]="8">
       <nz-form-item>
-        <nz-form-label>Created Date</nz-form-label>
-        <nz-form-control>
+        <nz-form-label nz-col [nzSpan]="6">Ngày tạo</nz-form-label>
+        <nz-form-control nz-col [nzSpan]="18">
           <nz-range-picker [formControlName]="'date'" (ngModelChange)="onChangeDate($event)"></nz-range-picker>
         </nz-form-control>
       </nz-form-item>
     </div>
   </div>
+  <div nz-row [nzGutter]="24">
+    <div nz-col [nzSpan]="8">
+      <nz-form-item>
+        <nz-form-label nz-col [nzSpan]="6" [nzFor]="'id'">Id</nz-form-label>
+        <nz-form-control nz-col [nzSpan]="18">
+          <input
+            nz-input
+            placeholder="Id chiến dịch"
+            [formControlName]="'id'"
+          />
+        </nz-form-control>
+      </nz-form-item>
+    </div>    <div nz-col [nzSpan]="8">
+      <nz-form-item>
+        <nz-form-label nz-col [nzSpan]="6" [nzFor]="'accountId'">Id tài khoản</nz-form-label>
+        <nz-form-control nz-col [nzSpan]="18">
+          <input
+            nz-input
+            placeholder="Id tài khoản tạo chiến dịch"
+            [formControlName]="'accountId'"
+          />
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+    <div nz-col [nzSpan]="8">
+      <nz-form-item>
+        <nz-form-label nz-col [nzSpan]="6" [nzFor]="'username'">Tài khoản</nz-form-label>
+        <nz-form-control nz-col [nzSpan]="18">
+          <input
+            nz-input
+            placeholder="Tài khoản người tạo chiến dịch"
+            [formControlName]="'username'"
+          />
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+  </div>
+  <div nz-row [nzGutter]="24">
+    <div nz-col [nzSpan]="8">
+      <nz-form-item>
+        <nz-form-label nz-col [nzSpan]="6" [nzFor]="'role'">Trạng thái</nz-form-label>
+        <nz-form-control nz-col [nzSpan]="18">
+          <nz-select ngModel="{{status}}" (ngModelChange)="search()" formControlName="status">
+            <nz-option nzLabel="Tất cả" nzValue=""></nz-option>
+            <nz-option *ngFor="let p of campaignStatusEnum" [nzValue]="p.key" [nzLabel]="p.value"></nz-option>
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+    <div nz-col [nzSpan]="8">
+      <nz-form-item>
+        <nz-form-label nz-col [nzSpan]="6" [nzFor]="'categoryId'">Danh mục</nz-form-label>
+        <nz-form-control nz-col [nzSpan]="18">
+          <nz-select ngModel="{{category}}" (ngModelChange)="search()" formControlName="category">
+            <nz-option nzLabel="Tất cả" nzValue=""></nz-option>
+            <nz-option *ngFor="let p of listCategories" [nzValue]="p.id" [nzLabel]="p.name"></nz-option>
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+  </div>
+
   <div nz-row>
     <div nz-col [nzSpan]="24" class="search-area">
       <button nz-button [nzType]="'primary'" (click)="search()">Search</button>

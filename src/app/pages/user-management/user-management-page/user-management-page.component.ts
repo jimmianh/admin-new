@@ -25,11 +25,11 @@ export class UserManagementPageComponent implements OnInit{
   totalElements: number = 0;
   offset: number = 1;
   limit: number = 6;
-  keyword = "";
-  status: number = -1;
   formSearch!: UntypedFormGroup;
   validateForm!: UntypedFormGroup;
   isVisible = false;
+  status!: number;
+  role!: string;
 
   constructor(private userService: UserService,
               private fb: UntypedFormBuilder,
@@ -39,7 +39,6 @@ export class UserManagementPageComponent implements OnInit{
 
   ngOnInit(): void {
     this.createFormSearch();
-    console.log(this.formSearch)
     this.search();
   }
 
