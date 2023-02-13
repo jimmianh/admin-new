@@ -2,34 +2,114 @@
   <div nz-row [nzGutter]="24">
     <div nz-col [nzSpan]="8">
       <nz-form-item>
-        <nz-form-label class="label__keyword">Keyword</nz-form-label>
-        <nz-form-control>
+        <nz-form-label nz-col [nzSpan]="6" [nzFor]="'username'">Tài khoản</nz-form-label>
+        <nz-form-control nz-col [nzSpan]="18">
           <input
             nz-input
-            placeholder="Vui lòng từ khóa"
-            [formControlName]="'keyword'"
+            placeholder="Tài khoản"
+            [formControlName]="'username'"
           />
         </nz-form-control>
       </nz-form-item>
     </div>
-    <div nz-col [nzSpan]="4">
+    <div nz-col [nzSpan]="8">
       <nz-form-item>
-        <nz-form-label class="label__keyword">Status</nz-form-label>
-        <nz-form-control>
-          <nz-select nzShowSearch nzAllowClear nzPlaceHolder="status" [formControlName]="'status'">
-            <nz-option nzLabel="ENABLE" nzValue="1"></nz-option>
-            <nz-option nzLabel="DISABLE" nzValue="0"></nz-option>
+        <nz-form-label nz-col [nzSpan]="6" [nzFor]="'name'">Họ tên</nz-form-label>
+        <nz-form-control nz-col [nzSpan]="18">
+          <input
+            nz-input
+            placeholder="Họ tên"
+            [formControlName]="'name'"
+          />
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+    <div nz-col [nzSpan]="8">
+      <nz-form-item>
+        <nz-form-label nz-col [nzSpan]="6" [nzFor]="'status'">Trạng thái</nz-form-label>
+        <nz-form-control nz-col [nzSpan]="18">
+          <nz-select formControlName="status">
+            <nz-option nzLabel="Tất cả" nzValue=""></nz-option>
+            <nz-option nzLabel="Hoạt động" nzValue="1"></nz-option>
+            <nz-option nzLabel="Khóa" nzValue="0"></nz-option>
           </nz-select>
         </nz-form-control>
       </nz-form-item>
     </div>
   </div>
+  <div nz-row [nzGutter]="24">
+    <div nz-col [nzSpan]="8">
+      <nz-form-item>
+        <nz-form-label nz-col [nzSpan]="6" [nzFor]="'email'">Email</nz-form-label>
+        <nz-form-control nz-col [nzSpan]="18">
+          <input
+            nz-input
+            placeholder="Email"
+            [formControlName]="'email'"
+          />
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+    <div nz-col [nzSpan]="8">
+      <nz-form-item>
+        <nz-form-label nz-col [nzSpan]="6" [nzFor]="'phone'">Số điện thoại</nz-form-label>
+        <nz-form-control nz-col [nzSpan]="18">
+          <input
+            nz-input
+            placeholder="Số điện thoại"
+            [formControlName]="'phone'"
+          />
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+    <div nz-col [nzSpan]="8">
+      <nz-form-item>
+        <nz-form-label nz-col [nzSpan]="6" [nzFor]="'address'">Địa chỉ</nz-form-label>
+        <nz-form-control nz-col [nzSpan]="18">
+          <input
+            nz-input
+            placeholder="Địa chỉ"
+            [formControlName]="'address'"
+          />
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+  </div>
+  <div nz-row [nzGutter]="24">
+    <div nz-col [nzSpan]="8">
+      <nz-form-item>
+        <nz-form-label nz-col [nzSpan]="6" [nzFor]="'id'">Id</nz-form-label>
+        <nz-form-control nz-col [nzSpan]="18">
+          <input
+            nz-input
+            placeholder="id"
+            [formControlName]="'id'"
+          />
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+    <div nz-col [nzSpan]="8">
+      <nz-form-item>
+        <nz-form-label nz-col [nzSpan]="6" [nzFor]="'role'">Chức danh</nz-form-label>
+        <nz-form-control nz-col [nzSpan]="18">
+          <nz-select formControlName="role">
+            <nz-option nzLabel="Tất cả" nzValue=""></nz-option>
+            <nz-option nzLabel="Quản trị viên" nzValue="ROLE_ADMIN"></nz-option>
+            <nz-option nzLabel="Người dùng" nzValue="ROLE_USER"></nz-option>
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+
+  </div>
+
   <div nz-row>
     <div nz-col [nzSpan]="24" class="search-area">
       <button nz-button [nzType]="'primary'" (click)="search()">Search</button>
-      <button nz-button (click)="resetForm()">Clear</button>
+      <button nz-button (click)="clear()">Clear</button>
     </div>
   </div>
+
 </form>
 <div class="search-result-list">
   <nz-table
@@ -40,21 +120,31 @@
     <thead>
     <tr>
       <th style="text-align: center">Stt</th>
-      <th style="text-align: center">Name</th>
-      <th style="text-align: center">Role</th>
-      <th style="text-align: center">Status</th>
-<!--      <th>Action</th>-->
+      <th style="text-align: center">Tài khoản</th>
+      <th style="text-align: center">Chức danh</th>
+      <th style="text-align: center">Trạng thái</th>
+      <th width="10%" style="text-align: center">Thao tác</th>
+
+      <!--      <th>Action</th>-->
     </tr>
     </thead>
     <tbody>
     <tr *ngFor="let data of listUser; let i = index">
       <td style="text-align: center">{{ i + 1 }}</td>
       <td style="text-align: center">{{ data.username }}</td>
-      <td style="text-align: center">{{ data.role }}</td>
+      <td style="text-align: center">{{ data.role == 'ROLE_ADMIN' ? 'Quản trị viên' : 'Người dùng' }}</td>
       <td style="text-align: center"><nz-switch [(ngModel)]="data.status" (ngModelChange)="onChange($event, data.id)" ></nz-switch></td>
-<!--      <td style="text-align: center">-->
-<!--        <span nz-icon nzType="edit" (click)="getDetail(data.id)" nzTheme="outline" style="color: #2c2ce0; cursor: pointer"></span>-->
-<!--      </td>-->
+      <td style="text-align: center">
+        <a nz-dropdown [nzDropdownMenu]="menu" nz-icon nzType="menu-fold" nzTheme="outline"></a>
+        <nz-dropdown-menu #menu="nzDropdownMenu">
+          <ul nz-menu nzSelectable>
+            <li nz-menu-item [routerLink]="'/user/detail/' + data.id" style="cursor: pointer">
+              <span nz-icon nzType="eye"  nzTheme="fill" style="color: #009624;"></span>
+              <span style="margin-left: 5px">Xem chi tiết</span>
+            </li>
+          </ul>
+        </nz-dropdown-menu>
+      </td>
     </tr>
     </tbody>
   </nz-table>

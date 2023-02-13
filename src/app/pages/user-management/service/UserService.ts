@@ -2,10 +2,10 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {catchError, Subject, tap, throwError} from "rxjs";
 import {SystemUtil} from "../../../util/SystemUtil";
+import {UserModel} from "../model/UserModel";
 
-const token = localStorage.getItem('access_token');
 const headers: HttpHeaders = new HttpHeaders({
-  Authorization: 'Bearer ' + token,
+  Authorization: 'Bearer ' + localStorage.getItem('access_token'),
   'content-type': 'application/json'
 });
 @Injectable({
@@ -24,23 +24,16 @@ export class UserService {
     return this.refreshData;
   }
 
-  getPage(offset: number, limit: number, keyword: string, status: any) {
-    let query = `/api/v1/admin/accounts?offset=${offset}&limit=${limit}`;
-    if (status !== undefined){
-      query += `&status=${status}`
-    }
-    if (keyword !== null){
-      query += `&keyword=${keyword}`
-    }
+  search(filter: any) {
     return this.http
-      .get<any>(SystemUtil.getBaseUrl() + query, {
-        headers,
-      })
+      .post<any>(SystemUtil.getBaseUrl() + `/api/v1/admin/accounts/search`,
+        JSON.stringify(filter),
+        {headers})
       .pipe(
         catchError((error: any) => {
           return throwError(error);
         }),
-        tap(()=>{
+        tap(() => {
           this.RefreshData.next()
         })
       );
@@ -48,7 +41,8 @@ export class UserService {
 
   updateStatus(id: number, status : number) {
     return this.http
-      .put<any>(SystemUtil.getBaseUrl() + `/api/v1/admin/accounts/update/status?id=${id}&status=${status}`,{},
+      .put<any>(SystemUtil.getBaseUrl() +
+        `/api/v1/admin/accounts/update/status?accountId=${id}&status=${status}`,{},
         {headers})
       .pipe(
         catchError((error: any) => {
@@ -61,9 +55,9 @@ export class UserService {
   }
 
 
-  getDetail(id: number){
+  getDetail(id: string | null){
     return this.http
-      .get<any>(SystemUtil.getBaseUrl() + `/api/v1/admin/accounts/detail?id=${id}`,
+      .get<UserModel>(SystemUtil.getBaseUrl() + `/api/v1/admin/accounts/detail?accountId=${id}`,
         {headers})
       .pipe(
         catchError((error: any) => {

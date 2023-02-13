@@ -1,0 +1,42 @@
+<div>
+  <a style="float: right" class="mb-2" nz-button [nzType]="'primary'"
+     [routerLink]="'/user/list'"><span>Danh sách tài khoản</span></a>
+</div>
+<nz-descriptions nzTitle="Thông tin tài khoản" nzBordered>
+  <nz-descriptions-item [nzSpan]="3" nzTitle="Id">{{user.id}}</nz-descriptions-item>
+  <nz-descriptions-item [nzSpan]="3" nzTitle="Tài khoản">{{user.username}}</nz-descriptions-item>
+  <nz-descriptions-item [nzSpan]="3" nzTitle="Role">
+    <nz-tag [nzColor]="roleColor">{{role}}</nz-tag>
+  </nz-descriptions-item>
+  <nz-descriptions-item [nzSpan]="3" nzTitle="Trạng thái">
+    <nz-tag [nzColor]="colorStatus">{{status}}</nz-tag>
+  </nz-descriptions-item>
+</nz-descriptions>
+<br>
+<nz-descriptions nzBordered nzLayout="vertical">
+  <nz-descriptions-item [nzSpan]="2" nzTitle="">
+    <img nz-image width="200px" nzSrc="{{user.profile.avatar}}" [nzFallback]=fallback alt="" />
+  </nz-descriptions-item>
+  <nz-descriptions-item nzTitle="Thông tin cá nhân">
+    Họ tên: {{user.profile.firstName + user.profile.lastName}}
+    <br />
+    <br />
+    Ngày sinh: {{handleDate(user && user.profile.dateOfBirth)}}
+    <br />
+    <br />
+    Email: {{user.profile.email}}
+    <br />
+    <br />
+    Số điện thoại: {{user.profile.phone}}
+    <br />
+    <br />
+    Địa chỉ: {{user.profile.address}}
+    <br />
+  </nz-descriptions-item>
+
+</nz-descriptions>
+<br>
+<!--<div>-->
+<!--  <a style="float: right" class="mb-2" nz-button [nzType]="'primary'"-->
+<!--     [routerLink]="'/campaign/list'"><span>Quay lại trang danh sách</span></a>-->
+<!--</div>-->

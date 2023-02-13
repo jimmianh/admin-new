@@ -1,13 +1,12 @@
 import {Component, OnInit} from '@angular/core';
-import {SponsorModal} from "../../sponsor-management/model/SponsorModal";
 import {UntypedFormBuilder, UntypedFormGroup, Validators} from "@angular/forms";
 import {BaseStatusEnum} from "../../../enum/base-status-enum";
 import {UserService} from "../service/UserService";
 import {UserModel} from "../model/UserModel";
 import {Router} from "@angular/router";
-import data from "./data";
-import {PaymentChannel} from "../../payment-channel-management/model/PaymentChannel";
 import {take} from "rxjs";
+import {NzNotificationService} from "ng-zorro-antd/notification";
+import {Message} from "../../../util/StringUtil";
 
 interface DataItem {
   name: string;
@@ -27,48 +26,44 @@ export class UserManagementPageComponent implements OnInit{
   offset: number = 1;
   limit: number = 6;
   keyword = "";
-  status!: undefined;
+  status: number = -1;
   formSearch!: UntypedFormGroup;
   validateForm!: UntypedFormGroup;
   isVisible = false;
 
-  constructor(private userService: UserService, private fb: UntypedFormBuilder, private router: Router) {
+  constructor(private userService: UserService,
+              private fb: UntypedFormBuilder,
+              private notificationService: NzNotificationService,
+              private router: Router) {
   }
 
   ngOnInit(): void {
-    this.getPageUser();
     this.createFormSearch();
-  }
-
-  handlerDataResponse(res: any) {
-    this.listUser = res?.items
-    this.pageSize = res?.totalPages
-    this.offset = res?.offset
-    this.limit = res?.limit
-    this.totalElements = res?.totalElements
+    console.log(this.formSearch)
+    this.search();
   }
 
   onChangePage(page: number) {
     this.offset = page;
-    this.getPageUser();
+    this.search();
   }
 
   resetForm() {
     this.formSearch.reset();
-    this.keyword ="";
-    this.status = undefined;
-    this.getPageUser();
+    this.offset = 1;
+    this.searchAccount();
   }
 
-  search() {
-    this.keyword = this.formSearch.value.keyword ?? "";
-    this.status = this.formSearch.value.status;
-    this.getPageUser();
-  }
 
   createFormSearch() {
     this.formSearch = this.fb.group({
-      keyword: [null, [Validators.nullValidator]],
+      name: [null, [Validators.nullValidator]],
+      username: [null, [Validators.nullValidator]],
+      phone: [null, [Validators.nullValidator]],
+      email: [null, [Validators.nullValidator]],
+      address: [null, [Validators.nullValidator]],
+      id: [null, [Validators.nullValidator]],
+      role: [null, [Validators.nullValidator]],
       status: [null, [Validators.nullValidator]],
       offset: [1, [Validators.nullValidator]],
       limit: [10, [Validators.nullValidator]],
@@ -80,19 +75,60 @@ export class UserManagementPageComponent implements OnInit{
     this.updateStatus(id, s);
   }
 
-
-  getPageUser() {
-    this.userService.getPage(this.offset, this.limit, this.keyword, this.status).subscribe(res => this.handlerDataResponse(res))
+  search() {
+    this.searchAccount();
   }
 
+  searchAccount() {
+    let filter = this.createFilterAccount();
+    this.userService.search(filter)
+      .subscribe(res => this.handlerResponseListUser(res))
+  }
+
+  handlerResponseListUser(res: any) {
+    this.listUser = res?.items
+    this.pageSize = res?.totalPages
+    this.offset = res?.offset
+    this.limit = res?.limit
+    this.totalElements = res?.totalElements
+  }
+
+  createFilterAccount(): any {
+    let filter = {...this.formSearch.value}
+    filter.offset = this.offset;
+    filter.limit = this.limit;
+    return filter;
+  }
+
+  clear() {
+    this.formSearch.reset();
+    this.offset = 1;
+    this.limit = 10;
+    this.search();
+  }
+
+  // getPageUser() {
+  //   this.userService.getPage(this.offset, this.limit, this.keyword, this.status).subscribe(res => this.handlerDataResponse(res))
+  // }
+
   updateStatus(id: number, status: number) {
-    this.userService.updateStatus(id, status).subscribe(e => console.log(e))
+    this.userService.updateStatus(id, status)
+      .subscribe(
+        res => {
+          if (res.status) {
+            this.notificationService.success(Message.NOTIFICATION, Message.UPDATE_SUCCESS)
+          } else {
+            this.notificationService.error(Message.NOTIFICATION, Message.UPDATE_FAIL + " " + res.message)
+          }
+        },
+        (err) => this.notificationService.error(Message.NOTIFICATION, Message.UPDATE_FAIL)
+      )
   }
   onEdit(id: number ) {
     this.router.navigate(['user', 'edit', id]).then();
   }
 
-  getDetail(id: number) {
+  getDetail(id: string) {
     this.userService.getDetail(id).subscribe(res => {
       this.validateForm.get('username')!.setValue(res.username)
       this.validateForm.get('role')!.setValue(res.role)
