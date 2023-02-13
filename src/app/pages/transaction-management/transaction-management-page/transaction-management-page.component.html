@@ -2,38 +2,112 @@
   <div nz-row [nzGutter]="24">
     <div nz-col [nzSpan]="8">
       <nz-form-item>
-        <nz-form-label nz-col [nzSpan]="6">Keyword</nz-form-label>
+        <nz-form-label nz-col [nzSpan]="6">Tên chiến dịch</nz-form-label>
         <nz-form-control nz-col [nzSpan]="18">
           <input
             nz-input
-            placeholder="Vui lòng từ khóa"
-            [formControlName]="'keyword'"
+            placeholder="Tên chiến dịch"
+            [formControlName]="'campaignTitle'"
           />
         </nz-form-control>
       </nz-form-item>
     </div>
     <div nz-col [nzSpan]="8">
       <nz-form-item>
-        <nz-form-label nz-col [nzSpan]="6">Sending Time</nz-form-label>
+        <nz-form-label nz-col [nzSpan]="6">Id chiến dịch</nz-form-label>
+        <nz-form-control nz-col [nzSpan]="18">
+          <input
+            nz-input
+            placeholder="Id chiến dịch"
+            [formControlName]="'campaignId'"
+          />
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+    <div nz-col [nzSpan]="8">
+      <nz-form-item>
+        <nz-form-label nz-col [nzSpan]="6">Thời gian gửi</nz-form-label>
         <nz-form-control nz-col [nzSpan]="18">
           <nz-range-picker [formControlName]="'date'" (ngModelChange)="onChange($event)"></nz-range-picker>
         </nz-form-control>
       </nz-form-item>
     </div>
-    <div nz-col [nzSpan]="6">
-      <nz-form-item>
-        <nz-form-label nz-col [nzSpan]="6">Status</nz-form-label>
-        <nz-form-control nz-col [nzSpan]="18">
-          <nz-select nzShowSearch nzAllowClear nzPlaceHolder="status" [formControlName]="'paymentStatus'">
-            <nz-option nzLabel="DONE" nzValue="DONE"></nz-option>
-            <nz-option nzLabel="UNPAID" nzValue="UNPAID"></nz-option>
-          </nz-select>
-        </nz-form-control>
-      </nz-form-item>
-    </div>
+<!--    <div nz-col [nzSpan]="6">-->
+<!--      <nz-form-item>-->
+<!--        <nz-form-label nz-col [nzSpan]="6">Status</nz-form-label>-->
+<!--        <nz-form-control nz-col [nzSpan]="18">-->
+<!--          <nz-select nzPlaceHolder="status" [formControlName]="'paymentStatus'">-->
+<!--            <nz-option nzLabel="Tất cả" nzValue=""></nz-option>-->
+<!--            <nz-option nzLabel="Hoàn thành" nzValue="DONE"></nz-option>-->
+<!--            <nz-option nzLabel="Chưa hoàn thành" nzValue="UNPAID"></nz-option>-->
+<!--          </nz-select>-->
+<!--        </nz-form-control>-->
+<!--      </nz-form-item>-->
+<!--    </div>-->
 
   </div>
   <div nz-row [nzGutter]="24">
+    <div nz-col [nzSpan]="8">
+      <nz-form-item>
+        <nz-form-label nz-col [nzSpan]="6">Tên người gửi</nz-form-label>
+        <nz-form-control nz-col [nzSpan]="18">
+          <input
+            nz-input
+            placeholder="Tên người gửi"
+            [formControlName]="'senderName'"
+          />
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+    <div nz-col [nzSpan]="8">
+      <nz-form-item>
+        <nz-form-label nz-col [nzSpan]="6">Tài khoản</nz-form-label>
+        <nz-form-control nz-col [nzSpan]="18">
+          <input
+            nz-input
+            placeholder="Tài khoản gửi"
+            [formControlName]="'username'"
+          />
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+    <div nz-col [nzSpan]="8">
+      <nz-form-item>
+        <nz-form-label nz-col [nzSpan]="6">Id tài khoản</nz-form-label>
+        <nz-form-control nz-col [nzSpan]="18">
+          <input
+            nz-input
+            placeholder="Id tài khoản gửi"
+            [formControlName]="'accountId'"
+          />
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+  </div>
+  <div nz-row [nzGutter]="24">
+    <div nz-col [nzSpan]="8">
+      <nz-form-item>
+        <nz-form-label nz-col [nzSpan]="6">Mã giao dịch</nz-form-label>
+        <nz-form-control nz-col [nzSpan]="18">
+          <input
+            nz-input
+            placeholder="Mã giao dịch"
+            [formControlName]="'transactionId'"
+          />
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+<!--    <div nz-col [nzSpan]="8">-->
+<!--      <nz-form-item>-->
+<!--        <nz-form-label nz-col [nzSpan]="6">Kênh</nz-form-label>-->
+<!--        <nz-form-control nz-col [nzSpan]="18">-->
+<!--          <nz-select ngModel="{{paymentChannel}}" nzPlaceHolder="Kênh thanh toán" [formControlName]="'paymentChannelId'">-->
+<!--            <nz-option nzLabel="Tất cả" nzValue=""></nz-option>-->
+<!--            <nz-option *ngFor="let p of listPaymentChannel" [nzValue]="p.id" [nzLabel]="p.name"></nz-option>-->
+<!--          </nz-select>-->
+<!--        </nz-form-control>-->
+<!--      </nz-form-item>-->
+<!--    </div>-->
     <div nz-col [nzSpan]="8">
       <nz-form-item>
         <nz-form-label nz-col [nzSpan]="6">Amount ($)</nz-form-label>
@@ -52,6 +126,7 @@
       </nz-form-item>
     </div>
   </div>
+
   <div nz-row>
     <div nz-col [nzSpan]="24" class="search-area">
       <button nz-button [nzType]="'primary'" (click)="btnSearch()">Search</button>

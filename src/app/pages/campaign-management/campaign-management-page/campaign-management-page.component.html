@@ -21,13 +21,13 @@
             class="__amount_start"
             nz-input
             type="number"
-            placeholder="start"
+            placeholder="Từ"
             [formControlName]="'targetAmountStart'"/>
           <input
             class="__amount_end"
             nz-input
             type="number"
-            placeholder="end"
+            placeholder="đến"
             [formControlName]="'targetAmountEnd'"/>
         </nz-form-control>
       </nz-form-item>
@@ -67,7 +67,7 @@
     </div>
     <div nz-col [nzSpan]="8">
       <nz-form-item>
-        <nz-form-label nz-col [nzSpan]="6" [nzFor]="'username'">Tài khoản</nz-form-label>
+        <nz-form-label nz-col [nzSpan]="6" [nzFor]="'username'">Người tạo</nz-form-label>
         <nz-form-control nz-col [nzSpan]="18">
           <input
             nz-input
@@ -105,8 +105,8 @@
 
   <div nz-row>
     <div nz-col [nzSpan]="24" class="search-area">
-      <button nz-button [nzType]="'primary'" (click)="search()">Search</button>
-      <button nz-button (click)="clear()">Clear</button>
+      <button nz-button [nzType]="'primary'" (click)="search()">Tìm kiếm</button>
+      <button nz-button (click)="clear()">Làm mới</button>
     </div>
   </div>
 </form>
