@@ -3,7 +3,7 @@ import {AmountByMonth, AmountCategories} from "../pages/dashboard/model/Dashboar
 export class SystemUtil {
 
   static getBaseUrl() {
-    return 'https://herofund.up.railway.app';
+    return 'http://localhost:8080';
   }
 
   static local: 'http://localhost:8080';
@@ -48,13 +48,15 @@ export class SystemUtil {
     let amountArr = [];
     for (let i = 1; i <= now.getMonth() + 1; i++) {
       monthArr.push(`T${i}`);
-      for (let j = 0; j < amountByMonth.length; j++) {
-        if (amountByMonth[j].month === i) {
-          map.set(i, amountByMonth[j].amount)
-          amountArr.push(amountByMonth[j].amount)
-          break;
+      if (amountByMonth && amountByMonth.length > 0){
+        for (let j = 0; j < amountByMonth.length; j++) {
+          if (amountByMonth[j].month === i) {
+            map.set(i, amountByMonth[j].amount)
+            amountArr.push(amountByMonth[j].amount)
+            break;
+          }
+          map.set(i, 0);
         }
-        map.set(i, 0);
       }
     }
     map.set("month", monthArr)
@@ -66,9 +68,11 @@ export class SystemUtil {
     let map = new Map();
     let cateArr = [];
     let amountArr = [];
-    for (let i = 0; i < amountByCate.length; i++) {
-      cateArr.push(`${amountByCate[i].name}`);
-      amountArr.push(amountByCate[i].amount);
+    if (amountByCate && amountByCate.length > 0){
+      for (let i = 0; i < amountByCate.length; i++) {
+        cateArr.push(`${amountByCate[i].name}`);
+        amountArr.push(amountByCate[i].amount);
+      }
     }
     map.set("name", cateArr)
     map.set("amount", amountArr)

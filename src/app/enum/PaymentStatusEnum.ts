@@ -9,4 +9,5 @@ export enum CampaignStatusEnum {
   WAIT,
   REJECT,
   URGENT,
+  DONE
 }

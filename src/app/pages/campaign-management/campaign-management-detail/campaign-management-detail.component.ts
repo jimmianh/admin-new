@@ -36,8 +36,9 @@ export class CampaignManagementDetailComponent implements OnInit {
         res && (this.campaign = res);
         let map = SystemUtil.convertEnumToMap(CampaignStatusEnum);
         this.paymentStatus = map.get(this.campaign.status);
-        this.colorStatus = this.paymentStatus === CampaignStatusEnum[CampaignStatusEnum.ENABLE] ? "#87d068" :
-          this.paymentStatus === CampaignStatusEnum[CampaignStatusEnum.URGENT] ? "red" : `purple`;
+        this.colorStatus = this.paymentStatus === CampaignStatusEnum[CampaignStatusEnum.ENABLE] ? "#fcb92c" :
+          this.paymentStatus === CampaignStatusEnum[CampaignStatusEnum.URGENT] ? "red" :
+            CampaignStatusEnum[CampaignStatusEnum.ENABLE] ? `#009624FF` :`purple`;
         this.colorPortal = this.campaign.portal === 'ADMIN' ? "#108ee9" : "magenta"
 
       })
